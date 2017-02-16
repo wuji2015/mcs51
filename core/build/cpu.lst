@@ -1,0 +1,217 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Intel 8051), page 1.
+Hexadecimal [24-Bits]
+
+
+
+                                      1 .area CSEG (CODE)
+                                      2 .macro  PUSHALL          ;保存现场
+                                      3 ;	push bits
+                                      4         INC SP
+                                      5         PUSH ACC
+                                      6         PUSH B
+                                      7         PUSH DPL
+                                      8         PUSH DPH
+                                      9         MOV  A,R7 
+                                     10         PUSH ACC
+                                     11         MOV  A,R6
+                                     12         PUSH ACC
+                                     13         MOV  A,R5
+                                     14         PUSH ACC
+                                     15         MOV  A,R4
+                                     16         PUSH ACC
+                                     17         MOV  A,R3
+                                     18         PUSH ACC
+                                     19         MOV  A,R2
+                                     20         PUSH ACC
+                                     21         MOV  A,R1
+                                     22         PUSH ACC
+                                     23         MOV  A,R0
+                                     24 	PUSH ACC
+                                     25         PUSH PSW
+                                     26 .endm
+                                     27 .macro  POPALL   		;恢复现场
+                                     28         POP  PSW
+                                     29 	POP  ACC
+                                     30         MOV  R0,A
+                                     31         POP  ACC
+                                     32         MOV  R1,A
+                                     33         POP  ACC
+                                     34         MOV  R2,A
+                                     35         POP  ACC
+                                     36         MOV  R3,A
+                                     37         POP  ACC
+                                     38         MOV  R4,A
+                                     39         POP  ACC
+                                     40         MOV  R5,A
+                                     41         POP  ACC
+                                     42         MOV  R6,A
+                                     43         POP  ACC
+                                     44         MOV  R7,A
+                                     45         POP  DPH
+                                     46         POP  DPL
+                                     47         POP  B
+                                     48         POP  ACC
+                                     49 	DEC  SP
+                                     50 ;	pop  bits
+                                     51 .endm
+                                     52 .globl _switch_task
+                                     53 .globl _switch_task_int
+      000000                         54 _switch_task:	
+                                     55 ;任务切换函数
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Intel 8051), page 2.
+Hexadecimal [24-Bits]
+
+
+
+      000000                         56 	PUSHALL
+                                      1 ;	push bits
+      000000 05 81            [12]    2         INC SP
+      000002 C0 E0            [24]    3         PUSH ACC
+      000004 C0 F0            [24]    4         PUSH B
+      000006 C0 82            [24]    5         PUSH DPL
+      000008 C0 83            [24]    6         PUSH DPH
+      00000A EF               [12]    7         MOV  A,R7 
+      00000B C0 E0            [24]    8         PUSH ACC
+      00000D EE               [12]    9         MOV  A,R6
+      00000E C0 E0            [24]   10         PUSH ACC
+      000010 ED               [12]   11         MOV  A,R5
+      000011 C0 E0            [24]   12         PUSH ACC
+      000013 EC               [12]   13         MOV  A,R4
+      000014 C0 E0            [24]   14         PUSH ACC
+      000016 EB               [12]   15         MOV  A,R3
+      000017 C0 E0            [24]   16         PUSH ACC
+      000019 EA               [12]   17         MOV  A,R2
+      00001A C0 E0            [24]   18         PUSH ACC
+      00001C E9               [12]   19         MOV  A,R1
+      00001D C0 E0            [24]   20         PUSH ACC
+      00001F E8               [12]   21         MOV  A,R0
+      000020 C0 E0            [24]   22 	PUSH ACC
+      000022 C0 D0            [24]   23         PUSH PSW
+      000024 79 00            [12]   57 	MOV R1,# _CUR_TCB_T	;保存好当前任务
+      000026 87 82            [24]   58 	MOV DPL, @R1
+      000028 09               [12]   59 	INC R1
+      000029 87 83            [24]   60 	MOV DPH, @R1
+      00002B E5 81            [12]   61 	MOV A ,SP
+      00002D F0               [24]   62 	MOVX @DPTR, A
+      00002E                         63 _switch_task_int:
+      00002E 79 00            [12]   64 	MOV R1,# _CUR_TCB_T	;将CUR_TCB_T置为HIGHT_TCB_T
+      000030 78 00            [12]   65 	MOV R0 ,# _HIGHT_TCB_T
+      000032 86 82            [24]   66 	MOV DPL , @R0
+      000034 A7 82            [24]   67 	MOV @R1,DPL
+      000036 08               [12]   68 	INC R0
+      000037 09               [12]   69 	INC R1
+      000038 86 83            [24]   70 	MOV DPH , @R0
+      00003A A7 83            [24]   71 	MOV @R1,DPH
+      00003C E0               [24]   72 	MOVX A, @DPTR		;取出保存的SP指针
+      00003D 85 E0 81         [24]   73 	MOV SP , ACC
+      000040                         74 	POPALL
+      000040 D0 D0            [24]    1         POP  PSW
+      000042 D0 E0            [24]    2 	POP  ACC
+      000044 F8               [12]    3         MOV  R0,A
+      000045 D0 E0            [24]    4         POP  ACC
+      000047 F9               [12]    5         MOV  R1,A
+      000048 D0 E0            [24]    6         POP  ACC
+      00004A FA               [12]    7         MOV  R2,A
+      00004B D0 E0            [24]    8         POP  ACC
+      00004D FB               [12]    9         MOV  R3,A
+      00004E D0 E0            [24]   10         POP  ACC
+      000050 FC               [12]   11         MOV  R4,A
+      000051 D0 E0            [24]   12         POP  ACC
+      000053 FD               [12]   13         MOV  R5,A
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Intel 8051), page 3.
+Hexadecimal [24-Bits]
+
+
+
+      000054 D0 E0            [24]   14         POP  ACC
+      000056 FE               [12]   15         MOV  R6,A
+      000057 D0 E0            [24]   16         POP  ACC
+      000059 FF               [12]   17         MOV  R7,A
+      00005A D0 83            [24]   18         POP  DPH
+      00005C D0 82            [24]   19         POP  DPL
+      00005E D0 F0            [24]   20         POP  B
+      000060 D0 E0            [24]   21         POP  ACC
+      000062 15 81            [12]   22 	DEC  SP
+                                     23 ;	pop  bits
+      000064 D2 AF            [12]   75 	SETB EA
+      000066 22               [24]   76 	RET
+                                     77 	
+                                     78 .globl _exit_int
+      000067                         79 _exit_int:
+                                     80 		
+      000067 75 82 00         [24]   81 	MOV DPL,# _interrup   
+      00006A 75 83 00         [24]   82 	MOV DPH,# ( _interrup>>8) 
+      00006D E0               [24]   83 	MOVX A,@DPTR
+      00006E 14               [12]   84 	DEC A
+      00006F F0               [24]   85 	MOVX @DPTR, A
+      000070 79 00            [12]   86 	MOV R1,# _CUR_TCB_T	;将CUR_TCB_T置为HIGHT_TCB_T
+      000072 78 00            [12]   87 	MOV R0 ,# _HIGHT_TCB_T
+      000074 86 82            [24]   88 	MOV DPL , @R0
+      000076 A7 82            [24]   89 	MOV @R1,DPL
+      000078 08               [12]   90 	INC R0
+      000079 09               [12]   91 	INC R1
+      00007A 86 83            [24]   92 	MOV DPH , @R0
+      00007C A7 83            [24]   93 	MOV @R1,DPH
+      00007E E0               [24]   94 	MOVX A, @DPTR		;取出保存的SP指针
+      00007F 85 E0 81         [24]   95 	MOV SP , ACC
+      000082                         96 	POPALL
+      000082 D0 D0            [24]    1         POP  PSW
+      000084 D0 E0            [24]    2 	POP  ACC
+      000086 F8               [12]    3         MOV  R0,A
+      000087 D0 E0            [24]    4         POP  ACC
+      000089 F9               [12]    5         MOV  R1,A
+      00008A D0 E0            [24]    6         POP  ACC
+      00008C FA               [12]    7         MOV  R2,A
+      00008D D0 E0            [24]    8         POP  ACC
+      00008F FB               [12]    9         MOV  R3,A
+      000090 D0 E0            [24]   10         POP  ACC
+      000092 FC               [12]   11         MOV  R4,A
+      000093 D0 E0            [24]   12         POP  ACC
+      000095 FD               [12]   13         MOV  R5,A
+      000096 D0 E0            [24]   14         POP  ACC
+      000098 FE               [12]   15         MOV  R6,A
+      000099 D0 E0            [24]   16         POP  ACC
+      00009B FF               [12]   17         MOV  R7,A
+      00009C D0 83            [24]   18         POP  DPH
+      00009E D0 82            [24]   19         POP  DPL
+      0000A0 D0 F0            [24]   20         POP  B
+      0000A2 D0 E0            [24]   21         POP  ACC
+      0000A4 15 81            [12]   22 	DEC  SP
+                                     23 ;	pop  bits
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Intel 8051), page 4.
+Hexadecimal [24-Bits]
+
+
+
+      0000A6 D2 AF            [12]   97 	SETB EA
+      0000A8 32               [24]   98 	RETI
+                                     99 
+                                    100 .globl _hongwai
+      0000A9                        101 _hongwai:
+      0000A9                        102 	PUSHALL
+                                      1 ;	push bits
+      0000A9 05 81            [12]    2         INC SP
+      0000AB C0 E0            [24]    3         PUSH ACC
+      0000AD C0 F0            [24]    4         PUSH B
+      0000AF C0 82            [24]    5         PUSH DPL
+      0000B1 C0 83            [24]    6         PUSH DPH
+      0000B3 EF               [12]    7         MOV  A,R7 
+      0000B4 C0 E0            [24]    8         PUSH ACC
+      0000B6 EE               [12]    9         MOV  A,R6
+      0000B7 C0 E0            [24]   10         PUSH ACC
+      0000B9 ED               [12]   11         MOV  A,R5
+      0000BA C0 E0            [24]   12         PUSH ACC
+      0000BC EC               [12]   13         MOV  A,R4
+      0000BD C0 E0            [24]   14         PUSH ACC
+      0000BF EB               [12]   15         MOV  A,R3
+      0000C0 C0 E0            [24]   16         PUSH ACC
+      0000C2 EA               [12]   17         MOV  A,R2
+      0000C3 C0 E0            [24]   18         PUSH ACC
+      0000C5 E9               [12]   19         MOV  A,R1
+      0000C6 C0 E0            [24]   20         PUSH ACC
+      0000C8 E8               [12]   21         MOV  A,R0
+      0000C9 C0 E0            [24]   22 	PUSH ACC
+      0000CB C0 D0            [24]   23         PUSH PSW
+      0000CD AE 82            [24]  103 	MOV R6, DPL
+      0000CF AF 83            [24]  104 	MOV R7, DPH
+                                    105 

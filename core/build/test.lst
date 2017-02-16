@@ -1,0 +1,1858 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.5.0 #9253 (May  7 2016) (Linux)
+                                      4 ; This file was generated Wed Sep 21 13:59:23 2016
+                                      5 ;--------------------------------------------------------
+                                      6 	.module test
+                                      7 	.optsdcc -mmcs51 --model-large
+                                      8 	
+                                      9 ;--------------------------------------------------------
+                                     10 ; Public variables in this module
+                                     11 ;--------------------------------------------------------
+                                     12 	.globl _main
+                                     13 	.globl _hw_init
+                                     14 	.globl _key_init
+                                     15 	.globl _sound_init
+                                     16 	.globl _maichong
+                                     17 	.globl _idle
+                                     18 	.globl _pca_isr
+                                     19 	.globl _t1_isr
+                                     20 	.globl _t0_isr
+                                     21 	.globl _s1_isr
+                                     22 	.globl _s2_isr
+                                     23 	.globl _ext1_isr
+                                     24 	.globl _ext0_isr
+                                     25 	.globl _delay
+                                     26 	.globl _app
+                                     27 	.globl _wifi_init
+                                     28 	.globl _release_semaphore
+                                     29 	.globl _sendstr
+                                     30 	.globl _uart_init
+                                     31 	.globl _display
+                                     32 	.globl _task_create
+                                     33 	.globl _os_start
+                                     34 	.globl _os_init
+                                     35 	.globl _exit_int
+                                     36 	.globl _CF
+                                     37 	.globl _CR
+                                     38 	.globl _CCF1
+                                     39 	.globl _CCF0
+                                     40 	.globl _TF2
+                                     41 	.globl _EXF2
+                                     42 	.globl _RCLK
+                                     43 	.globl _TCLK
+                                     44 	.globl _EXEN2
+                                     45 	.globl _TR2
+                                     46 	.globl _C_T2
+                                     47 	.globl _CP_RL2
+                                     48 	.globl _T2CON_7
+                                     49 	.globl _T2CON_6
+                                     50 	.globl _T2CON_5
+                                     51 	.globl _T2CON_4
+                                     52 	.globl _T2CON_3
+                                     53 	.globl _T2CON_2
+                                     54 	.globl _T2CON_1
+                                     55 	.globl _T2CON_0
+                                     56 	.globl _PT2
+                                     57 	.globl _ET2
+                                     58 	.globl _CY
+                                     59 	.globl _AC
+                                     60 	.globl _F0
+                                     61 	.globl _RS1
+                                     62 	.globl _RS0
+                                     63 	.globl _OV
+                                     64 	.globl _F1
+                                     65 	.globl _P
+                                     66 	.globl _PS
+                                     67 	.globl _PT1
+                                     68 	.globl _PX1
+                                     69 	.globl _PT0
+                                     70 	.globl _PX0
+                                     71 	.globl _RD
+                                     72 	.globl _WR
+                                     73 	.globl _T1
+                                     74 	.globl _T0
+                                     75 	.globl _INT1
+                                     76 	.globl _INT0
+                                     77 	.globl _TXD
+                                     78 	.globl _RXD
+                                     79 	.globl _P3_7
+                                     80 	.globl _P3_6
+                                     81 	.globl _P3_5
+                                     82 	.globl _P3_4
+                                     83 	.globl _P3_3
+                                     84 	.globl _P3_2
+                                     85 	.globl _P3_1
+                                     86 	.globl _P3_0
+                                     87 	.globl _EA
+                                     88 	.globl _ES
+                                     89 	.globl _ET1
+                                     90 	.globl _EX1
+                                     91 	.globl _ET0
+                                     92 	.globl _EX0
+                                     93 	.globl _P2_7
+                                     94 	.globl _P2_6
+                                     95 	.globl _P2_5
+                                     96 	.globl _P2_4
+                                     97 	.globl _P2_3
+                                     98 	.globl _P2_2
+                                     99 	.globl _P2_1
+                                    100 	.globl _P2_0
+                                    101 	.globl _SM0
+                                    102 	.globl _SM1
+                                    103 	.globl _SM2
+                                    104 	.globl _REN
+                                    105 	.globl _TB8
+                                    106 	.globl _RB8
+                                    107 	.globl _TI
+                                    108 	.globl _RI
+                                    109 	.globl _P1_7
+                                    110 	.globl _P1_6
+                                    111 	.globl _P1_5
+                                    112 	.globl _P1_4
+                                    113 	.globl _P1_3
+                                    114 	.globl _P1_2
+                                    115 	.globl _P1_1
+                                    116 	.globl _P1_0
+                                    117 	.globl _TF1
+                                    118 	.globl _TR1
+                                    119 	.globl _TF0
+                                    120 	.globl _TR0
+                                    121 	.globl _IE1
+                                    122 	.globl _IT1
+                                    123 	.globl _IE0
+                                    124 	.globl _IT0
+                                    125 	.globl _P0_7
+                                    126 	.globl _P0_6
+                                    127 	.globl _P0_5
+                                    128 	.globl _P0_4
+                                    129 	.globl _P0_3
+                                    130 	.globl _P0_2
+                                    131 	.globl _P0_1
+                                    132 	.globl _P0_0
+                                    133 	.globl _IAP_CONTR
+                                    134 	.globl _PCA_PWM1
+                                    135 	.globl _PCA_PWM0
+                                    136 	.globl _CCAP1H
+                                    137 	.globl _CCAP1L
+                                    138 	.globl _CCAP0H
+                                    139 	.globl _CCAP0L
+                                    140 	.globl _CH
+                                    141 	.globl _CL
+                                    142 	.globl _CCAPM1
+                                    143 	.globl _CCAPM0
+                                    144 	.globl _CMOD
+                                    145 	.globl _CCON
+                                    146 	.globl _WAKE_CLKO
+                                    147 	.globl _BRT
+                                    148 	.globl _IE2
+                                    149 	.globl _S2BUF
+                                    150 	.globl _S2CON
+                                    151 	.globl _AUXR1
+                                    152 	.globl _AUXR
+                                    153 	.globl _TH2
+                                    154 	.globl _TL2
+                                    155 	.globl _RCAP2H
+                                    156 	.globl _RCAP2L
+                                    157 	.globl _T2CON
+                                    158 	.globl _B
+                                    159 	.globl _ACC
+                                    160 	.globl _PSW
+                                    161 	.globl _IP
+                                    162 	.globl _P3
+                                    163 	.globl _IE
+                                    164 	.globl _P2
+                                    165 	.globl _SBUF
+                                    166 	.globl _SCON
+                                    167 	.globl _P1
+                                    168 	.globl _TH1
+                                    169 	.globl _TH0
+                                    170 	.globl _TL1
+                                    171 	.globl _TL0
+                                    172 	.globl _TMOD
+                                    173 	.globl _TCON
+                                    174 	.globl _PCON
+                                    175 	.globl _DPH
+                                    176 	.globl _DPL
+                                    177 	.globl _SP
+                                    178 	.globl _P0
+                                    179 	.globl _b
+                                    180 	.globl _interrupt_count
+                                    181 	.globl _interrupt_disable
+                                    182 	.globl _interrupt_enable
+                                    183 	.globl _te
+                                    184 ;--------------------------------------------------------
+                                    185 ; special function registers
+                                    186 ;--------------------------------------------------------
+                                    187 	.area RSEG    (ABS,DATA)
+      000000                        188 	.org 0x0000
+                           000080   189 _P0	=	0x0080
+                           000081   190 _SP	=	0x0081
+                           000082   191 _DPL	=	0x0082
+                           000083   192 _DPH	=	0x0083
+                           000087   193 _PCON	=	0x0087
+                           000088   194 _TCON	=	0x0088
+                           000089   195 _TMOD	=	0x0089
+                           00008A   196 _TL0	=	0x008a
+                           00008B   197 _TL1	=	0x008b
+                           00008C   198 _TH0	=	0x008c
+                           00008D   199 _TH1	=	0x008d
+                           000090   200 _P1	=	0x0090
+                           000098   201 _SCON	=	0x0098
+                           000099   202 _SBUF	=	0x0099
+                           0000A0   203 _P2	=	0x00a0
+                           0000A8   204 _IE	=	0x00a8
+                           0000B0   205 _P3	=	0x00b0
+                           0000B8   206 _IP	=	0x00b8
+                           0000D0   207 _PSW	=	0x00d0
+                           0000E0   208 _ACC	=	0x00e0
+                           0000F0   209 _B	=	0x00f0
+                           0000C8   210 _T2CON	=	0x00c8
+                           0000CA   211 _RCAP2L	=	0x00ca
+                           0000CB   212 _RCAP2H	=	0x00cb
+                           0000CC   213 _TL2	=	0x00cc
+                           0000CD   214 _TH2	=	0x00cd
+                           00008E   215 _AUXR	=	0x008e
+                           0000A2   216 _AUXR1	=	0x00a2
+                           00009A   217 _S2CON	=	0x009a
+                           00009B   218 _S2BUF	=	0x009b
+                           0000AF   219 _IE2	=	0x00af
+                           00009C   220 _BRT	=	0x009c
+                           00008F   221 _WAKE_CLKO	=	0x008f
+                           0000D8   222 _CCON	=	0x00d8
+                           0000D9   223 _CMOD	=	0x00d9
+                           0000DA   224 _CCAPM0	=	0x00da
+                           0000DB   225 _CCAPM1	=	0x00db
+                           0000E9   226 _CL	=	0x00e9
+                           0000F9   227 _CH	=	0x00f9
+                           0000EA   228 _CCAP0L	=	0x00ea
+                           0000FA   229 _CCAP0H	=	0x00fa
+                           0000EB   230 _CCAP1L	=	0x00eb
+                           0000FB   231 _CCAP1H	=	0x00fb
+                           0000F2   232 _PCA_PWM0	=	0x00f2
+                           0000F3   233 _PCA_PWM1	=	0x00f3
+                           0000C7   234 _IAP_CONTR	=	0x00c7
+                                    235 ;--------------------------------------------------------
+                                    236 ; special function bits
+                                    237 ;--------------------------------------------------------
+                                    238 	.area RSEG    (ABS,DATA)
+      000000                        239 	.org 0x0000
+                           000080   240 _P0_0	=	0x0080
+                           000081   241 _P0_1	=	0x0081
+                           000082   242 _P0_2	=	0x0082
+                           000083   243 _P0_3	=	0x0083
+                           000084   244 _P0_4	=	0x0084
+                           000085   245 _P0_5	=	0x0085
+                           000086   246 _P0_6	=	0x0086
+                           000087   247 _P0_7	=	0x0087
+                           000088   248 _IT0	=	0x0088
+                           000089   249 _IE0	=	0x0089
+                           00008A   250 _IT1	=	0x008a
+                           00008B   251 _IE1	=	0x008b
+                           00008C   252 _TR0	=	0x008c
+                           00008D   253 _TF0	=	0x008d
+                           00008E   254 _TR1	=	0x008e
+                           00008F   255 _TF1	=	0x008f
+                           000090   256 _P1_0	=	0x0090
+                           000091   257 _P1_1	=	0x0091
+                           000092   258 _P1_2	=	0x0092
+                           000093   259 _P1_3	=	0x0093
+                           000094   260 _P1_4	=	0x0094
+                           000095   261 _P1_5	=	0x0095
+                           000096   262 _P1_6	=	0x0096
+                           000097   263 _P1_7	=	0x0097
+                           000098   264 _RI	=	0x0098
+                           000099   265 _TI	=	0x0099
+                           00009A   266 _RB8	=	0x009a
+                           00009B   267 _TB8	=	0x009b
+                           00009C   268 _REN	=	0x009c
+                           00009D   269 _SM2	=	0x009d
+                           00009E   270 _SM1	=	0x009e
+                           00009F   271 _SM0	=	0x009f
+                           0000A0   272 _P2_0	=	0x00a0
+                           0000A1   273 _P2_1	=	0x00a1
+                           0000A2   274 _P2_2	=	0x00a2
+                           0000A3   275 _P2_3	=	0x00a3
+                           0000A4   276 _P2_4	=	0x00a4
+                           0000A5   277 _P2_5	=	0x00a5
+                           0000A6   278 _P2_6	=	0x00a6
+                           0000A7   279 _P2_7	=	0x00a7
+                           0000A8   280 _EX0	=	0x00a8
+                           0000A9   281 _ET0	=	0x00a9
+                           0000AA   282 _EX1	=	0x00aa
+                           0000AB   283 _ET1	=	0x00ab
+                           0000AC   284 _ES	=	0x00ac
+                           0000AF   285 _EA	=	0x00af
+                           0000B0   286 _P3_0	=	0x00b0
+                           0000B1   287 _P3_1	=	0x00b1
+                           0000B2   288 _P3_2	=	0x00b2
+                           0000B3   289 _P3_3	=	0x00b3
+                           0000B4   290 _P3_4	=	0x00b4
+                           0000B5   291 _P3_5	=	0x00b5
+                           0000B6   292 _P3_6	=	0x00b6
+                           0000B7   293 _P3_7	=	0x00b7
+                           0000B0   294 _RXD	=	0x00b0
+                           0000B1   295 _TXD	=	0x00b1
+                           0000B2   296 _INT0	=	0x00b2
+                           0000B3   297 _INT1	=	0x00b3
+                           0000B4   298 _T0	=	0x00b4
+                           0000B5   299 _T1	=	0x00b5
+                           0000B6   300 _WR	=	0x00b6
+                           0000B7   301 _RD	=	0x00b7
+                           0000B8   302 _PX0	=	0x00b8
+                           0000B9   303 _PT0	=	0x00b9
+                           0000BA   304 _PX1	=	0x00ba
+                           0000BB   305 _PT1	=	0x00bb
+                           0000BC   306 _PS	=	0x00bc
+                           0000D0   307 _P	=	0x00d0
+                           0000D1   308 _F1	=	0x00d1
+                           0000D2   309 _OV	=	0x00d2
+                           0000D3   310 _RS0	=	0x00d3
+                           0000D4   311 _RS1	=	0x00d4
+                           0000D5   312 _F0	=	0x00d5
+                           0000D6   313 _AC	=	0x00d6
+                           0000D7   314 _CY	=	0x00d7
+                           0000AD   315 _ET2	=	0x00ad
+                           0000BD   316 _PT2	=	0x00bd
+                           0000C8   317 _T2CON_0	=	0x00c8
+                           0000C9   318 _T2CON_1	=	0x00c9
+                           0000CA   319 _T2CON_2	=	0x00ca
+                           0000CB   320 _T2CON_3	=	0x00cb
+                           0000CC   321 _T2CON_4	=	0x00cc
+                           0000CD   322 _T2CON_5	=	0x00cd
+                           0000CE   323 _T2CON_6	=	0x00ce
+                           0000CF   324 _T2CON_7	=	0x00cf
+                           0000C8   325 _CP_RL2	=	0x00c8
+                           0000C9   326 _C_T2	=	0x00c9
+                           0000CA   327 _TR2	=	0x00ca
+                           0000CB   328 _EXEN2	=	0x00cb
+                           0000CC   329 _TCLK	=	0x00cc
+                           0000CD   330 _RCLK	=	0x00cd
+                           0000CE   331 _EXF2	=	0x00ce
+                           0000CF   332 _TF2	=	0x00cf
+                           0000D8   333 _CCF0	=	0x00d8
+                           0000D9   334 _CCF1	=	0x00d9
+                           0000DE   335 _CR	=	0x00de
+                           0000DF   336 _CF	=	0x00df
+                                    337 ;--------------------------------------------------------
+                                    338 ; overlayable register banks
+                                    339 ;--------------------------------------------------------
+                                    340 	.area REG_BANK_0	(REL,OVR,DATA)
+      000000                        341 	.ds 8
+                                    342 	.area REG_BANK_1	(REL,OVR,DATA)
+      000000                        343 	.ds 8
+                                    344 ;--------------------------------------------------------
+                                    345 ; overlayable bit register bank
+                                    346 ;--------------------------------------------------------
+                                    347 	.area BIT_BANK	(REL,OVR,DATA)
+      000000                        348 bits:
+      000000                        349 	.ds 1
+                           008000   350 	b0 = bits[0]
+                           008100   351 	b1 = bits[1]
+                           008200   352 	b2 = bits[2]
+                           008300   353 	b3 = bits[3]
+                           008400   354 	b4 = bits[4]
+                           008500   355 	b5 = bits[5]
+                           008600   356 	b6 = bits[6]
+                           008700   357 	b7 = bits[7]
+                                    358 ;--------------------------------------------------------
+                                    359 ; internal ram data
+                                    360 ;--------------------------------------------------------
+                                    361 	.area DSEG    (DATA)
+                                    362 ;--------------------------------------------------------
+                                    363 ; overlayable items in internal ram 
+                                    364 ;--------------------------------------------------------
+                                    365 ;--------------------------------------------------------
+                                    366 ; Stack segment in internal ram 
+                                    367 ;--------------------------------------------------------
+                                    368 	.area	SSEG
+      000000                        369 __start__stack:
+      000000                        370 	.ds	1
+                                    371 
+                                    372 ;--------------------------------------------------------
+                                    373 ; indirectly addressable internal ram data
+                                    374 ;--------------------------------------------------------
+                                    375 	.area ISEG    (DATA)
+                                    376 ;--------------------------------------------------------
+                                    377 ; absolute internal ram data
+                                    378 ;--------------------------------------------------------
+                                    379 	.area IABS    (ABS,DATA)
+                                    380 	.area IABS    (ABS,DATA)
+                                    381 ;--------------------------------------------------------
+                                    382 ; bit data
+                                    383 ;--------------------------------------------------------
+                                    384 	.area BSEG    (BIT)
+      000000                        385 _t1_isr_sloc0_1_0:
+      000000                        386 	.ds 1
+      000001                        387 _pca_isr_sloc0_1_0:
+      000001                        388 	.ds 1
+                                    389 ;--------------------------------------------------------
+                                    390 ; paged external ram data
+                                    391 ;--------------------------------------------------------
+                                    392 	.area PSEG    (PAG,XDATA)
+                                    393 ;--------------------------------------------------------
+                                    394 ; external ram data
+                                    395 ;--------------------------------------------------------
+                                    396 	.area XSEG    (XDATA)
+      000000                        397 _delay_i_1_32:
+      000000                        398 	.ds 2
+      000002                        399 _delay_j_1_33:
+      000002                        400 	.ds 2
+      000004                        401 _interrupt_count::
+      000004                        402 	.ds 2
+      000006                        403 _te_S_1_90:
+      000006                        404 	.ds 3
+      000009                        405 _te_i_1_90:
+      000009                        406 	.ds 2
+                                    407 ;--------------------------------------------------------
+                                    408 ; absolute external ram data
+                                    409 ;--------------------------------------------------------
+                                    410 	.area XABS    (ABS,XDATA)
+                                    411 ;--------------------------------------------------------
+                                    412 ; external initialized ram data
+                                    413 ;--------------------------------------------------------
+                                    414 	.area XISEG   (XDATA)
+      000000                        415 _b::
+      000000                        416 	.ds 2
+                                    417 	.area HOME    (CODE)
+                                    418 	.area GSINIT0 (CODE)
+                                    419 	.area GSINIT1 (CODE)
+                                    420 	.area GSINIT2 (CODE)
+                                    421 	.area GSINIT3 (CODE)
+                                    422 	.area GSINIT4 (CODE)
+                                    423 	.area GSINIT5 (CODE)
+                                    424 	.area GSINIT  (CODE)
+                                    425 	.area GSFINAL (CODE)
+                                    426 	.area CSEG    (CODE)
+                                    427 ;--------------------------------------------------------
+                                    428 ; interrupt vector 
+                                    429 ;--------------------------------------------------------
+                                    430 	.area HOME    (CODE)
+      000000                        431 __interrupt_vect:
+      000000 02r00r00         [24]  432 	ljmp	__sdcc_gsinit_startup
+      000003 02r00rA4         [24]  433 	ljmp	_ext0_isr
+      000006                        434 	.ds	5
+      00000B 02r03r5F         [24]  435 	ljmp	_t0_isr
+      00000E                        436 	.ds	5
+      000013 02r01r29         [24]  437 	ljmp	_ext1_isr
+      000016                        438 	.ds	5
+      00001B 02r03r60         [24]  439 	ljmp	_t1_isr
+      00001E                        440 	.ds	5
+      000023 02r02r85         [24]  441 	ljmp	_s1_isr
+      000026                        442 	.ds	5
+      00002B 32               [24]  443 	reti
+      00002C                        444 	.ds	7
+      000033 32               [24]  445 	reti
+      000034                        446 	.ds	7
+      00003B 02r04r87         [24]  447 	ljmp	_pca_isr
+      00003E                        448 	.ds	5
+      000043 02r01rB6         [24]  449 	ljmp	_s2_isr
+                                    450 ;--------------------------------------------------------
+                                    451 ; global & static initialisations
+                                    452 ;--------------------------------------------------------
+                                    453 	.area HOME    (CODE)
+                                    454 	.area GSINIT  (CODE)
+                                    455 	.area GSFINAL (CODE)
+                                    456 	.area GSINIT  (CODE)
+                                    457 	.globl __sdcc_gsinit_startup
+                                    458 	.globl __sdcc_program_startup
+                                    459 	.globl __start__stack
+                                    460 	.globl __mcs51_genXINIT
+                                    461 	.globl __mcs51_genXRAMCLEAR
+                                    462 	.globl __mcs51_genRAMCLEAR
+                                    463 	.area GSFINAL (CODE)
+      000000 02r00r46         [24]  464 	ljmp	__sdcc_program_startup
+                                    465 ;--------------------------------------------------------
+                                    466 ; Home
+                                    467 ;--------------------------------------------------------
+                                    468 	.area HOME    (CODE)
+                                    469 	.area HOME    (CODE)
+      000046                        470 __sdcc_program_startup:
+      000046 02r06rD3         [24]  471 	ljmp	_main
+                                    472 ;	return from main will return to caller
+                                    473 ;--------------------------------------------------------
+                                    474 ; code
+                                    475 ;--------------------------------------------------------
+                                    476 	.area CSEG    (CODE)
+                                    477 ;------------------------------------------------------------
+                                    478 ;Allocation info for local variables in function 'delay'
+                                    479 ;------------------------------------------------------------
+                                    480 ;i                         Allocated with name '_delay_i_1_32'
+                                    481 ;j                         Allocated with name '_delay_j_1_33'
+                                    482 ;------------------------------------------------------------
+                                    483 ;	test.c:15: void delay(unsigned int i)
+                                    484 ;	-----------------------------------------
+                                    485 ;	 function delay
+                                    486 ;	-----------------------------------------
+      000000                        487 _delay:
+                           000007   488 	ar7 = 0x07
+                           000006   489 	ar6 = 0x06
+                           000005   490 	ar5 = 0x05
+                           000004   491 	ar4 = 0x04
+                           000003   492 	ar3 = 0x03
+                           000002   493 	ar2 = 0x02
+                           000001   494 	ar1 = 0x01
+                           000000   495 	ar0 = 0x00
+      000000 AF 83            [24]  496 	mov	r7,dph
+      000002 E5 82            [12]  497 	mov	a,dpl
+      000004 90r00r00         [24]  498 	mov	dptr,#_delay_i_1_32
+      000007 F0               [24]  499 	movx	@dptr,a
+      000008 EF               [12]  500 	mov	a,r7
+      000009 A3               [24]  501 	inc	dptr
+      00000A F0               [24]  502 	movx	@dptr,a
+                                    503 ;	test.c:17: uint j=100;
+      00000B 90r00r00         [24]  504 	mov	dptr,#_delay_i_1_32
+      00000E E0               [24]  505 	movx	a,@dptr
+      00000F FE               [12]  506 	mov	r6,a
+      000010 A3               [24]  507 	inc	dptr
+      000011 E0               [24]  508 	movx	a,@dptr
+      000012 FF               [12]  509 	mov	r7,a
+      000013                        510 00106$:
+                                    511 ;	test.c:18: for (;i!=0;i--){
+      000013 BE 00 05         [24]  512 	cjne	r6,#0x00,00123$
+      000016 BF 00 02         [24]  513 	cjne	r7,#0x00,00123$
+      000019 80 33            [24]  514 	sjmp	00116$
+      00001B                        515 00123$:
+                                    516 ;	test.c:19: for(j=1000;j>0;j--);
+      00001B 90r00r02         [24]  517 	mov	dptr,#_delay_j_1_33
+      00001E 74 E8            [12]  518 	mov	a,#0xE8
+      000020 F0               [24]  519 	movx	@dptr,a
+      000021 74 03            [12]  520 	mov	a,#0x03
+      000023 A3               [24]  521 	inc	dptr
+      000024 F0               [24]  522 	movx	@dptr,a
+      000025 90r00r02         [24]  523 	mov	dptr,#_delay_j_1_33
+      000028 E0               [24]  524 	movx	a,@dptr
+      000029 FC               [12]  525 	mov	r4,a
+      00002A A3               [24]  526 	inc	dptr
+      00002B E0               [24]  527 	movx	a,@dptr
+      00002C FD               [12]  528 	mov	r5,a
+      00002D                        529 00104$:
+      00002D 1C               [12]  530 	dec	r4
+      00002E BC FF 01         [24]  531 	cjne	r4,#0xFF,00124$
+      000031 1D               [12]  532 	dec	r5
+      000032                        533 00124$:
+      000032 EC               [12]  534 	mov	a,r4
+      000033 4D               [12]  535 	orl	a,r5
+      000034 60 04            [24]  536 	jz	00110$
+      000036 7B 01            [12]  537 	mov	r3,#0x01
+      000038 80 02            [24]  538 	sjmp	00111$
+      00003A                        539 00110$:
+      00003A 7B 00            [12]  540 	mov	r3,#0x00
+      00003C                        541 00111$:
+      00003C EB               [12]  542 	mov	a,r3
+      00003D 70 EE            [24]  543 	jnz	00104$
+                                    544 ;	test.c:18: for (;i!=0;i--){
+      00003F 1E               [12]  545 	dec	r6
+      000040 BE FF 01         [24]  546 	cjne	r6,#0xFF,00127$
+      000043 1F               [12]  547 	dec	r7
+      000044                        548 00127$:
+      000044 90r00r00         [24]  549 	mov	dptr,#_delay_i_1_32
+      000047 EE               [12]  550 	mov	a,r6
+      000048 F0               [24]  551 	movx	@dptr,a
+      000049 EF               [12]  552 	mov	a,r7
+      00004A A3               [24]  553 	inc	dptr
+      00004B F0               [24]  554 	movx	@dptr,a
+      00004C 80 C5            [24]  555 	sjmp	00106$
+      00004E                        556 00116$:
+      00004E 90r00r00         [24]  557 	mov	dptr,#_delay_i_1_32
+      000051 EE               [12]  558 	mov	a,r6
+      000052 F0               [24]  559 	movx	@dptr,a
+      000053 EF               [12]  560 	mov	a,r7
+      000054 A3               [24]  561 	inc	dptr
+      000055 F0               [24]  562 	movx	@dptr,a
+      000056 22               [24]  563 	ret
+                                    564 ;------------------------------------------------------------
+                                    565 ;Allocation info for local variables in function 'interrupt_disable'
+                                    566 ;------------------------------------------------------------
+                                    567 ;	interrupt.c:3: void interrupt_disable(void)
+                                    568 ;	-----------------------------------------
+                                    569 ;	 function interrupt_disable
+                                    570 ;	-----------------------------------------
+      000057                        571 _interrupt_disable:
+                                    572 ;	interrupt.c:5: if ( interrupt_count<sizeof(uint)){
+      000057 90r00r04         [24]  573 	mov	dptr,#_interrupt_count
+      00005A E0               [24]  574 	movx	a,@dptr
+      00005B FE               [12]  575 	mov	r6,a
+      00005C A3               [24]  576 	inc	dptr
+      00005D E0               [24]  577 	movx	a,@dptr
+      00005E FF               [12]  578 	mov	r7,a
+      00005F C3               [12]  579 	clr	c
+      000060 EE               [12]  580 	mov	a,r6
+      000061 94 02            [12]  581 	subb	a,#0x02
+      000063 EF               [12]  582 	mov	a,r7
+      000064 94 00            [12]  583 	subb	a,#0x00
+      000066 40 02            [24]  584 	jc	00104$
+      000068 80 10            [24]  585 	sjmp	00102$
+      00006A                        586 00104$:
+                                    587 ;	interrupt.c:6: interrupt_count++;
+      00006A 90r00r04         [24]  588 	mov	dptr,#_interrupt_count
+      00006D E0               [24]  589 	movx	a,@dptr
+      00006E 24 01            [12]  590 	add	a,#0x01
+      000070 F0               [24]  591 	movx	@dptr,a
+      000071 A3               [24]  592 	inc	dptr
+      000072 E0               [24]  593 	movx	a,@dptr
+      000073 34 00            [12]  594 	addc	a,#0x00
+      000075 F0               [24]  595 	movx	@dptr,a
+                                    596 ;	interrupt.c:7: EA=0;
+      000076 C2 AF            [12]  597 	clr	_EA
+      000078 80 02            [24]  598 	sjmp	00106$
+                                    599 ;	interrupt.c:9: while(1);
+      00007A                        600 00102$:
+      00007A 80 FE            [24]  601 	sjmp	00102$
+      00007C                        602 00106$:
+                                    603 ;	interrupt.c:11: return;
+      00007C 22               [24]  604 	ret
+                                    605 ;------------------------------------------------------------
+                                    606 ;Allocation info for local variables in function 'interrupt_enable'
+                                    607 ;------------------------------------------------------------
+                                    608 ;	interrupt.c:13: void interrupt_enable(void)
+                                    609 ;	-----------------------------------------
+                                    610 ;	 function interrupt_enable
+                                    611 ;	-----------------------------------------
+      00007D                        612 _interrupt_enable:
+                                    613 ;	interrupt.c:15: if (interrupt_count>0){
+      00007D 90r00r04         [24]  614 	mov	dptr,#_interrupt_count
+      000080 E0               [24]  615 	movx	a,@dptr
+      000081 F5 F0            [12]  616 	mov	b,a
+      000083 A3               [24]  617 	inc	dptr
+      000084 E0               [24]  618 	movx	a,@dptr
+      000085 45 F0            [12]  619 	orl	a,b
+      000087 70 02            [24]  620 	jnz	00101$
+      000089 80 16            [24]  621 	sjmp	00102$
+      00008B                        622 00101$:
+                                    623 ;	interrupt.c:16: interrupt_count--;
+      00008B 90r00r04         [24]  624 	mov	dptr,#_interrupt_count
+      00008E E0               [24]  625 	movx	a,@dptr
+      00008F 24 FF            [12]  626 	add	a,#0xFF
+      000091 FE               [12]  627 	mov	r6,a
+      000092 A3               [24]  628 	inc	dptr
+      000093 E0               [24]  629 	movx	a,@dptr
+      000094 34 FF            [12]  630 	addc	a,#0xFF
+      000096 FF               [12]  631 	mov	r7,a
+      000097 90r00r04         [24]  632 	mov	dptr,#_interrupt_count
+      00009A EE               [12]  633 	mov	a,r6
+      00009B F0               [24]  634 	movx	@dptr,a
+      00009C EF               [12]  635 	mov	a,r7
+      00009D A3               [24]  636 	inc	dptr
+      00009E F0               [24]  637 	movx	@dptr,a
+      00009F 80 02            [24]  638 	sjmp	00103$
+      0000A1                        639 00102$:
+                                    640 ;	interrupt.c:18: EA=1;
+      0000A1 D2 AF            [12]  641 	setb	_EA
+      0000A3                        642 00103$:
+                                    643 ;	interrupt.c:20: return;
+      0000A3 22               [24]  644 	ret
+                                    645 ;------------------------------------------------------------
+                                    646 ;Allocation info for local variables in function 'ext0_isr'
+                                    647 ;------------------------------------------------------------
+                                    648 ;	interrupt.c:22: void ext0_isr(void) __interrupt (0) __using (1)
+                                    649 ;	-----------------------------------------
+                                    650 ;	 function ext0_isr
+                                    651 ;	-----------------------------------------
+      0000A4                        652 _ext0_isr:
+                           00000F   653 	ar7 = 0x0F
+                           00000E   654 	ar6 = 0x0E
+                           00000D   655 	ar5 = 0x0D
+                           00000C   656 	ar4 = 0x0C
+                           00000B   657 	ar3 = 0x0B
+                           00000A   658 	ar2 = 0x0A
+                           000009   659 	ar1 = 0x09
+                           000008   660 	ar0 = 0x08
+      0000A4 C0*00            [24]  661 	push	bits
+      0000A6 C0 E0            [24]  662 	push	acc
+      0000A8 C0 F0            [24]  663 	push	b
+      0000AA C0 82            [24]  664 	push	dpl
+      0000AC C0 83            [24]  665 	push	dph
+      0000AE C0 07            [24]  666 	push	(0+7)
+      0000B0 C0 06            [24]  667 	push	(0+6)
+      0000B2 C0 05            [24]  668 	push	(0+5)
+      0000B4 C0 04            [24]  669 	push	(0+4)
+      0000B6 C0 03            [24]  670 	push	(0+3)
+      0000B8 C0 02            [24]  671 	push	(0+2)
+      0000BA C0 01            [24]  672 	push	(0+1)
+      0000BC C0 00            [24]  673 	push	(0+0)
+      0000BE C0 D0            [24]  674 	push	psw
+      0000C0 75 D0 08         [24]  675 	mov	psw,#0x08
+                                    676 ;	interrupt.c:24: enter_int;
+      0000C3 C2 AF            [12]  677 	CLR EA 
+      0000C5 75 82r00         [24]  678 	MOV DPL,# _interrup 
+      0000C8 75 83s00         [24]  679 	MOV DPH,# ( _interrup>>8) 
+      0000CB E0               [24]  680 	MOVX A, @DPTR 
+      0000CC 04               [12]  681 	INC A 
+      0000CD F0               [24]  682 	MOVX @DPTR, A 
+      0000CE 78r00            [12]  683 	MOV R0,# _CUR_TCB_T 
+      0000D0 86 82            [24]  684 	MOV DPL ,@R0 
+      0000D2 08               [12]  685 	INC R0 
+      0000D3 86 83            [24]  686 	MOV DPH , @R0 
+      0000D5 E5 81            [12]  687 	MOV A , SP 
+      0000D7 F0               [24]  688 	MOVX @DPTR , A 
+      0000D8 78r00            [12]  689 	MOV R0 ,# _stack_int 
+      0000DA E8               [12]  690 	MOV A , R0 
+      0000DB 85 E0 81         [24]  691 	MOV SP , ACC 
+                                    692 ;	interrupt.c:25: delay(100);
+      0000DE 90 00 64         [24]  693 	mov	dptr,#0x0064
+      0000E1 75 D0 00         [24]  694 	mov	psw,#0x00
+      0000E4 12r00r00         [24]  695 	lcall	_delay
+      0000E7 75 D0 08         [24]  696 	mov	psw,#0x08
+                                    697 ;	interrupt.c:26: P2_3=!P2_3;
+      0000EA B2 A3            [12]  698 	cpl	_P2_3
+                                    699 ;	interrupt.c:27: if(P3_2==1)exit_int();
+      0000EC 20 B2 02         [24]  700 	jb	_P3_2,00101$
+      0000EF 80 09            [24]  701 	sjmp	00102$
+      0000F1                        702 00101$:
+      0000F1 75 D0 00         [24]  703 	mov	psw,#0x00
+      0000F4 12r00r00         [24]  704 	lcall	_exit_int
+      0000F7 75 D0 08         [24]  705 	mov	psw,#0x08
+      0000FA                        706 00102$:
+                                    707 ;	interrupt.c:28: release_semaphore(1);
+      0000FA 90 00 01         [24]  708 	mov	dptr,#0x0001
+      0000FD 75 D0 00         [24]  709 	mov	psw,#0x00
+      000100 12r00r00         [24]  710 	lcall	_release_semaphore
+                                    711 ;	interrupt.c:29: exit_int();
+      000103 75 D0 00         [24]  712 	mov	psw,#0x00
+      000106 12r00r00         [24]  713 	lcall	_exit_int
+      000109 75 D0 08         [24]  714 	mov	psw,#0x08
+                                    715 ;	interrupt.c:30: return;
+      00010C D0 D0            [24]  716 	pop	psw
+      00010E D0 00            [24]  717 	pop	(0+0)
+      000110 D0 01            [24]  718 	pop	(0+1)
+      000112 D0 02            [24]  719 	pop	(0+2)
+      000114 D0 03            [24]  720 	pop	(0+3)
+      000116 D0 04            [24]  721 	pop	(0+4)
+      000118 D0 05            [24]  722 	pop	(0+5)
+      00011A D0 06            [24]  723 	pop	(0+6)
+      00011C D0 07            [24]  724 	pop	(0+7)
+      00011E D0 83            [24]  725 	pop	dph
+      000120 D0 82            [24]  726 	pop	dpl
+      000122 D0 F0            [24]  727 	pop	b
+      000124 D0 E0            [24]  728 	pop	acc
+      000126 D0*00            [24]  729 	pop	bits
+      000128 32               [24]  730 	reti
+                                    731 ;------------------------------------------------------------
+                                    732 ;Allocation info for local variables in function 'ext1_isr'
+                                    733 ;------------------------------------------------------------
+                                    734 ;	interrupt.c:32: void ext1_isr(void) __interrupt (2) __using (1)
+                                    735 ;	-----------------------------------------
+                                    736 ;	 function ext1_isr
+                                    737 ;	-----------------------------------------
+      000129                        738 _ext1_isr:
+      000129 C0*00            [24]  739 	push	bits
+      00012B C0 E0            [24]  740 	push	acc
+      00012D C0 F0            [24]  741 	push	b
+      00012F C0 82            [24]  742 	push	dpl
+      000131 C0 83            [24]  743 	push	dph
+      000133 C0 07            [24]  744 	push	(0+7)
+      000135 C0 06            [24]  745 	push	(0+6)
+      000137 C0 05            [24]  746 	push	(0+5)
+      000139 C0 04            [24]  747 	push	(0+4)
+      00013B C0 03            [24]  748 	push	(0+3)
+      00013D C0 02            [24]  749 	push	(0+2)
+      00013F C0 01            [24]  750 	push	(0+1)
+      000141 C0 00            [24]  751 	push	(0+0)
+      000143 C0 D0            [24]  752 	push	psw
+      000145 75 D0 08         [24]  753 	mov	psw,#0x08
+                                    754 ;	interrupt.c:34: enter_int;
+      000148 C2 AF            [12]  755 	CLR EA 
+      00014A 75 82r00         [24]  756 	MOV DPL,# _interrup 
+      00014D 75 83s00         [24]  757 	MOV DPH,# ( _interrup>>8) 
+      000150 E0               [24]  758 	MOVX A, @DPTR 
+      000151 04               [12]  759 	INC A 
+      000152 F0               [24]  760 	MOVX @DPTR, A 
+      000153 78r00            [12]  761 	MOV R0,# _CUR_TCB_T 
+      000155 86 82            [24]  762 	MOV DPL ,@R0 
+      000157 08               [12]  763 	INC R0 
+      000158 86 83            [24]  764 	MOV DPH , @R0 
+      00015A E5 81            [12]  765 	MOV A , SP 
+      00015C F0               [24]  766 	MOVX @DPTR , A 
+      00015D 78r00            [12]  767 	MOV R0 ,# _stack_int 
+      00015F E8               [12]  768 	MOV A , R0 
+      000160 85 E0 81         [24]  769 	MOV SP , ACC 
+                                    770 ;	interrupt.c:35: delay(100);
+      000163 90 00 64         [24]  771 	mov	dptr,#0x0064
+      000166 75 D0 00         [24]  772 	mov	psw,#0x00
+      000169 12r00r00         [24]  773 	lcall	_delay
+      00016C 75 D0 08         [24]  774 	mov	psw,#0x08
+                                    775 ;	interrupt.c:36: if(P3_3==1)exit_int();
+      00016F 20 B3 02         [24]  776 	jb	_P3_3,00101$
+      000172 80 09            [24]  777 	sjmp	00102$
+      000174                        778 00101$:
+      000174 75 D0 00         [24]  779 	mov	psw,#0x00
+      000177 12r00r00         [24]  780 	lcall	_exit_int
+      00017A 75 D0 08         [24]  781 	mov	psw,#0x08
+      00017D                        782 00102$:
+                                    783 ;	interrupt.c:37: if(copy_waveing)return;
+      00017D 90r00r00         [24]  784 	mov	dptr,#_copy_waveing
+      000180 E0               [24]  785 	movx	a,@dptr
+      000181 70 02            [24]  786 	jnz	00103$
+      000183 80 02            [24]  787 	sjmp	00104$
+      000185                        788 00103$:
+      000185 80 12            [24]  789 	sjmp	00105$
+      000187                        790 00104$:
+                                    791 ;	interrupt.c:38: release_semaphore(2);
+      000187 90 00 02         [24]  792 	mov	dptr,#0x0002
+      00018A 75 D0 00         [24]  793 	mov	psw,#0x00
+      00018D 12r00r00         [24]  794 	lcall	_release_semaphore
+                                    795 ;	interrupt.c:39: exit_int();
+      000190 75 D0 00         [24]  796 	mov	psw,#0x00
+      000193 12r00r00         [24]  797 	lcall	_exit_int
+      000196 75 D0 08         [24]  798 	mov	psw,#0x08
+                                    799 ;	interrupt.c:40: return;
+      000199                        800 00105$:
+      000199 D0 D0            [24]  801 	pop	psw
+      00019B D0 00            [24]  802 	pop	(0+0)
+      00019D D0 01            [24]  803 	pop	(0+1)
+      00019F D0 02            [24]  804 	pop	(0+2)
+      0001A1 D0 03            [24]  805 	pop	(0+3)
+      0001A3 D0 04            [24]  806 	pop	(0+4)
+      0001A5 D0 05            [24]  807 	pop	(0+5)
+      0001A7 D0 06            [24]  808 	pop	(0+6)
+      0001A9 D0 07            [24]  809 	pop	(0+7)
+      0001AB D0 83            [24]  810 	pop	dph
+      0001AD D0 82            [24]  811 	pop	dpl
+      0001AF D0 F0            [24]  812 	pop	b
+      0001B1 D0 E0            [24]  813 	pop	acc
+      0001B3 D0*00            [24]  814 	pop	bits
+      0001B5 32               [24]  815 	reti
+                                    816 ;------------------------------------------------------------
+                                    817 ;Allocation info for local variables in function 's2_isr'
+                                    818 ;------------------------------------------------------------
+                                    819 ;	interrupt.c:46: void s2_isr(void) __interrupt (8) __using (1)	//串口2中断
+                                    820 ;	-----------------------------------------
+                                    821 ;	 function s2_isr
+                                    822 ;	-----------------------------------------
+      0001B6                        823 _s2_isr:
+      0001B6 C0*00            [24]  824 	push	bits
+      0001B8 C0 E0            [24]  825 	push	acc
+      0001BA C0 F0            [24]  826 	push	b
+      0001BC C0 82            [24]  827 	push	dpl
+      0001BE C0 83            [24]  828 	push	dph
+      0001C0 C0 07            [24]  829 	push	(0+7)
+      0001C2 C0 06            [24]  830 	push	(0+6)
+      0001C4 C0 05            [24]  831 	push	(0+5)
+      0001C6 C0 04            [24]  832 	push	(0+4)
+      0001C8 C0 03            [24]  833 	push	(0+3)
+      0001CA C0 02            [24]  834 	push	(0+2)
+      0001CC C0 01            [24]  835 	push	(0+1)
+      0001CE C0 00            [24]  836 	push	(0+0)
+      0001D0 C0 D0            [24]  837 	push	psw
+      0001D2 75 D0 08         [24]  838 	mov	psw,#0x08
+                                    839 ;	interrupt.c:48: enter_int;
+      0001D5 C2 AF            [12]  840 	CLR EA 
+      0001D7 75 82r00         [24]  841 	MOV DPL,# _interrup 
+      0001DA 75 83s00         [24]  842 	MOV DPH,# ( _interrup>>8) 
+      0001DD E0               [24]  843 	MOVX A, @DPTR 
+      0001DE 04               [12]  844 	INC A 
+      0001DF F0               [24]  845 	MOVX @DPTR, A 
+      0001E0 78r00            [12]  846 	MOV R0,# _CUR_TCB_T 
+      0001E2 86 82            [24]  847 	MOV DPL ,@R0 
+      0001E4 08               [12]  848 	INC R0 
+      0001E5 86 83            [24]  849 	MOV DPH , @R0 
+      0001E7 E5 81            [12]  850 	MOV A , SP 
+      0001E9 F0               [24]  851 	MOVX @DPTR , A 
+      0001EA 78r00            [12]  852 	MOV R0 ,# _stack_int 
+      0001EC E8               [12]  853 	MOV A , R0 
+      0001ED 85 E0 81         [24]  854 	MOV SP , ACC 
+                                    855 ;	interrupt.c:49: if(S2CON&0x02){
+      0001F0 E5 9A            [12]  856 	mov	a,_S2CON
+      0001F2 20 E1 02         [24]  857 	jb	acc.1,00105$
+      0001F5 80 0B            [24]  858 	sjmp	00106$
+      0001F7                        859 00105$:
+                                    860 ;	interrupt.c:50: S2CON&=0xfd;	//清除中断置位
+      0001F7 53 9A FD         [24]  861 	anl	_S2CON,#0xFD
+                                    862 ;	interrupt.c:51: TI2=1;
+      0001FA 90r00r00         [24]  863 	mov	dptr,#_TI2
+      0001FD 74 01            [12]  864 	mov	a,#0x01
+      0001FF F0               [24]  865 	movx	@dptr,a
+      000200 80 5D            [24]  866 	sjmp	00107$
+      000202                        867 00106$:
+                                    868 ;	interrupt.c:53: S2CON&=0xfc;
+      000202 53 9A FC         [24]  869 	anl	_S2CON,#0xFC
+                                    870 ;	interrupt.c:54: if(wifi_data_w==wifi_data_end)wifi_data_w=wifi_data;
+      000205 90r00r00         [24]  871 	mov	dptr,#_wifi_data_w
+      000208 E0               [24]  872 	movx	a,@dptr
+      000209 FE               [12]  873 	mov	r6,a
+      00020A A3               [24]  874 	inc	dptr
+      00020B E0               [24]  875 	movx	a,@dptr
+      00020C FF               [12]  876 	mov	r7,a
+      00020D 90r00r00         [24]  877 	mov	dptr,#_wifi_data_end
+      000210 E0               [24]  878 	movx	a,@dptr
+      000211 FC               [12]  879 	mov	r4,a
+      000212 A3               [24]  880 	inc	dptr
+      000213 E0               [24]  881 	movx	a,@dptr
+      000214 FD               [12]  882 	mov	r5,a
+      000215 EE               [12]  883 	mov	a,r6
+      000216 B5 0C 0E         [24]  884 	cjne	a,ar4,00102$
+      000219 EF               [12]  885 	mov	a,r7
+      00021A B5 0D 0A         [24]  886 	cjne	a,ar5,00102$
+      00021D 90r00r00         [24]  887 	mov	dptr,#_wifi_data_w
+      000220 74r00            [12]  888 	mov	a,#_wifi_data
+      000222 F0               [24]  889 	movx	@dptr,a
+      000223 74s00            [12]  890 	mov	a,#(_wifi_data >> 8)
+      000225 A3               [24]  891 	inc	dptr
+      000226 F0               [24]  892 	movx	@dptr,a
+      000227                        893 00102$:
+                                    894 ;	interrupt.c:55: *wifi_data_w=S2BUF;
+      000227 90r00r00         [24]  895 	mov	dptr,#_wifi_data_w
+      00022A E0               [24]  896 	movx	a,@dptr
+      00022B FE               [12]  897 	mov	r6,a
+      00022C A3               [24]  898 	inc	dptr
+      00022D E0               [24]  899 	movx	a,@dptr
+      00022E FF               [12]  900 	mov	r7,a
+      00022F 8E 82            [24]  901 	mov	dpl,r6
+      000231 8F 83            [24]  902 	mov	dph,r7
+      000233 E5 9B            [12]  903 	mov	a,_S2BUF
+      000235 F0               [24]  904 	movx	@dptr,a
+                                    905 ;	interrupt.c:56: if(*wifi_data_w=='\r')release_semaphore(14);
+      000236 90r00r00         [24]  906 	mov	dptr,#_wifi_data_w
+      000239 E0               [24]  907 	movx	a,@dptr
+      00023A FE               [12]  908 	mov	r6,a
+      00023B A3               [24]  909 	inc	dptr
+      00023C E0               [24]  910 	movx	a,@dptr
+      00023D FF               [12]  911 	mov	r7,a
+      00023E 8E 82            [24]  912 	mov	dpl,r6
+      000240 8F 83            [24]  913 	mov	dph,r7
+      000242 E0               [24]  914 	movx	a,@dptr
+      000243 FE               [12]  915 	mov	r6,a
+      000244 BE 0D 0C         [24]  916 	cjne	r6,#0x0D,00104$
+      000247 90 00 0E         [24]  917 	mov	dptr,#0x000E
+      00024A 75 D0 00         [24]  918 	mov	psw,#0x00
+      00024D 12r00r00         [24]  919 	lcall	_release_semaphore
+      000250 75 D0 08         [24]  920 	mov	psw,#0x08
+      000253                        921 00104$:
+                                    922 ;	interrupt.c:57: wifi_data_w++;
+      000253 90r00r00         [24]  923 	mov	dptr,#_wifi_data_w
+      000256 E0               [24]  924 	movx	a,@dptr
+      000257 24 01            [12]  925 	add	a,#0x01
+      000259 F0               [24]  926 	movx	@dptr,a
+      00025A A3               [24]  927 	inc	dptr
+      00025B E0               [24]  928 	movx	a,@dptr
+      00025C 34 00            [12]  929 	addc	a,#0x00
+      00025E F0               [24]  930 	movx	@dptr,a
+      00025F                        931 00107$:
+                                    932 ;	interrupt.c:59: exit_int();
+      00025F 75 D0 00         [24]  933 	mov	psw,#0x00
+      000262 12r00r00         [24]  934 	lcall	_exit_int
+      000265 75 D0 08         [24]  935 	mov	psw,#0x08
+                                    936 ;	interrupt.c:60: return;
+      000268 D0 D0            [24]  937 	pop	psw
+      00026A D0 00            [24]  938 	pop	(0+0)
+      00026C D0 01            [24]  939 	pop	(0+1)
+      00026E D0 02            [24]  940 	pop	(0+2)
+      000270 D0 03            [24]  941 	pop	(0+3)
+      000272 D0 04            [24]  942 	pop	(0+4)
+      000274 D0 05            [24]  943 	pop	(0+5)
+      000276 D0 06            [24]  944 	pop	(0+6)
+      000278 D0 07            [24]  945 	pop	(0+7)
+      00027A D0 83            [24]  946 	pop	dph
+      00027C D0 82            [24]  947 	pop	dpl
+      00027E D0 F0            [24]  948 	pop	b
+      000280 D0 E0            [24]  949 	pop	acc
+      000282 D0*00            [24]  950 	pop	bits
+      000284 32               [24]  951 	reti
+                                    952 ;------------------------------------------------------------
+                                    953 ;Allocation info for local variables in function 's1_isr'
+                                    954 ;------------------------------------------------------------
+                                    955 ;	interrupt.c:66: void s1_isr(void) __interrupt (4) __using (1)
+                                    956 ;	-----------------------------------------
+                                    957 ;	 function s1_isr
+                                    958 ;	-----------------------------------------
+      000285                        959 _s1_isr:
+      000285 C0*00            [24]  960 	push	bits
+      000287 C0 E0            [24]  961 	push	acc
+      000289 C0 F0            [24]  962 	push	b
+      00028B C0 82            [24]  963 	push	dpl
+      00028D C0 83            [24]  964 	push	dph
+      00028F C0 07            [24]  965 	push	(0+7)
+      000291 C0 06            [24]  966 	push	(0+6)
+      000293 C0 05            [24]  967 	push	(0+5)
+      000295 C0 04            [24]  968 	push	(0+4)
+      000297 C0 03            [24]  969 	push	(0+3)
+      000299 C0 02            [24]  970 	push	(0+2)
+      00029B C0 01            [24]  971 	push	(0+1)
+      00029D C0 00            [24]  972 	push	(0+0)
+      00029F C0 D0            [24]  973 	push	psw
+      0002A1 75 D0 08         [24]  974 	mov	psw,#0x08
+                                    975 ;	interrupt.c:68: enter_int;
+      0002A4 C2 AF            [12]  976 	CLR EA 
+      0002A6 75 82r00         [24]  977 	MOV DPL,# _interrup 
+      0002A9 75 83s00         [24]  978 	MOV DPH,# ( _interrup>>8) 
+      0002AC E0               [24]  979 	MOVX A, @DPTR 
+      0002AD 04               [12]  980 	INC A 
+      0002AE F0               [24]  981 	MOVX @DPTR, A 
+      0002AF 78r00            [12]  982 	MOV R0,# _CUR_TCB_T 
+      0002B1 86 82            [24]  983 	MOV DPL ,@R0 
+      0002B3 08               [12]  984 	INC R0 
+      0002B4 86 83            [24]  985 	MOV DPH , @R0 
+      0002B6 E5 81            [12]  986 	MOV A , SP 
+      0002B8 F0               [24]  987 	MOVX @DPTR , A 
+      0002B9 78r00            [12]  988 	MOV R0 ,# _stack_int 
+      0002BB E8               [12]  989 	MOV A , R0 
+      0002BC 85 E0 81         [24]  990 	MOV SP , ACC 
+                                    991 ;	interrupt.c:69: if(RI){
+      0002BF 20 98 03         [24]  992 	jb	_RI,00105$
+      0002C2 02r03r31         [24]  993 	ljmp	00106$
+      0002C5                        994 00105$:
+                                    995 ;	interrupt.c:70: RI=0;
+      0002C5 C2 98            [12]  996 	clr	_RI
+                                    997 ;	interrupt.c:71: if(serial_w==serial_end)serial_w=serial_buf;
+      0002C7 90r00r00         [24]  998 	mov	dptr,#_serial_w
+      0002CA E0               [24]  999 	movx	a,@dptr
+      0002CB FE               [12] 1000 	mov	r6,a
+      0002CC A3               [24] 1001 	inc	dptr
+      0002CD E0               [24] 1002 	movx	a,@dptr
+      0002CE FF               [12] 1003 	mov	r7,a
+      0002CF 90r00r00         [24] 1004 	mov	dptr,#_serial_end
+      0002D2 E0               [24] 1005 	movx	a,@dptr
+      0002D3 FC               [12] 1006 	mov	r4,a
+      0002D4 A3               [24] 1007 	inc	dptr
+      0002D5 E0               [24] 1008 	movx	a,@dptr
+      0002D6 FD               [12] 1009 	mov	r5,a
+      0002D7 EE               [12] 1010 	mov	a,r6
+      0002D8 B5 0C 0E         [24] 1011 	cjne	a,ar4,00102$
+      0002DB EF               [12] 1012 	mov	a,r7
+      0002DC B5 0D 0A         [24] 1013 	cjne	a,ar5,00102$
+      0002DF 90r00r00         [24] 1014 	mov	dptr,#_serial_w
+      0002E2 74r00            [12] 1015 	mov	a,#_serial_buf
+      0002E4 F0               [24] 1016 	movx	@dptr,a
+      0002E5 74s00            [12] 1017 	mov	a,#(_serial_buf >> 8)
+      0002E7 A3               [24] 1018 	inc	dptr
+      0002E8 F0               [24] 1019 	movx	@dptr,a
+      0002E9                       1020 00102$:
+                                   1021 ;	interrupt.c:72: *serial_w=SBUF;
+      0002E9 90r00r00         [24] 1022 	mov	dptr,#_serial_w
+      0002EC E0               [24] 1023 	movx	a,@dptr
+      0002ED FE               [12] 1024 	mov	r6,a
+      0002EE A3               [24] 1025 	inc	dptr
+      0002EF E0               [24] 1026 	movx	a,@dptr
+      0002F0 FF               [12] 1027 	mov	r7,a
+      0002F1 8E 82            [24] 1028 	mov	dpl,r6
+      0002F3 8F 83            [24] 1029 	mov	dph,r7
+      0002F5 E5 99            [12] 1030 	mov	a,_SBUF
+      0002F7 F0               [24] 1031 	movx	@dptr,a
+                                   1032 ;	interrupt.c:73: SBUF=*serial_w;
+      0002F8 90r00r00         [24] 1033 	mov	dptr,#_serial_w
+      0002FB E0               [24] 1034 	movx	a,@dptr
+      0002FC FE               [12] 1035 	mov	r6,a
+      0002FD A3               [24] 1036 	inc	dptr
+      0002FE E0               [24] 1037 	movx	a,@dptr
+      0002FF FF               [12] 1038 	mov	r7,a
+      000300 8E 82            [24] 1039 	mov	dpl,r6
+      000302 8F 83            [24] 1040 	mov	dph,r7
+      000304 E0               [24] 1041 	movx	a,@dptr
+      000305 F5 99            [12] 1042 	mov	_SBUF,a
+                                   1043 ;	interrupt.c:74: if(*serial_w=='\r'){
+      000307 8E 82            [24] 1044 	mov	dpl,r6
+      000309 8F 83            [24] 1045 	mov	dph,r7
+      00030B E0               [24] 1046 	movx	a,@dptr
+      00030C FE               [12] 1047 	mov	r6,a
+      00030D BE 0D 0C         [24] 1048 	cjne	r6,#0x0D,00104$
+                                   1049 ;	interrupt.c:76: release_semaphore(15);
+      000310 90 00 0F         [24] 1050 	mov	dptr,#0x000F
+      000313 75 D0 00         [24] 1051 	mov	psw,#0x00
+      000316 12r00r00         [24] 1052 	lcall	_release_semaphore
+      000319 75 D0 08         [24] 1053 	mov	psw,#0x08
+      00031C                       1054 00104$:
+                                   1055 ;	interrupt.c:78: serial_w+=1;
+      00031C 90r00r00         [24] 1056 	mov	dptr,#_serial_w
+      00031F E0               [24] 1057 	movx	a,@dptr
+      000320 FE               [12] 1058 	mov	r6,a
+      000321 A3               [24] 1059 	inc	dptr
+      000322 E0               [24] 1060 	movx	a,@dptr
+      000323 FF               [12] 1061 	mov	r7,a
+      000324 90r00r00         [24] 1062 	mov	dptr,#_serial_w
+      000327 74 01            [12] 1063 	mov	a,#0x01
+      000329 2E               [12] 1064 	add	a,r6
+      00032A F0               [24] 1065 	movx	@dptr,a
+      00032B E4               [12] 1066 	clr	a
+      00032C 3F               [12] 1067 	addc	a,r7
+      00032D A3               [24] 1068 	inc	dptr
+      00032E F0               [24] 1069 	movx	@dptr,a
+      00032F 80 08            [24] 1070 	sjmp	00107$
+      000331                       1071 00106$:
+                                   1072 ;	interrupt.c:80: TI=0;
+      000331 C2 99            [12] 1073 	clr	_TI
+                                   1074 ;	interrupt.c:81: TI1=1;
+      000333 90r00r00         [24] 1075 	mov	dptr,#_TI1
+      000336 74 01            [12] 1076 	mov	a,#0x01
+      000338 F0               [24] 1077 	movx	@dptr,a
+      000339                       1078 00107$:
+                                   1079 ;	interrupt.c:83: exit_int();
+      000339 75 D0 00         [24] 1080 	mov	psw,#0x00
+      00033C 12r00r00         [24] 1081 	lcall	_exit_int
+      00033F 75 D0 08         [24] 1082 	mov	psw,#0x08
+                                   1083 ;	interrupt.c:84: return;
+      000342 D0 D0            [24] 1084 	pop	psw
+      000344 D0 00            [24] 1085 	pop	(0+0)
+      000346 D0 01            [24] 1086 	pop	(0+1)
+      000348 D0 02            [24] 1087 	pop	(0+2)
+      00034A D0 03            [24] 1088 	pop	(0+3)
+      00034C D0 04            [24] 1089 	pop	(0+4)
+      00034E D0 05            [24] 1090 	pop	(0+5)
+      000350 D0 06            [24] 1091 	pop	(0+6)
+      000352 D0 07            [24] 1092 	pop	(0+7)
+      000354 D0 83            [24] 1093 	pop	dph
+      000356 D0 82            [24] 1094 	pop	dpl
+      000358 D0 F0            [24] 1095 	pop	b
+      00035A D0 E0            [24] 1096 	pop	acc
+      00035C D0*00            [24] 1097 	pop	bits
+      00035E 32               [24] 1098 	reti
+                                   1099 ;------------------------------------------------------------
+                                   1100 ;Allocation info for local variables in function 't0_isr'
+                                   1101 ;------------------------------------------------------------
+                                   1102 ;	interrupt.c:86: void t0_isr(void) __interrupt (1) __using (1)
+                                   1103 ;	-----------------------------------------
+                                   1104 ;	 function t0_isr
+                                   1105 ;	-----------------------------------------
+      00035F                       1106 _t0_isr:
+                                   1107 ;	interrupt.c:88: return;
+      00035F 32               [24] 1108 	reti
+                                   1109 ;	eliminated unneeded mov psw,# (no regs used in bank)
+                                   1110 ;	eliminated unneeded push/pop psw
+                                   1111 ;	eliminated unneeded push/pop dpl
+                                   1112 ;	eliminated unneeded push/pop dph
+                                   1113 ;	eliminated unneeded push/pop b
+                                   1114 ;	eliminated unneeded push/pop acc
+                                   1115 ;------------------------------------------------------------
+                                   1116 ;Allocation info for local variables in function 't1_isr'
+                                   1117 ;------------------------------------------------------------
+                                   1118 ;	interrupt.c:95: void t1_isr(void) __interrupt (3) __using (1)
+                                   1119 ;	-----------------------------------------
+                                   1120 ;	 function t1_isr
+                                   1121 ;	-----------------------------------------
+      000360                       1122 _t1_isr:
+      000360 C0 E0            [24] 1123 	push	acc
+      000362 C0 F0            [24] 1124 	push	b
+      000364 C0 82            [24] 1125 	push	dpl
+      000366 C0 83            [24] 1126 	push	dph
+      000368 C0 D0            [24] 1127 	push	psw
+      00036A 75 D0 08         [24] 1128 	mov	psw,#0x08
+                                   1129 ;	interrupt.c:99: if(copy_waveing){
+      00036D 90r00r00         [24] 1130 	mov	dptr,#_copy_waveing
+      000370 E0               [24] 1131 	movx	a,@dptr
+      000371 70 03            [24] 1132 	jnz	00113$
+      000373 02r04r07         [24] 1133 	ljmp	00114$
+      000376                       1134 00113$:
+                                   1135 ;	interrupt.c:100: if(copywave_count<400){
+      000376 90r00r00         [24] 1136 	mov	dptr,#_copywave_count
+      000379 E0               [24] 1137 	movx	a,@dptr
+      00037A FE               [12] 1138 	mov	r6,a
+      00037B A3               [24] 1139 	inc	dptr
+      00037C E0               [24] 1140 	movx	a,@dptr
+      00037D FF               [12] 1141 	mov	r7,a
+      00037E C3               [12] 1142 	clr	c
+      00037F EE               [12] 1143 	mov	a,r6
+      000380 94 90            [12] 1144 	subb	a,#0x90
+      000382 EF               [12] 1145 	mov	a,r7
+      000383 94 01            [12] 1146 	subb	a,#0x01
+      000385 40 03            [24] 1147 	jc	00104$
+      000387 02r04r00         [24] 1148 	ljmp	00105$
+      00038A                       1149 00104$:
+                                   1150 ;	interrupt.c:101: if(copywave_bit_count<8){
+      00038A 90r00r00         [24] 1151 	mov	dptr,#_copywave_bit_count
+      00038D E0               [24] 1152 	movx	a,@dptr
+      00038E FF               [12] 1153 	mov	r7,a
+      00038F BF 08 00         [24] 1154 	cjne	r7,#0x08,00131$
+      000392                       1155 00131$:
+      000392 40 1D            [24] 1156 	jc	00103$
+                                   1157 ;	interrupt.c:103: copywave_bit_count=0;
+      000394 90r00r00         [24] 1158 	mov	dptr,#_copywave_bit_count
+      000397 E4               [12] 1159 	clr	a
+      000398 F0               [24] 1160 	movx	@dptr,a
+                                   1161 ;	interrupt.c:104: copywave_p++;
+      000399 90r00r00         [24] 1162 	mov	dptr,#_copywave_p
+      00039C E0               [24] 1163 	movx	a,@dptr
+      00039D 24 01            [12] 1164 	add	a,#0x01
+      00039F F0               [24] 1165 	movx	@dptr,a
+      0003A0 A3               [24] 1166 	inc	dptr
+      0003A1 E0               [24] 1167 	movx	a,@dptr
+      0003A2 34 00            [12] 1168 	addc	a,#0x00
+      0003A4 F0               [24] 1169 	movx	@dptr,a
+                                   1170 ;	interrupt.c:105: copywave_count++;
+      0003A5 90r00r00         [24] 1171 	mov	dptr,#_copywave_count
+      0003A8 E0               [24] 1172 	movx	a,@dptr
+      0003A9 24 01            [12] 1173 	add	a,#0x01
+      0003AB F0               [24] 1174 	movx	@dptr,a
+      0003AC A3               [24] 1175 	inc	dptr
+      0003AD E0               [24] 1176 	movx	a,@dptr
+      0003AE 34 00            [12] 1177 	addc	a,#0x00
+      0003B0 F0               [24] 1178 	movx	@dptr,a
+      0003B1                       1179 00103$:
+                                   1180 ;	interrupt.c:107: copywave_bit_count++;
+      0003B1 90r00r00         [24] 1181 	mov	dptr,#_copywave_bit_count
+      0003B4 E0               [24] 1182 	movx	a,@dptr
+      0003B5 24 01            [12] 1183 	add	a,#0x01
+      0003B7 F0               [24] 1184 	movx	@dptr,a
+                                   1185 ;	interrupt.c:108: *copywave_p=*copywave_p<<1;
+      0003B8 90r00r00         [24] 1186 	mov	dptr,#_copywave_p
+      0003BB E0               [24] 1187 	movx	a,@dptr
+      0003BC FD               [12] 1188 	mov	r5,a
+      0003BD A3               [24] 1189 	inc	dptr
+      0003BE E0               [24] 1190 	movx	a,@dptr
+      0003BF FE               [12] 1191 	mov	r6,a
+      0003C0 A3               [24] 1192 	inc	dptr
+      0003C1 E0               [24] 1193 	movx	a,@dptr
+      0003C2 FF               [12] 1194 	mov	r7,a
+      0003C3 8D 82            [24] 1195 	mov	dpl,r5
+      0003C5 8E 83            [24] 1196 	mov	dph,r6
+      0003C7 8F F0            [24] 1197 	mov	b,r7
+      0003C9 12r00r00         [24] 1198 	lcall	__gptrget
+      0003CC 25 E0            [12] 1199 	add	a,acc
+      0003CE 8D 82            [24] 1200 	mov	dpl,r5
+      0003D0 8E 83            [24] 1201 	mov	dph,r6
+      0003D2 8F F0            [24] 1202 	mov	b,r7
+      0003D4 12r00r00         [24] 1203 	lcall	__gptrput
+                                   1204 ;	interrupt.c:109: *copywave_p|=input;
+      0003D7 90r00r00         [24] 1205 	mov	dptr,#_copywave_p
+      0003DA E0               [24] 1206 	movx	a,@dptr
+      0003DB FD               [12] 1207 	mov	r5,a
+      0003DC A3               [24] 1208 	inc	dptr
+      0003DD E0               [24] 1209 	movx	a,@dptr
+      0003DE FE               [12] 1210 	mov	r6,a
+      0003DF A3               [24] 1211 	inc	dptr
+      0003E0 E0               [24] 1212 	movx	a,@dptr
+      0003E1 FF               [12] 1213 	mov	r7,a
+      0003E2 8D 82            [24] 1214 	mov	dpl,r5
+      0003E4 8E 83            [24] 1215 	mov	dph,r6
+      0003E6 8F F0            [24] 1216 	mov	b,r7
+      0003E8 12r00r00         [24] 1217 	lcall	__gptrget
+      0003EB FC               [12] 1218 	mov	r4,a
+      0003EC A2 A7            [12] 1219 	mov	c,_P2_7
+      0003EE E4               [12] 1220 	clr	a
+      0003EF 33               [12] 1221 	rlc	a
+      0003F0 FB               [12] 1222 	mov	r3,a
+      0003F1 42 0C            [12] 1223 	orl	ar4,a
+      0003F3 8D 82            [24] 1224 	mov	dpl,r5
+      0003F5 8E 83            [24] 1225 	mov	dph,r6
+      0003F7 8F F0            [24] 1226 	mov	b,r7
+      0003F9 EC               [12] 1227 	mov	a,r4
+      0003FA 12r00r00         [24] 1228 	lcall	__gptrput
+      0003FD 02r04r7C         [24] 1229 	ljmp	00116$
+      000400                       1230 00105$:
+                                   1231 ;	interrupt.c:111: TR1=0;
+      000400 C2 8E            [12] 1232 	clr	_TR1
+                                   1233 ;	interrupt.c:112: TR0=0;
+      000402 C2 8C            [12] 1234 	clr	_TR0
+      000404 02r04r7C         [24] 1235 	ljmp	00116$
+      000407                       1236 00114$:
+                                   1237 ;	interrupt.c:115: if(copywave_count<400){
+      000407 90r00r00         [24] 1238 	mov	dptr,#_copywave_count
+      00040A E0               [24] 1239 	movx	a,@dptr
+      00040B FE               [12] 1240 	mov	r6,a
+      00040C A3               [24] 1241 	inc	dptr
+      00040D E0               [24] 1242 	movx	a,@dptr
+      00040E FF               [12] 1243 	mov	r7,a
+      00040F C3               [12] 1244 	clr	c
+      000410 EE               [12] 1245 	mov	a,r6
+      000411 94 90            [12] 1246 	subb	a,#0x90
+      000413 EF               [12] 1247 	mov	a,r7
+      000414 94 01            [12] 1248 	subb	a,#0x01
+      000416 40 02            [24] 1249 	jc	00110$
+      000418 80 5E            [24] 1250 	sjmp	00111$
+      00041A                       1251 00110$:
+                                   1252 ;	interrupt.c:116: if(copywave_bit_count<8){
+      00041A 90r00r00         [24] 1253 	mov	dptr,#_copywave_bit_count
+      00041D E0               [24] 1254 	movx	a,@dptr
+      00041E FF               [12] 1255 	mov	r7,a
+      00041F BF 08 00         [24] 1256 	cjne	r7,#0x08,00134$
+      000422                       1257 00134$:
+      000422 40 1D            [24] 1258 	jc	00109$
+                                   1259 ;	interrupt.c:118: copywave_p++;
+      000424 90r00r00         [24] 1260 	mov	dptr,#_copywave_p
+      000427 E0               [24] 1261 	movx	a,@dptr
+      000428 24 01            [12] 1262 	add	a,#0x01
+      00042A F0               [24] 1263 	movx	@dptr,a
+      00042B A3               [24] 1264 	inc	dptr
+      00042C E0               [24] 1265 	movx	a,@dptr
+      00042D 34 00            [12] 1266 	addc	a,#0x00
+      00042F F0               [24] 1267 	movx	@dptr,a
+                                   1268 ;	interrupt.c:119: copywave_count++;
+      000430 90r00r00         [24] 1269 	mov	dptr,#_copywave_count
+      000433 E0               [24] 1270 	movx	a,@dptr
+      000434 24 01            [12] 1271 	add	a,#0x01
+      000436 F0               [24] 1272 	movx	@dptr,a
+      000437 A3               [24] 1273 	inc	dptr
+      000438 E0               [24] 1274 	movx	a,@dptr
+      000439 34 00            [12] 1275 	addc	a,#0x00
+      00043B F0               [24] 1276 	movx	@dptr,a
+                                   1277 ;	interrupt.c:120: copywave_bit_count=0;
+      00043C 90r00r00         [24] 1278 	mov	dptr,#_copywave_bit_count
+      00043F E4               [12] 1279 	clr	a
+      000440 F0               [24] 1280 	movx	@dptr,a
+      000441                       1281 00109$:
+                                   1282 ;	interrupt.c:122: TR0=*copywave_p&0x80;
+      000441 90r00r00         [24] 1283 	mov	dptr,#_copywave_p
+      000444 E0               [24] 1284 	movx	a,@dptr
+      000445 FD               [12] 1285 	mov	r5,a
+      000446 A3               [24] 1286 	inc	dptr
+      000447 E0               [24] 1287 	movx	a,@dptr
+      000448 FE               [12] 1288 	mov	r6,a
+      000449 A3               [24] 1289 	inc	dptr
+      00044A E0               [24] 1290 	movx	a,@dptr
+      00044B FF               [12] 1291 	mov	r7,a
+      00044C 8D 82            [24] 1292 	mov	dpl,r5
+      00044E 8E 83            [24] 1293 	mov	dph,r6
+      000450 8F F0            [24] 1294 	mov	b,r7
+      000452 12r00r00         [24] 1295 	lcall	__gptrget
+      000455 33               [12] 1296 	rlc	a
+      000456 92*00            [24] 1297 	mov  _t1_isr_sloc0_1_0,c
+      000458 92 8C            [24] 1298 	mov	_TR0,c
+                                   1299 ;	interrupt.c:123: *copywave_p=*copywave_p<<1;
+      00045A 8D 82            [24] 1300 	mov	dpl,r5
+      00045C 8E 83            [24] 1301 	mov	dph,r6
+      00045E 8F F0            [24] 1302 	mov	b,r7
+      000460 12r00r00         [24] 1303 	lcall	__gptrget
+      000463 25 E0            [12] 1304 	add	a,acc
+      000465 FC               [12] 1305 	mov	r4,a
+      000466 8D 82            [24] 1306 	mov	dpl,r5
+      000468 8E 83            [24] 1307 	mov	dph,r6
+      00046A 8F F0            [24] 1308 	mov	b,r7
+      00046C 12r00r00         [24] 1309 	lcall	__gptrput
+                                   1310 ;	interrupt.c:124: copywave_bit_count++;
+      00046F 90r00r00         [24] 1311 	mov	dptr,#_copywave_bit_count
+      000472 E0               [24] 1312 	movx	a,@dptr
+      000473 24 01            [12] 1313 	add	a,#0x01
+      000475 F0               [24] 1314 	movx	@dptr,a
+      000476 80 04            [24] 1315 	sjmp	00116$
+      000478                       1316 00111$:
+                                   1317 ;	interrupt.c:126: TR1=0;
+      000478 C2 8E            [12] 1318 	clr	_TR1
+                                   1319 ;	interrupt.c:127: TR0=0;
+      00047A C2 8C            [12] 1320 	clr	_TR0
+      00047C                       1321 00116$:
+      00047C D0 D0            [24] 1322 	pop	psw
+      00047E D0 83            [24] 1323 	pop	dph
+      000480 D0 82            [24] 1324 	pop	dpl
+      000482 D0 F0            [24] 1325 	pop	b
+      000484 D0 E0            [24] 1326 	pop	acc
+      000486 32               [24] 1327 	reti
+                                   1328 ;------------------------------------------------------------
+                                   1329 ;Allocation info for local variables in function 'pca_isr'
+                                   1330 ;------------------------------------------------------------
+                                   1331 ;	interrupt.c:137: void pca_isr(void) __interrupt (7) __using (1)
+                                   1332 ;	-----------------------------------------
+                                   1333 ;	 function pca_isr
+                                   1334 ;	-----------------------------------------
+      000487                       1335 _pca_isr:
+      000487 C0 E0            [24] 1336 	push	acc
+      000489 C0 F0            [24] 1337 	push	b
+      00048B C0 82            [24] 1338 	push	dpl
+      00048D C0 83            [24] 1339 	push	dph
+      00048F C0 D0            [24] 1340 	push	psw
+      000491 75 D0 08         [24] 1341 	mov	psw,#0x08
+                                   1342 ;	interrupt.c:139: CCF0=0;
+      000494 C2 D8            [12] 1343 	clr	_CCF0
+                                   1344 ;	interrupt.c:140: CCAP0L=time;
+      000496 90r00r00         [24] 1345 	mov	dptr,#_time
+      000499 E0               [24] 1346 	movx	a,@dptr
+      00049A FE               [12] 1347 	mov	r6,a
+      00049B A3               [24] 1348 	inc	dptr
+      00049C E0               [24] 1349 	movx	a,@dptr
+      00049D FF               [12] 1350 	mov	r7,a
+      00049E 8E EA            [24] 1351 	mov	_CCAP0L,r6
+                                   1352 ;	interrupt.c:141: CCAP0H=time>>8;
+      0004A0 8F FA            [24] 1353 	mov	_CCAP0H,r7
+                                   1354 ;	interrupt.c:142: time+=TIME;
+      0004A2 90r00r00         [24] 1355 	mov	dptr,#_time
+      0004A5 74 4C            [12] 1356 	mov	a,#0x4C
+      0004A7 2E               [12] 1357 	add	a,r6
+      0004A8 F0               [24] 1358 	movx	@dptr,a
+      0004A9 74 04            [12] 1359 	mov	a,#0x04
+      0004AB 3F               [12] 1360 	addc	a,r7
+      0004AC A3               [24] 1361 	inc	dptr
+      0004AD F0               [24] 1362 	movx	@dptr,a
+                                   1363 ;	interrupt.c:143: if(copy_waveing){
+      0004AE 90r00r00         [24] 1364 	mov	dptr,#_copy_waveing
+      0004B1 E0               [24] 1365 	movx	a,@dptr
+      0004B2 70 03            [24] 1366 	jnz	00113$
+      0004B4 02r05r4D         [24] 1367 	ljmp	00114$
+      0004B7                       1368 00113$:
+                                   1369 ;	interrupt.c:144: if(copywave_count<400){
+      0004B7 90r00r00         [24] 1370 	mov	dptr,#_copywave_count
+      0004BA E0               [24] 1371 	movx	a,@dptr
+      0004BB FE               [12] 1372 	mov	r6,a
+      0004BC A3               [24] 1373 	inc	dptr
+      0004BD E0               [24] 1374 	movx	a,@dptr
+      0004BE FF               [12] 1375 	mov	r7,a
+      0004BF C3               [12] 1376 	clr	c
+      0004C0 EE               [12] 1377 	mov	a,r6
+      0004C1 94 90            [12] 1378 	subb	a,#0x90
+      0004C3 EF               [12] 1379 	mov	a,r7
+      0004C4 94 01            [12] 1380 	subb	a,#0x01
+      0004C6 40 03            [24] 1381 	jc	00104$
+      0004C8 02r05r41         [24] 1382 	ljmp	00105$
+      0004CB                       1383 00104$:
+                                   1384 ;	interrupt.c:145: if(copywave_bit_count<8){
+      0004CB 90r00r00         [24] 1385 	mov	dptr,#_copywave_bit_count
+      0004CE E0               [24] 1386 	movx	a,@dptr
+      0004CF FF               [12] 1387 	mov	r7,a
+      0004D0 BF 08 00         [24] 1388 	cjne	r7,#0x08,00131$
+      0004D3                       1389 00131$:
+      0004D3 40 1D            [24] 1390 	jc	00103$
+                                   1391 ;	interrupt.c:147: copywave_bit_count=0;
+      0004D5 90r00r00         [24] 1392 	mov	dptr,#_copywave_bit_count
+      0004D8 E4               [12] 1393 	clr	a
+      0004D9 F0               [24] 1394 	movx	@dptr,a
+                                   1395 ;	interrupt.c:148: copywave_p++;
+      0004DA 90r00r00         [24] 1396 	mov	dptr,#_copywave_p
+      0004DD E0               [24] 1397 	movx	a,@dptr
+      0004DE 24 01            [12] 1398 	add	a,#0x01
+      0004E0 F0               [24] 1399 	movx	@dptr,a
+      0004E1 A3               [24] 1400 	inc	dptr
+      0004E2 E0               [24] 1401 	movx	a,@dptr
+      0004E3 34 00            [12] 1402 	addc	a,#0x00
+      0004E5 F0               [24] 1403 	movx	@dptr,a
+                                   1404 ;	interrupt.c:149: copywave_count++;
+      0004E6 90r00r00         [24] 1405 	mov	dptr,#_copywave_count
+      0004E9 E0               [24] 1406 	movx	a,@dptr
+      0004EA 24 01            [12] 1407 	add	a,#0x01
+      0004EC F0               [24] 1408 	movx	@dptr,a
+      0004ED A3               [24] 1409 	inc	dptr
+      0004EE E0               [24] 1410 	movx	a,@dptr
+      0004EF 34 00            [12] 1411 	addc	a,#0x00
+      0004F1 F0               [24] 1412 	movx	@dptr,a
+      0004F2                       1413 00103$:
+                                   1414 ;	interrupt.c:151: copywave_bit_count++;
+      0004F2 90r00r00         [24] 1415 	mov	dptr,#_copywave_bit_count
+      0004F5 E0               [24] 1416 	movx	a,@dptr
+      0004F6 24 01            [12] 1417 	add	a,#0x01
+      0004F8 F0               [24] 1418 	movx	@dptr,a
+                                   1419 ;	interrupt.c:152: *copywave_p=*copywave_p<<1;
+      0004F9 90r00r00         [24] 1420 	mov	dptr,#_copywave_p
+      0004FC E0               [24] 1421 	movx	a,@dptr
+      0004FD FD               [12] 1422 	mov	r5,a
+      0004FE A3               [24] 1423 	inc	dptr
+      0004FF E0               [24] 1424 	movx	a,@dptr
+      000500 FE               [12] 1425 	mov	r6,a
+      000501 A3               [24] 1426 	inc	dptr
+      000502 E0               [24] 1427 	movx	a,@dptr
+      000503 FF               [12] 1428 	mov	r7,a
+      000504 8D 82            [24] 1429 	mov	dpl,r5
+      000506 8E 83            [24] 1430 	mov	dph,r6
+      000508 8F F0            [24] 1431 	mov	b,r7
+      00050A 12r00r00         [24] 1432 	lcall	__gptrget
+      00050D 25 E0            [12] 1433 	add	a,acc
+      00050F 8D 82            [24] 1434 	mov	dpl,r5
+      000511 8E 83            [24] 1435 	mov	dph,r6
+      000513 8F F0            [24] 1436 	mov	b,r7
+      000515 12r00r00         [24] 1437 	lcall	__gptrput
+                                   1438 ;	interrupt.c:153: *copywave_p|=input;
+      000518 90r00r00         [24] 1439 	mov	dptr,#_copywave_p
+      00051B E0               [24] 1440 	movx	a,@dptr
+      00051C FD               [12] 1441 	mov	r5,a
+      00051D A3               [24] 1442 	inc	dptr
+      00051E E0               [24] 1443 	movx	a,@dptr
+      00051F FE               [12] 1444 	mov	r6,a
+      000520 A3               [24] 1445 	inc	dptr
+      000521 E0               [24] 1446 	movx	a,@dptr
+      000522 FF               [12] 1447 	mov	r7,a
+      000523 8D 82            [24] 1448 	mov	dpl,r5
+      000525 8E 83            [24] 1449 	mov	dph,r6
+      000527 8F F0            [24] 1450 	mov	b,r7
+      000529 12r00r00         [24] 1451 	lcall	__gptrget
+      00052C FC               [12] 1452 	mov	r4,a
+      00052D A2 A7            [12] 1453 	mov	c,_P2_7
+      00052F E4               [12] 1454 	clr	a
+      000530 33               [12] 1455 	rlc	a
+      000531 FB               [12] 1456 	mov	r3,a
+      000532 42 0C            [12] 1457 	orl	ar4,a
+      000534 8D 82            [24] 1458 	mov	dpl,r5
+      000536 8E 83            [24] 1459 	mov	dph,r6
+      000538 8F F0            [24] 1460 	mov	b,r7
+      00053A EC               [12] 1461 	mov	a,r4
+      00053B 12r00r00         [24] 1462 	lcall	__gptrput
+      00053E 02r05rC2         [24] 1463 	ljmp	00116$
+      000541                       1464 00105$:
+                                   1465 ;	interrupt.c:155: CR=0;
+      000541 C2 DE            [12] 1466 	clr	_CR
+                                   1467 ;	interrupt.c:156: TR0=0;
+      000543 C2 8C            [12] 1468 	clr	_TR0
+                                   1469 ;	interrupt.c:157: copy_waveing=0;
+      000545 90r00r00         [24] 1470 	mov	dptr,#_copy_waveing
+      000548 E4               [12] 1471 	clr	a
+      000549 F0               [24] 1472 	movx	@dptr,a
+      00054A 02r05rC2         [24] 1473 	ljmp	00116$
+      00054D                       1474 00114$:
+                                   1475 ;	interrupt.c:160: if(copywave_count<400){
+      00054D 90r00r00         [24] 1476 	mov	dptr,#_copywave_count
+      000550 E0               [24] 1477 	movx	a,@dptr
+      000551 FE               [12] 1478 	mov	r6,a
+      000552 A3               [24] 1479 	inc	dptr
+      000553 E0               [24] 1480 	movx	a,@dptr
+      000554 FF               [12] 1481 	mov	r7,a
+      000555 C3               [12] 1482 	clr	c
+      000556 EE               [12] 1483 	mov	a,r6
+      000557 94 90            [12] 1484 	subb	a,#0x90
+      000559 EF               [12] 1485 	mov	a,r7
+      00055A 94 01            [12] 1486 	subb	a,#0x01
+      00055C 40 02            [24] 1487 	jc	00110$
+      00055E 80 5E            [24] 1488 	sjmp	00111$
+      000560                       1489 00110$:
+                                   1490 ;	interrupt.c:161: if(copywave_bit_count<8){
+      000560 90r00r00         [24] 1491 	mov	dptr,#_copywave_bit_count
+      000563 E0               [24] 1492 	movx	a,@dptr
+      000564 FF               [12] 1493 	mov	r7,a
+      000565 BF 08 00         [24] 1494 	cjne	r7,#0x08,00134$
+      000568                       1495 00134$:
+      000568 40 1D            [24] 1496 	jc	00109$
+                                   1497 ;	interrupt.c:163: copywave_p++;
+      00056A 90r00r00         [24] 1498 	mov	dptr,#_copywave_p
+      00056D E0               [24] 1499 	movx	a,@dptr
+      00056E 24 01            [12] 1500 	add	a,#0x01
+      000570 F0               [24] 1501 	movx	@dptr,a
+      000571 A3               [24] 1502 	inc	dptr
+      000572 E0               [24] 1503 	movx	a,@dptr
+      000573 34 00            [12] 1504 	addc	a,#0x00
+      000575 F0               [24] 1505 	movx	@dptr,a
+                                   1506 ;	interrupt.c:164: copywave_count++;
+      000576 90r00r00         [24] 1507 	mov	dptr,#_copywave_count
+      000579 E0               [24] 1508 	movx	a,@dptr
+      00057A 24 01            [12] 1509 	add	a,#0x01
+      00057C F0               [24] 1510 	movx	@dptr,a
+      00057D A3               [24] 1511 	inc	dptr
+      00057E E0               [24] 1512 	movx	a,@dptr
+      00057F 34 00            [12] 1513 	addc	a,#0x00
+      000581 F0               [24] 1514 	movx	@dptr,a
+                                   1515 ;	interrupt.c:165: copywave_bit_count=0;
+      000582 90r00r00         [24] 1516 	mov	dptr,#_copywave_bit_count
+      000585 E4               [12] 1517 	clr	a
+      000586 F0               [24] 1518 	movx	@dptr,a
+      000587                       1519 00109$:
+                                   1520 ;	interrupt.c:167: TR0=*copywave_p&0x80;
+      000587 90r00r00         [24] 1521 	mov	dptr,#_copywave_p
+      00058A E0               [24] 1522 	movx	a,@dptr
+      00058B FD               [12] 1523 	mov	r5,a
+      00058C A3               [24] 1524 	inc	dptr
+      00058D E0               [24] 1525 	movx	a,@dptr
+      00058E FE               [12] 1526 	mov	r6,a
+      00058F A3               [24] 1527 	inc	dptr
+      000590 E0               [24] 1528 	movx	a,@dptr
+      000591 FF               [12] 1529 	mov	r7,a
+      000592 8D 82            [24] 1530 	mov	dpl,r5
+      000594 8E 83            [24] 1531 	mov	dph,r6
+      000596 8F F0            [24] 1532 	mov	b,r7
+      000598 12r00r00         [24] 1533 	lcall	__gptrget
+      00059B 33               [12] 1534 	rlc	a
+      00059C 92*01            [24] 1535 	mov  _pca_isr_sloc0_1_0,c
+      00059E 92 8C            [24] 1536 	mov	_TR0,c
+                                   1537 ;	interrupt.c:168: *copywave_p=*copywave_p<<1;
+      0005A0 8D 82            [24] 1538 	mov	dpl,r5
+      0005A2 8E 83            [24] 1539 	mov	dph,r6
+      0005A4 8F F0            [24] 1540 	mov	b,r7
+      0005A6 12r00r00         [24] 1541 	lcall	__gptrget
+      0005A9 25 E0            [12] 1542 	add	a,acc
+      0005AB FC               [12] 1543 	mov	r4,a
+      0005AC 8D 82            [24] 1544 	mov	dpl,r5
+      0005AE 8E 83            [24] 1545 	mov	dph,r6
+      0005B0 8F F0            [24] 1546 	mov	b,r7
+      0005B2 12r00r00         [24] 1547 	lcall	__gptrput
+                                   1548 ;	interrupt.c:169: copywave_bit_count++;
+      0005B5 90r00r00         [24] 1549 	mov	dptr,#_copywave_bit_count
+      0005B8 E0               [24] 1550 	movx	a,@dptr
+      0005B9 24 01            [12] 1551 	add	a,#0x01
+      0005BB F0               [24] 1552 	movx	@dptr,a
+      0005BC 80 04            [24] 1553 	sjmp	00116$
+      0005BE                       1554 00111$:
+                                   1555 ;	interrupt.c:171: CR=0;
+      0005BE C2 DE            [12] 1556 	clr	_CR
+                                   1557 ;	interrupt.c:172: TR0=0;
+      0005C0 C2 8C            [12] 1558 	clr	_TR0
+      0005C2                       1559 00116$:
+      0005C2 D0 D0            [24] 1560 	pop	psw
+      0005C4 D0 83            [24] 1561 	pop	dph
+      0005C6 D0 82            [24] 1562 	pop	dpl
+      0005C8 D0 F0            [24] 1563 	pop	b
+      0005CA D0 E0            [24] 1564 	pop	acc
+      0005CC 32               [24] 1565 	reti
+                                   1566 ;------------------------------------------------------------
+                                   1567 ;Allocation info for local variables in function 'idle'
+                                   1568 ;------------------------------------------------------------
+                                   1569 ;	test.c:25: void idle(void)
+                                   1570 ;	-----------------------------------------
+                                   1571 ;	 function idle
+                                   1572 ;	-----------------------------------------
+      0005CD                       1573 _idle:
+                           000007  1574 	ar7 = 0x07
+                           000006  1575 	ar6 = 0x06
+                           000005  1576 	ar5 = 0x05
+                           000004  1577 	ar4 = 0x04
+                           000003  1578 	ar3 = 0x03
+                           000002  1579 	ar2 = 0x02
+                           000001  1580 	ar1 = 0x01
+                           000000  1581 	ar0 = 0x00
+                                   1582 ;	test.c:27: while(1){
+      0005CD                       1583 00102$:
+                                   1584 ;	test.c:28: P2_3=!P2_3;
+      0005CD B2 A3            [12] 1585 	cpl	_P2_3
+                                   1586 ;	test.c:29: delay(500);
+      0005CF 90 01 F4         [24] 1587 	mov	dptr,#0x01F4
+      0005D2 12r00r00         [24] 1588 	lcall	_delay
+                                   1589 ;	test.c:31: return;
+      0005D5 80 F6            [24] 1590 	sjmp	00102$
+                                   1591 ;------------------------------------------------------------
+                                   1592 ;Allocation info for local variables in function 'te'
+                                   1593 ;------------------------------------------------------------
+                                   1594 ;S                         Allocated with name '_te_S_1_90'
+                                   1595 ;i                         Allocated with name '_te_i_1_90'
+                                   1596 ;------------------------------------------------------------
+                                   1597 ;	test.c:34: void te(void)
+                                   1598 ;	-----------------------------------------
+                                   1599 ;	 function te
+                                   1600 ;	-----------------------------------------
+      0005D7                       1601 _te:
+                                   1602 ;	test.c:36: uchar *S=(uchar*)SP-2;
+      0005D7 AD 81            [24] 1603 	mov	r5,_SP
+      0005D9 E4               [12] 1604 	clr	a
+      0005DA FE               [12] 1605 	mov	r6,a
+      0005DB FF               [12] 1606 	mov	r7,a
+      0005DC ED               [12] 1607 	mov	a,r5
+      0005DD 24 FE            [12] 1608 	add	a,#0xFE
+      0005DF FD               [12] 1609 	mov	r5,a
+      0005E0 EE               [12] 1610 	mov	a,r6
+      0005E1 34 FF            [12] 1611 	addc	a,#0xFF
+      0005E3 FE               [12] 1612 	mov	r6,a
+      0005E4 90r00r06         [24] 1613 	mov	dptr,#_te_S_1_90
+      0005E7 ED               [12] 1614 	mov	a,r5
+      0005E8 F0               [24] 1615 	movx	@dptr,a
+      0005E9 EE               [12] 1616 	mov	a,r6
+      0005EA A3               [24] 1617 	inc	dptr
+      0005EB F0               [24] 1618 	movx	@dptr,a
+      0005EC EF               [12] 1619 	mov	a,r7
+      0005ED A3               [24] 1620 	inc	dptr
+      0005EE F0               [24] 1621 	movx	@dptr,a
+                                   1622 ;	test.c:38: for(i=0;i<20;i++){
+      0005EF 90r00r09         [24] 1623 	mov	dptr,#_te_i_1_90
+      0005F2 F0               [24] 1624 	movx	@dptr,a
+      0005F3 A3               [24] 1625 	inc	dptr
+      0005F4 F0               [24] 1626 	movx	@dptr,a
+      0005F5 90r00r09         [24] 1627 	mov	dptr,#_te_i_1_90
+      0005F8 E0               [24] 1628 	movx	a,@dptr
+      0005F9 FE               [12] 1629 	mov	r6,a
+      0005FA A3               [24] 1630 	inc	dptr
+      0005FB E0               [24] 1631 	movx	a,@dptr
+      0005FC FF               [12] 1632 	mov	r7,a
+      0005FD 90r00r06         [24] 1633 	mov	dptr,#_te_S_1_90
+      000600 E0               [24] 1634 	movx	a,@dptr
+      000601 FB               [12] 1635 	mov	r3,a
+      000602 A3               [24] 1636 	inc	dptr
+      000603 E0               [24] 1637 	movx	a,@dptr
+      000604 FC               [12] 1638 	mov	r4,a
+      000605 A3               [24] 1639 	inc	dptr
+      000606 E0               [24] 1640 	movx	a,@dptr
+      000607 FD               [12] 1641 	mov	r5,a
+      000608                       1642 00102$:
+                                   1643 ;	test.c:39: display("SP=",(uchar)S);
+      000608 8B 00            [24] 1644 	mov	ar0,r3
+      00060A 8C 01            [24] 1645 	mov	ar1,r4
+      00060C 8D 02            [24] 1646 	mov	ar2,r5
+      00060E 90r00r00         [24] 1647 	mov	dptr,#_display_PARM_2
+      000611 E8               [12] 1648 	mov	a,r0
+      000612 F0               [24] 1649 	movx	@dptr,a
+      000613 90r00r00         [24] 1650 	mov	dptr,#___str_0
+      000616 75 F0 80         [24] 1651 	mov	b,#0x80
+      000619 C0 07            [24] 1652 	push	ar7
+      00061B C0 06            [24] 1653 	push	ar6
+      00061D C0 05            [24] 1654 	push	ar5
+      00061F C0 04            [24] 1655 	push	ar4
+      000621 C0 03            [24] 1656 	push	ar3
+      000623 12r00r00         [24] 1657 	lcall	_display
+      000626 D0 03            [24] 1658 	pop	ar3
+      000628 D0 04            [24] 1659 	pop	ar4
+      00062A D0 05            [24] 1660 	pop	ar5
+      00062C D0 06            [24] 1661 	pop	ar6
+      00062E D0 07            [24] 1662 	pop	ar7
+                                   1663 ;	test.c:40: display("@SP=",*S);
+      000630 8B 82            [24] 1664 	mov	dpl,r3
+      000632 8C 83            [24] 1665 	mov	dph,r4
+      000634 8D F0            [24] 1666 	mov	b,r5
+      000636 12r00r00         [24] 1667 	lcall	__gptrget
+      000639 90r00r00         [24] 1668 	mov	dptr,#_display_PARM_2
+      00063C F0               [24] 1669 	movx	@dptr,a
+      00063D 90r00r04         [24] 1670 	mov	dptr,#___str_1
+      000640 75 F0 80         [24] 1671 	mov	b,#0x80
+      000643 C0 07            [24] 1672 	push	ar7
+      000645 C0 06            [24] 1673 	push	ar6
+      000647 C0 05            [24] 1674 	push	ar5
+      000649 C0 04            [24] 1675 	push	ar4
+      00064B C0 03            [24] 1676 	push	ar3
+      00064D 12r00r00         [24] 1677 	lcall	_display
+      000650 D0 03            [24] 1678 	pop	ar3
+      000652 D0 04            [24] 1679 	pop	ar4
+      000654 D0 05            [24] 1680 	pop	ar5
+      000656 D0 06            [24] 1681 	pop	ar6
+      000658 D0 07            [24] 1682 	pop	ar7
+                                   1683 ;	test.c:41: display("i=",(uchar)i);
+      00065A 90r00r00         [24] 1684 	mov	dptr,#_display_PARM_2
+      00065D EE               [12] 1685 	mov	a,r6
+      00065E F0               [24] 1686 	movx	@dptr,a
+      00065F 90r00r09         [24] 1687 	mov	dptr,#___str_2
+      000662 75 F0 80         [24] 1688 	mov	b,#0x80
+      000665 C0 07            [24] 1689 	push	ar7
+      000667 C0 06            [24] 1690 	push	ar6
+      000669 C0 05            [24] 1691 	push	ar5
+      00066B C0 04            [24] 1692 	push	ar4
+      00066D C0 03            [24] 1693 	push	ar3
+      00066F 12r00r00         [24] 1694 	lcall	_display
+      000672 D0 03            [24] 1695 	pop	ar3
+      000674 D0 04            [24] 1696 	pop	ar4
+      000676 D0 05            [24] 1697 	pop	ar5
+      000678 D0 06            [24] 1698 	pop	ar6
+      00067A D0 07            [24] 1699 	pop	ar7
+                                   1700 ;	test.c:42: S--;
+      00067C 1B               [12] 1701 	dec	r3
+      00067D BB FF 01         [24] 1702 	cjne	r3,#0xFF,00110$
+      000680 1C               [12] 1703 	dec	r4
+      000681                       1704 00110$:
+                                   1705 ;	test.c:38: for(i=0;i<20;i++){
+      000681 0E               [12] 1706 	inc	r6
+      000682 BE 00 01         [24] 1707 	cjne	r6,#0x00,00111$
+      000685 0F               [12] 1708 	inc	r7
+      000686                       1709 00111$:
+      000686 C3               [12] 1710 	clr	c
+      000687 EE               [12] 1711 	mov	a,r6
+      000688 94 14            [12] 1712 	subb	a,#0x14
+      00068A EF               [12] 1713 	mov	a,r7
+      00068B 94 00            [12] 1714 	subb	a,#0x00
+      00068D 50 03            [24] 1715 	jnc	00112$
+      00068F 02r06r08         [24] 1716 	ljmp	00102$
+      000692                       1717 00112$:
+      000692 22               [24] 1718 	ret
+                                   1719 ;------------------------------------------------------------
+                                   1720 ;Allocation info for local variables in function 'maichong'
+                                   1721 ;------------------------------------------------------------
+                                   1722 ;	test.c:47: void maichong(void)		//红外脉冲发生定时器输出初始化,发射定时器初始化
+                                   1723 ;	-----------------------------------------
+                                   1724 ;	 function maichong
+                                   1725 ;	-----------------------------------------
+      000693                       1726 _maichong:
+                                   1727 ;	test.c:49: TH0=0x72;
+      000693 75 8C 72         [24] 1728 	mov	_TH0,#0x72
+                                   1729 ;	test.c:50: TL0=0x72;
+      000696 75 8A 72         [24] 1730 	mov	_TL0,#0x72
+                                   1731 ;	test.c:51: WAKE_CLKO=0x01;
+      000699 75 8F 01         [24] 1732 	mov	_WAKE_CLKO,#0x01
+                                   1733 ;	test.c:52: AUXR|=0xc0;	//定时器1,0频率提高12倍
+      00069C 43 8E C0         [24] 1734 	orl	_AUXR,#0xC0
+                                   1735 ;	test.c:53: TMOD = 0x22;       //T1,T0 方式2
+      00069F 75 89 22         [24] 1736 	mov	_TMOD,#0x22
+                                   1737 ;	test.c:55: return;
+      0006A2 22               [24] 1738 	ret
+                                   1739 ;------------------------------------------------------------
+                                   1740 ;Allocation info for local variables in function 'sound_init'
+                                   1741 ;------------------------------------------------------------
+                                   1742 ;	test.c:57: void sound_init(void)		//声音初始化
+                                   1743 ;	-----------------------------------------
+                                   1744 ;	 function sound_init
+                                   1745 ;	-----------------------------------------
+      0006A3                       1746 _sound_init:
+                                   1747 ;	test.c:59: P0_2=0;
+      0006A3 C2 82            [12] 1748 	clr	_P0_2
+                                   1749 ;	test.c:60: delay(300);
+      0006A5 90 01 2C         [24] 1750 	mov	dptr,#0x012C
+      0006A8 12r00r00         [24] 1751 	lcall	_delay
+                                   1752 ;	test.c:61: P0_2=1;
+      0006AB D2 82            [12] 1753 	setb	_P0_2
+                                   1754 ;	test.c:62: return;
+      0006AD 22               [24] 1755 	ret
+                                   1756 ;------------------------------------------------------------
+                                   1757 ;Allocation info for local variables in function 'key_init'
+                                   1758 ;------------------------------------------------------------
+                                   1759 ;	test.c:64: void key_init( void)		//按键初始化
+                                   1760 ;	-----------------------------------------
+                                   1761 ;	 function key_init
+                                   1762 ;	-----------------------------------------
+      0006AE                       1763 _key_init:
+                                   1764 ;	test.c:66: EX1=1;IT1=1;
+      0006AE D2 AA            [12] 1765 	setb	_EX1
+      0006B0 D2 8A            [12] 1766 	setb	_IT1
+                                   1767 ;	test.c:67: EX0=1;IT0=1;IP=0x02;
+      0006B2 D2 A8            [12] 1768 	setb	_EX0
+      0006B4 D2 88            [12] 1769 	setb	_IT0
+      0006B6 75 B8 02         [24] 1770 	mov	_IP,#0x02
+                                   1771 ;	test.c:68: return;
+      0006B9 22               [24] 1772 	ret
+                                   1773 ;------------------------------------------------------------
+                                   1774 ;Allocation info for local variables in function 'hw_init'
+                                   1775 ;------------------------------------------------------------
+                                   1776 ;	test.c:73: void hw_init(void)
+                                   1777 ;	-----------------------------------------
+                                   1778 ;	 function hw_init
+                                   1779 ;	-----------------------------------------
+      0006BA                       1780 _hw_init:
+                                   1781 ;	test.c:75: interrupt_count=0;
+      0006BA 90r00r04         [24] 1782 	mov	dptr,#_interrupt_count
+      0006BD E4               [12] 1783 	clr	a
+      0006BE F0               [24] 1784 	movx	@dptr,a
+      0006BF A3               [24] 1785 	inc	dptr
+      0006C0 F0               [24] 1786 	movx	@dptr,a
+                                   1787 ;	test.c:76: maichong();
+      0006C1 12r06r93         [24] 1788 	lcall	_maichong
+                                   1789 ;	test.c:77: sound_init();
+      0006C4 12r06rA3         [24] 1790 	lcall	_sound_init
+                                   1791 ;	test.c:78: pca_timer();
+      0006C7 12r00r00         [24] 1792 	lcall	_pca_timer
+                                   1793 ;	test.c:79: uart_init();
+      0006CA 12r00r00         [24] 1794 	lcall	_uart_init
+                                   1795 ;	test.c:80: wifi_init();
+      0006CD 12r00r00         [24] 1796 	lcall	_wifi_init
+                                   1797 ;	test.c:81: key_init();
+                                   1798 ;	test.c:82: return;
+      0006D0 02r06rAE         [24] 1799 	ljmp	_key_init
+                                   1800 ;------------------------------------------------------------
+                                   1801 ;Allocation info for local variables in function 'main'
+                                   1802 ;------------------------------------------------------------
+                                   1803 ;	test.c:85: int main(void)
+                                   1804 ;	-----------------------------------------
+                                   1805 ;	 function main
+                                   1806 ;	-----------------------------------------
+      0006D3                       1807 _main:
+                                   1808 ;	test.c:87: hw_init();
+      0006D3 12r06rBA         [24] 1809 	lcall	_hw_init
+                                   1810 ;	test.c:88: os_init();
+      0006D6 12r00r00         [24] 1811 	lcall	_os_init
+                                   1812 ;	test.c:89: task_create(idle,7);	
+      0006D9 7DrCD            [12] 1813 	mov	r5,#_idle
+      0006DB 7Es05            [12] 1814 	mov	r6,#(_idle >> 8)
+      0006DD 7F 80            [12] 1815 	mov	r7,#0x80
+      0006DF 90r00r00         [24] 1816 	mov	dptr,#_task_create_PARM_2
+      0006E2 74 07            [12] 1817 	mov	a,#0x07
+      0006E4 F0               [24] 1818 	movx	@dptr,a
+      0006E5 E4               [12] 1819 	clr	a
+      0006E6 A3               [24] 1820 	inc	dptr
+      0006E7 F0               [24] 1821 	movx	@dptr,a
+      0006E8 8D 82            [24] 1822 	mov	dpl,r5
+      0006EA 8E 83            [24] 1823 	mov	dph,r6
+      0006EC 8F F0            [24] 1824 	mov	b,r7
+      0006EE 12r00r00         [24] 1825 	lcall	_task_create
+                                   1826 ;	test.c:90: app();
+      0006F1 12r00r00         [24] 1827 	lcall	_app
+                                   1828 ;	test.c:92: os_start();
+      0006F4 12r00r00         [24] 1829 	lcall	_os_start
+                                   1830 ;	test.c:93: while(1){
+      0006F7                       1831 00102$:
+                                   1832 ;	test.c:94: sendstr("switch_fail\r\n");
+      0006F7 90r00r0C         [24] 1833 	mov	dptr,#___str_3
+      0006FA 75 F0 80         [24] 1834 	mov	b,#0x80
+      0006FD 12r00r00         [24] 1835 	lcall	_sendstr
+      000700 80 F5            [24] 1836 	sjmp	00102$
+      000702 22               [24] 1837 	ret
+                                   1838 	.area CSEG    (CODE)
+                                   1839 	.area CONST   (CODE)
+      000000                       1840 ___str_0:
+      000000 53 50 3D              1841 	.ascii "SP="
+      000003 00                    1842 	.db 0x00
+      000004                       1843 ___str_1:
+      000004 40 53 50 3D           1844 	.ascii "@SP="
+      000008 00                    1845 	.db 0x00
+      000009                       1846 ___str_2:
+      000009 69 3D                 1847 	.ascii "i="
+      00000B 00                    1848 	.db 0x00
+      00000C                       1849 ___str_3:
+      00000C 73 77 69 74 63 68 5F  1850 	.ascii "switch_fail"
+             66 61 69 6C
+      000017 0D                    1851 	.db 0x0D
+      000018 0A                    1852 	.db 0x0A
+      000019 00                    1853 	.db 0x00
+                                   1854 	.area XINIT   (CODE)
+      000000                       1855 __xinit__b:
+      000000 34 12                 1856 	.byte #0x34,#0x12	; 4660
+                                   1857 	.area CABS    (ABS,CODE)

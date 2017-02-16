@@ -1,0 +1,1315 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.5.0 #9253 (May  7 2016) (Linux)
+                                      4 ; This file was generated Wed Sep 21 13:59:23 2016
+                                      5 ;--------------------------------------------------------
+                                      6 	.module core
+                                      7 	.optsdcc -mmcs51 --model-large
+                                      8 	
+                                      9 ;--------------------------------------------------------
+                                     10 ; Public variables in this module
+                                     11 ;--------------------------------------------------------
+                                     12 	.globl _MASK
+                                     13 	.globl _READYMAP
+                                     14 	.globl _os_start
+                                     15 	.globl _os_init
+                                     16 	.globl _task_del
+                                     17 	.globl _task_create
+                                     18 	.globl _tcb_init
+                                     19 	.globl _stack_init
+                                     20 	.globl _schedule
+                                     21 	.globl _switch_task_int
+                                     22 	.globl _switch_task
+                                     23 	.globl _CF
+                                     24 	.globl _CR
+                                     25 	.globl _CCF1
+                                     26 	.globl _CCF0
+                                     27 	.globl _TF2
+                                     28 	.globl _EXF2
+                                     29 	.globl _RCLK
+                                     30 	.globl _TCLK
+                                     31 	.globl _EXEN2
+                                     32 	.globl _TR2
+                                     33 	.globl _C_T2
+                                     34 	.globl _CP_RL2
+                                     35 	.globl _T2CON_7
+                                     36 	.globl _T2CON_6
+                                     37 	.globl _T2CON_5
+                                     38 	.globl _T2CON_4
+                                     39 	.globl _T2CON_3
+                                     40 	.globl _T2CON_2
+                                     41 	.globl _T2CON_1
+                                     42 	.globl _T2CON_0
+                                     43 	.globl _PT2
+                                     44 	.globl _ET2
+                                     45 	.globl _CY
+                                     46 	.globl _AC
+                                     47 	.globl _F0
+                                     48 	.globl _RS1
+                                     49 	.globl _RS0
+                                     50 	.globl _OV
+                                     51 	.globl _F1
+                                     52 	.globl _P
+                                     53 	.globl _PS
+                                     54 	.globl _PT1
+                                     55 	.globl _PX1
+                                     56 	.globl _PT0
+                                     57 	.globl _PX0
+                                     58 	.globl _RD
+                                     59 	.globl _WR
+                                     60 	.globl _T1
+                                     61 	.globl _T0
+                                     62 	.globl _INT1
+                                     63 	.globl _INT0
+                                     64 	.globl _TXD
+                                     65 	.globl _RXD
+                                     66 	.globl _P3_7
+                                     67 	.globl _P3_6
+                                     68 	.globl _P3_5
+                                     69 	.globl _P3_4
+                                     70 	.globl _P3_3
+                                     71 	.globl _P3_2
+                                     72 	.globl _P3_1
+                                     73 	.globl _P3_0
+                                     74 	.globl _EA
+                                     75 	.globl _ES
+                                     76 	.globl _ET1
+                                     77 	.globl _EX1
+                                     78 	.globl _ET0
+                                     79 	.globl _EX0
+                                     80 	.globl _P2_7
+                                     81 	.globl _P2_6
+                                     82 	.globl _P2_5
+                                     83 	.globl _P2_4
+                                     84 	.globl _P2_3
+                                     85 	.globl _P2_2
+                                     86 	.globl _P2_1
+                                     87 	.globl _P2_0
+                                     88 	.globl _SM0
+                                     89 	.globl _SM1
+                                     90 	.globl _SM2
+                                     91 	.globl _REN
+                                     92 	.globl _TB8
+                                     93 	.globl _RB8
+                                     94 	.globl _TI
+                                     95 	.globl _RI
+                                     96 	.globl _P1_7
+                                     97 	.globl _P1_6
+                                     98 	.globl _P1_5
+                                     99 	.globl _P1_4
+                                    100 	.globl _P1_3
+                                    101 	.globl _P1_2
+                                    102 	.globl _P1_1
+                                    103 	.globl _P1_0
+                                    104 	.globl _TF1
+                                    105 	.globl _TR1
+                                    106 	.globl _TF0
+                                    107 	.globl _TR0
+                                    108 	.globl _IE1
+                                    109 	.globl _IT1
+                                    110 	.globl _IE0
+                                    111 	.globl _IT0
+                                    112 	.globl _P0_7
+                                    113 	.globl _P0_6
+                                    114 	.globl _P0_5
+                                    115 	.globl _P0_4
+                                    116 	.globl _P0_3
+                                    117 	.globl _P0_2
+                                    118 	.globl _P0_1
+                                    119 	.globl _P0_0
+                                    120 	.globl _PCA_PWM1
+                                    121 	.globl _PCA_PWM0
+                                    122 	.globl _CCAP1H
+                                    123 	.globl _CCAP1L
+                                    124 	.globl _CCAP0H
+                                    125 	.globl _CCAP0L
+                                    126 	.globl _CH
+                                    127 	.globl _CL
+                                    128 	.globl _CCAPM1
+                                    129 	.globl _CCAPM0
+                                    130 	.globl _CMOD
+                                    131 	.globl _CCON
+                                    132 	.globl _WAKE_CLKO
+                                    133 	.globl _BRT
+                                    134 	.globl _IE2
+                                    135 	.globl _S2BUF
+                                    136 	.globl _S2CON
+                                    137 	.globl _AUXR1
+                                    138 	.globl _AUXR
+                                    139 	.globl _TH2
+                                    140 	.globl _TL2
+                                    141 	.globl _RCAP2H
+                                    142 	.globl _RCAP2L
+                                    143 	.globl _T2CON
+                                    144 	.globl _B
+                                    145 	.globl _ACC
+                                    146 	.globl _PSW
+                                    147 	.globl _IP
+                                    148 	.globl _P3
+                                    149 	.globl _IE
+                                    150 	.globl _P2
+                                    151 	.globl _SBUF
+                                    152 	.globl _SCON
+                                    153 	.globl _P1
+                                    154 	.globl _TH1
+                                    155 	.globl _TH0
+                                    156 	.globl _TL1
+                                    157 	.globl _TL0
+                                    158 	.globl _TMOD
+                                    159 	.globl _TCON
+                                    160 	.globl _PCON
+                                    161 	.globl _DPH
+                                    162 	.globl _DPL
+                                    163 	.globl _SP
+                                    164 	.globl _P0
+                                    165 	.globl _OS_START
+                                    166 	.globl _task_create_PARM_2
+                                    167 	.globl _tcb_init_PARM_2
+                                    168 	.globl _stack_init_PARM_2
+                                    169 	.globl _tcb_t
+                                    170 	.globl _interrup
+                                    171 	.globl _tcb
+                                    172 	.globl _CUR
+                                    173 	.globl _READY
+                                    174 	.globl _HIGHT_TCB_T
+                                    175 	.globl _CUR_TCB_T
+                                    176 	.globl _stack_int
+                                    177 	.globl _os_stack
+                                    178 ;--------------------------------------------------------
+                                    179 ; special function registers
+                                    180 ;--------------------------------------------------------
+                                    181 	.area RSEG    (ABS,DATA)
+      000000                        182 	.org 0x0000
+                           000080   183 _P0	=	0x0080
+                           000081   184 _SP	=	0x0081
+                           000082   185 _DPL	=	0x0082
+                           000083   186 _DPH	=	0x0083
+                           000087   187 _PCON	=	0x0087
+                           000088   188 _TCON	=	0x0088
+                           000089   189 _TMOD	=	0x0089
+                           00008A   190 _TL0	=	0x008a
+                           00008B   191 _TL1	=	0x008b
+                           00008C   192 _TH0	=	0x008c
+                           00008D   193 _TH1	=	0x008d
+                           000090   194 _P1	=	0x0090
+                           000098   195 _SCON	=	0x0098
+                           000099   196 _SBUF	=	0x0099
+                           0000A0   197 _P2	=	0x00a0
+                           0000A8   198 _IE	=	0x00a8
+                           0000B0   199 _P3	=	0x00b0
+                           0000B8   200 _IP	=	0x00b8
+                           0000D0   201 _PSW	=	0x00d0
+                           0000E0   202 _ACC	=	0x00e0
+                           0000F0   203 _B	=	0x00f0
+                           0000C8   204 _T2CON	=	0x00c8
+                           0000CA   205 _RCAP2L	=	0x00ca
+                           0000CB   206 _RCAP2H	=	0x00cb
+                           0000CC   207 _TL2	=	0x00cc
+                           0000CD   208 _TH2	=	0x00cd
+                           00008E   209 _AUXR	=	0x008e
+                           0000A2   210 _AUXR1	=	0x00a2
+                           00009A   211 _S2CON	=	0x009a
+                           00009B   212 _S2BUF	=	0x009b
+                           0000AF   213 _IE2	=	0x00af
+                           00009C   214 _BRT	=	0x009c
+                           00008F   215 _WAKE_CLKO	=	0x008f
+                           0000D8   216 _CCON	=	0x00d8
+                           0000D9   217 _CMOD	=	0x00d9
+                           0000DA   218 _CCAPM0	=	0x00da
+                           0000DB   219 _CCAPM1	=	0x00db
+                           0000E9   220 _CL	=	0x00e9
+                           0000F9   221 _CH	=	0x00f9
+                           0000EA   222 _CCAP0L	=	0x00ea
+                           0000FA   223 _CCAP0H	=	0x00fa
+                           0000EB   224 _CCAP1L	=	0x00eb
+                           0000FB   225 _CCAP1H	=	0x00fb
+                           0000F2   226 _PCA_PWM0	=	0x00f2
+                           0000F3   227 _PCA_PWM1	=	0x00f3
+                                    228 ;--------------------------------------------------------
+                                    229 ; special function bits
+                                    230 ;--------------------------------------------------------
+                                    231 	.area RSEG    (ABS,DATA)
+      000000                        232 	.org 0x0000
+                           000080   233 _P0_0	=	0x0080
+                           000081   234 _P0_1	=	0x0081
+                           000082   235 _P0_2	=	0x0082
+                           000083   236 _P0_3	=	0x0083
+                           000084   237 _P0_4	=	0x0084
+                           000085   238 _P0_5	=	0x0085
+                           000086   239 _P0_6	=	0x0086
+                           000087   240 _P0_7	=	0x0087
+                           000088   241 _IT0	=	0x0088
+                           000089   242 _IE0	=	0x0089
+                           00008A   243 _IT1	=	0x008a
+                           00008B   244 _IE1	=	0x008b
+                           00008C   245 _TR0	=	0x008c
+                           00008D   246 _TF0	=	0x008d
+                           00008E   247 _TR1	=	0x008e
+                           00008F   248 _TF1	=	0x008f
+                           000090   249 _P1_0	=	0x0090
+                           000091   250 _P1_1	=	0x0091
+                           000092   251 _P1_2	=	0x0092
+                           000093   252 _P1_3	=	0x0093
+                           000094   253 _P1_4	=	0x0094
+                           000095   254 _P1_5	=	0x0095
+                           000096   255 _P1_6	=	0x0096
+                           000097   256 _P1_7	=	0x0097
+                           000098   257 _RI	=	0x0098
+                           000099   258 _TI	=	0x0099
+                           00009A   259 _RB8	=	0x009a
+                           00009B   260 _TB8	=	0x009b
+                           00009C   261 _REN	=	0x009c
+                           00009D   262 _SM2	=	0x009d
+                           00009E   263 _SM1	=	0x009e
+                           00009F   264 _SM0	=	0x009f
+                           0000A0   265 _P2_0	=	0x00a0
+                           0000A1   266 _P2_1	=	0x00a1
+                           0000A2   267 _P2_2	=	0x00a2
+                           0000A3   268 _P2_3	=	0x00a3
+                           0000A4   269 _P2_4	=	0x00a4
+                           0000A5   270 _P2_5	=	0x00a5
+                           0000A6   271 _P2_6	=	0x00a6
+                           0000A7   272 _P2_7	=	0x00a7
+                           0000A8   273 _EX0	=	0x00a8
+                           0000A9   274 _ET0	=	0x00a9
+                           0000AA   275 _EX1	=	0x00aa
+                           0000AB   276 _ET1	=	0x00ab
+                           0000AC   277 _ES	=	0x00ac
+                           0000AF   278 _EA	=	0x00af
+                           0000B0   279 _P3_0	=	0x00b0
+                           0000B1   280 _P3_1	=	0x00b1
+                           0000B2   281 _P3_2	=	0x00b2
+                           0000B3   282 _P3_3	=	0x00b3
+                           0000B4   283 _P3_4	=	0x00b4
+                           0000B5   284 _P3_5	=	0x00b5
+                           0000B6   285 _P3_6	=	0x00b6
+                           0000B7   286 _P3_7	=	0x00b7
+                           0000B0   287 _RXD	=	0x00b0
+                           0000B1   288 _TXD	=	0x00b1
+                           0000B2   289 _INT0	=	0x00b2
+                           0000B3   290 _INT1	=	0x00b3
+                           0000B4   291 _T0	=	0x00b4
+                           0000B5   292 _T1	=	0x00b5
+                           0000B6   293 _WR	=	0x00b6
+                           0000B7   294 _RD	=	0x00b7
+                           0000B8   295 _PX0	=	0x00b8
+                           0000B9   296 _PT0	=	0x00b9
+                           0000BA   297 _PX1	=	0x00ba
+                           0000BB   298 _PT1	=	0x00bb
+                           0000BC   299 _PS	=	0x00bc
+                           0000D0   300 _P	=	0x00d0
+                           0000D1   301 _F1	=	0x00d1
+                           0000D2   302 _OV	=	0x00d2
+                           0000D3   303 _RS0	=	0x00d3
+                           0000D4   304 _RS1	=	0x00d4
+                           0000D5   305 _F0	=	0x00d5
+                           0000D6   306 _AC	=	0x00d6
+                           0000D7   307 _CY	=	0x00d7
+                           0000AD   308 _ET2	=	0x00ad
+                           0000BD   309 _PT2	=	0x00bd
+                           0000C8   310 _T2CON_0	=	0x00c8
+                           0000C9   311 _T2CON_1	=	0x00c9
+                           0000CA   312 _T2CON_2	=	0x00ca
+                           0000CB   313 _T2CON_3	=	0x00cb
+                           0000CC   314 _T2CON_4	=	0x00cc
+                           0000CD   315 _T2CON_5	=	0x00cd
+                           0000CE   316 _T2CON_6	=	0x00ce
+                           0000CF   317 _T2CON_7	=	0x00cf
+                           0000C8   318 _CP_RL2	=	0x00c8
+                           0000C9   319 _C_T2	=	0x00c9
+                           0000CA   320 _TR2	=	0x00ca
+                           0000CB   321 _EXEN2	=	0x00cb
+                           0000CC   322 _TCLK	=	0x00cc
+                           0000CD   323 _RCLK	=	0x00cd
+                           0000CE   324 _EXF2	=	0x00ce
+                           0000CF   325 _TF2	=	0x00cf
+                           0000D8   326 _CCF0	=	0x00d8
+                           0000D9   327 _CCF1	=	0x00d9
+                           0000DE   328 _CR	=	0x00de
+                           0000DF   329 _CF	=	0x00df
+                                    330 ;--------------------------------------------------------
+                                    331 ; overlayable register banks
+                                    332 ;--------------------------------------------------------
+                                    333 	.area REG_BANK_0	(REL,OVR,DATA)
+      000000                        334 	.ds 8
+                                    335 ;--------------------------------------------------------
+                                    336 ; internal ram data
+                                    337 ;--------------------------------------------------------
+                                    338 	.area DSEG    (DATA)
+      000000                        339 _tcb_init_sloc0_1_0:
+      000000                        340 	.ds 3
+                                    341 ;--------------------------------------------------------
+                                    342 ; overlayable items in internal ram 
+                                    343 ;--------------------------------------------------------
+                                    344 ;--------------------------------------------------------
+                                    345 ; indirectly addressable internal ram data
+                                    346 ;--------------------------------------------------------
+                                    347 	.area ISEG    (DATA)
+      000000                        348 _os_stack::
+      000000                        349 	.ds 184
+      0000B8                        350 _stack_int::
+      0000B8                        351 	.ds 20
+      0000CC                        352 _CUR_TCB_T::
+      0000CC                        353 	.ds 3
+      0000CF                        354 _HIGHT_TCB_T::
+      0000CF                        355 	.ds 3
+                                    356 ;--------------------------------------------------------
+                                    357 ; absolute internal ram data
+                                    358 ;--------------------------------------------------------
+                                    359 	.area IABS    (ABS,DATA)
+                                    360 	.area IABS    (ABS,DATA)
+                                    361 ;--------------------------------------------------------
+                                    362 ; bit data
+                                    363 ;--------------------------------------------------------
+                                    364 	.area BSEG    (BIT)
+                                    365 ;--------------------------------------------------------
+                                    366 ; paged external ram data
+                                    367 ;--------------------------------------------------------
+                                    368 	.area PSEG    (PAG,XDATA)
+                                    369 ;--------------------------------------------------------
+                                    370 ; external ram data
+                                    371 ;--------------------------------------------------------
+                                    372 	.area XSEG    (XDATA)
+      000000                        373 _READY::
+      000000                        374 	.ds 2
+      000002                        375 _CUR::
+      000002                        376 	.ds 2
+      000004                        377 _tcb::
+      000004                        378 	.ds 24
+      00001C                        379 _interrup::
+      00001C                        380 	.ds 1
+      00001D                        381 _tcb_t::
+      00001D                        382 	.ds 24
+      000035                        383 _schedule_hight_1_12:
+      000035                        384 	.ds 1
+      000036                        385 _stack_init_PARM_2:
+      000036                        386 	.ds 2
+      000038                        387 _stack_init_thread_1_17:
+      000038                        388 	.ds 3
+      00003B                        389 _tcb_init_PARM_2:
+      00003B                        390 	.ds 2
+      00003D                        391 _tcb_init_stack_1_19:
+      00003D                        392 	.ds 3
+      000040                        393 _task_create_PARM_2:
+      000040                        394 	.ds 2
+      000042                        395 _task_create_thread_1_21:
+      000042                        396 	.ds 3
+      000045                        397 _task_del_p_1_23:
+      000045                        398 	.ds 2
+      000047                        399 _os_init_i_1_26:
+      000047                        400 	.ds 2
+                                    401 ;--------------------------------------------------------
+                                    402 ; absolute external ram data
+                                    403 ;--------------------------------------------------------
+                                    404 	.area XABS    (ABS,XDATA)
+                                    405 ;--------------------------------------------------------
+                                    406 ; external initialized ram data
+                                    407 ;--------------------------------------------------------
+                                    408 	.area XISEG   (XDATA)
+      000000                        409 _OS_START::
+      000000                        410 	.ds 2
+                                    411 	.area HOME    (CODE)
+                                    412 	.area GSINIT0 (CODE)
+                                    413 	.area GSINIT1 (CODE)
+                                    414 	.area GSINIT2 (CODE)
+                                    415 	.area GSINIT3 (CODE)
+                                    416 	.area GSINIT4 (CODE)
+                                    417 	.area GSINIT5 (CODE)
+                                    418 	.area GSINIT  (CODE)
+                                    419 	.area GSFINAL (CODE)
+                                    420 	.area CSEG    (CODE)
+                                    421 ;--------------------------------------------------------
+                                    422 ; global & static initialisations
+                                    423 ;--------------------------------------------------------
+                                    424 	.area HOME    (CODE)
+                                    425 	.area GSINIT  (CODE)
+                                    426 	.area GSFINAL (CODE)
+                                    427 	.area GSINIT  (CODE)
+                                    428 ;--------------------------------------------------------
+                                    429 ; Home
+                                    430 ;--------------------------------------------------------
+                                    431 	.area HOME    (CODE)
+                                    432 	.area HOME    (CODE)
+                                    433 ;--------------------------------------------------------
+                                    434 ; code
+                                    435 ;--------------------------------------------------------
+                                    436 	.area CSEG    (CODE)
+                                    437 ;------------------------------------------------------------
+                                    438 ;Allocation info for local variables in function 'schedule'
+                                    439 ;------------------------------------------------------------
+                                    440 ;i                         Allocated with name '_schedule_i_1_12'
+                                    441 ;hight                     Allocated with name '_schedule_hight_1_12'
+                                    442 ;------------------------------------------------------------
+                                    443 ;	core.c:34: uint schedule(void){		//调度函数
+                                    444 ;	-----------------------------------------
+                                    445 ;	 function schedule
+                                    446 ;	-----------------------------------------
+      000000                        447 _schedule:
+                           000007   448 	ar7 = 0x07
+                           000006   449 	ar6 = 0x06
+                           000005   450 	ar5 = 0x05
+                           000004   451 	ar4 = 0x04
+                           000003   452 	ar3 = 0x03
+                           000002   453 	ar2 = 0x02
+                           000001   454 	ar1 = 0x01
+                           000000   455 	ar0 = 0x00
+                                    456 ;	core.c:37: if (OS_START==1){
+      000000 90r00r00         [24]  457 	mov	dptr,#_OS_START
+      000003 E0               [24]  458 	movx	a,@dptr
+      000004 FE               [12]  459 	mov	r6,a
+      000005 A3               [24]  460 	inc	dptr
+      000006 E0               [24]  461 	movx	a,@dptr
+      000007 FF               [12]  462 	mov	r7,a
+      000008 BE 01 71         [24]  463 	cjne	r6,#0x01,00106$
+      00000B BF 00 6E         [24]  464 	cjne	r7,#0x00,00106$
+                                    465 ;	core.c:38: EA=0;
+      00000E C2 AF            [12]  466 	clr	_EA
+                                    467 ;	core.c:39: hight=READYMAP[READY];
+      000010 90r00r00         [24]  468 	mov	dptr,#_READY
+      000013 E0               [24]  469 	movx	a,@dptr
+      000014 FE               [12]  470 	mov	r6,a
+      000015 A3               [24]  471 	inc	dptr
+      000016 E0               [24]  472 	movx	a,@dptr
+      000017 CE               [12]  473 	xch	a,r6
+      000018 25 E0            [12]  474 	add	a,acc
+      00001A CE               [12]  475 	xch	a,r6
+      00001B 33               [12]  476 	rlc	a
+      00001C FF               [12]  477 	mov	r7,a
+      00001D EE               [12]  478 	mov	a,r6
+      00001E 24r00            [12]  479 	add	a,#_READYMAP
+      000020 F5 82            [12]  480 	mov	dpl,a
+      000022 EF               [12]  481 	mov	a,r7
+      000023 34s00            [12]  482 	addc	a,#(_READYMAP >> 8)
+      000025 F5 83            [12]  483 	mov	dph,a
+      000027 E4               [12]  484 	clr	a
+      000028 93               [24]  485 	movc	a,@a+dptr
+      000029 FE               [12]  486 	mov	r6,a
+      00002A A3               [24]  487 	inc	dptr
+      00002B E4               [12]  488 	clr	a
+      00002C 93               [24]  489 	movc	a,@a+dptr
+      00002D 90r00r35         [24]  490 	mov	dptr,#_schedule_hight_1_12
+      000030 EE               [12]  491 	mov	a,r6
+      000031 F0               [24]  492 	movx	@dptr,a
+                                    493 ;	core.c:40: if (hight==CUR){
+      000032 90r00r02         [24]  494 	mov	dptr,#_CUR
+      000035 E0               [24]  495 	movx	a,@dptr
+      000036 FD               [12]  496 	mov	r5,a
+      000037 A3               [24]  497 	inc	dptr
+      000038 E0               [24]  498 	movx	a,@dptr
+      000039 FF               [12]  499 	mov	r7,a
+      00003A 7C 00            [12]  500 	mov	r4,#0x00
+      00003C EE               [12]  501 	mov	a,r6
+      00003D B5 05 0A         [24]  502 	cjne	a,ar5,00102$
+      000040 EC               [12]  503 	mov	a,r4
+      000041 B5 07 06         [24]  504 	cjne	a,ar7,00102$
+                                    505 ;	core.c:41: EA=1;
+      000044 D2 AF            [12]  506 	setb	_EA
+                                    507 ;	core.c:42: return 1;	//计算最高优先级
+      000046 90 00 01         [24]  508 	mov	dptr,#0x0001
+      000049 22               [24]  509 	ret
+      00004A                        510 00102$:
+                                    511 ;	core.c:44: HIGHT_TCB_T=tcb_t[hight];
+      00004A 90r00r35         [24]  512 	mov	dptr,#_schedule_hight_1_12
+      00004D E0               [24]  513 	movx	a,@dptr
+      00004E FF               [12]  514 	mov	r7,a
+      00004F 75 F0 03         [24]  515 	mov	b,#0x03
+      000052 A4               [48]  516 	mul	ab
+      000053 24r1D            [12]  517 	add	a,#_tcb_t
+      000055 F5 82            [12]  518 	mov	dpl,a
+      000057 74s00            [12]  519 	mov	a,#(_tcb_t >> 8)
+      000059 35 F0            [12]  520 	addc	a,b
+      00005B F5 83            [12]  521 	mov	dph,a
+      00005D 78rCF            [12]  522 	mov	r0,#_HIGHT_TCB_T
+      00005F E0               [24]  523 	movx	a,@dptr
+      000060 F6               [12]  524 	mov	@r0,a
+      000061 A3               [24]  525 	inc	dptr
+      000062 E0               [24]  526 	movx	a,@dptr
+      000063 08               [12]  527 	inc	r0
+      000064 F6               [12]  528 	mov	@r0,a
+      000065 A3               [24]  529 	inc	dptr
+      000066 E0               [24]  530 	movx	a,@dptr
+      000067 08               [12]  531 	inc	r0
+      000068 F6               [12]  532 	mov	@r0,a
+                                    533 ;	core.c:45: CUR=hight;
+      000069 90r00r02         [24]  534 	mov	dptr,#_CUR
+      00006C EF               [12]  535 	mov	a,r7
+      00006D F0               [24]  536 	movx	@dptr,a
+      00006E E4               [12]  537 	clr	a
+      00006F A3               [24]  538 	inc	dptr
+      000070 F0               [24]  539 	movx	@dptr,a
+                                    540 ;	core.c:55: if (interrup==0){
+      000071 90r00r1C         [24]  541 	mov	dptr,#_interrup
+      000074 E0               [24]  542 	movx	a,@dptr
+      000075 70 03            [24]  543 	jnz	00104$
+                                    544 ;	core.c:56: switch_task();
+      000077 12r00r00         [24]  545 	lcall	_switch_task
+      00007A                        546 00104$:
+                                    547 ;	core.c:59: EA=1;
+      00007A D2 AF            [12]  548 	setb	_EA
+      00007C                        549 00106$:
+                                    550 ;	core.c:61: return 0;
+      00007C 90 00 00         [24]  551 	mov	dptr,#0x0000
+      00007F 22               [24]  552 	ret
+                                    553 ;------------------------------------------------------------
+                                    554 ;Allocation info for local variables in function 'stack_init'
+                                    555 ;------------------------------------------------------------
+                                    556 ;p                         Allocated with name '_stack_init_PARM_2'
+                                    557 ;thread                    Allocated with name '_stack_init_thread_1_17'
+                                    558 ;stack                     Allocated with name '_stack_init_stack_1_18'
+                                    559 ;------------------------------------------------------------
+                                    560 ;	core.c:93: uchar* stack_init(void *thread,uint p){	/*p：优先级*/
+                                    561 ;	-----------------------------------------
+                                    562 ;	 function stack_init
+                                    563 ;	-----------------------------------------
+      000080                        564 _stack_init:
+      000080 AF F0            [24]  565 	mov	r7,b
+      000082 AE 83            [24]  566 	mov	r6,dph
+      000084 E5 82            [12]  567 	mov	a,dpl
+      000086 90r00r38         [24]  568 	mov	dptr,#_stack_init_thread_1_17
+      000089 F0               [24]  569 	movx	@dptr,a
+      00008A EE               [12]  570 	mov	a,r6
+      00008B A3               [24]  571 	inc	dptr
+      00008C F0               [24]  572 	movx	@dptr,a
+      00008D EF               [12]  573 	mov	a,r7
+      00008E A3               [24]  574 	inc	dptr
+      00008F F0               [24]  575 	movx	@dptr,a
+                                    576 ;	core.c:95: stack=&os_stack[p*23];
+      000090 90r00r36         [24]  577 	mov	dptr,#_stack_init_PARM_2
+      000093 E0               [24]  578 	movx	a,@dptr
+      000094 FE               [12]  579 	mov	r6,a
+      000095 A3               [24]  580 	inc	dptr
+      000096 E0               [24]  581 	movx	a,@dptr
+      000097 EE               [12]  582 	mov	a,r6
+      000098 75 F0 17         [24]  583 	mov	b,#0x17
+      00009B A4               [48]  584 	mul	ab
+      00009C 24r00            [12]  585 	add	a,#_os_stack
+      00009E F9               [12]  586 	mov	r1,a
+                                    587 ;	core.c:96: *stack++=(uchar)thread;	
+      00009F 90r00r38         [24]  588 	mov	dptr,#_stack_init_thread_1_17
+      0000A2 E0               [24]  589 	movx	a,@dptr
+      0000A3 FD               [12]  590 	mov	r5,a
+      0000A4 A3               [24]  591 	inc	dptr
+      0000A5 E0               [24]  592 	movx	a,@dptr
+      0000A6 FE               [12]  593 	mov	r6,a
+      0000A7 A3               [24]  594 	inc	dptr
+      0000A8 E0               [24]  595 	movx	a,@dptr
+      0000A9 8D 04            [24]  596 	mov	ar4,r5
+      0000AB A7 04            [24]  597 	mov	@r1,ar4
+      0000AD E9               [12]  598 	mov	a,r1
+      0000AE 04               [12]  599 	inc	a
+      0000AF F8               [12]  600 	mov	r0,a
+                                    601 ;	core.c:97: *stack++=(uchar)((uint)thread>>8);
+      0000B0 8E 05            [24]  602 	mov	ar5,r6
+      0000B2 A6 05            [24]  603 	mov	@r0,ar5
+                                    604 ;	core.c:98: return (stack+13);
+      0000B4 74 0F            [12]  605 	mov	a,#0x0F
+      0000B6 29               [12]  606 	add	a,r1
+      0000B7 FF               [12]  607 	mov	r7,a
+      0000B8 7E 00            [12]  608 	mov	r6,#0x00
+      0000BA 7D 40            [12]  609 	mov	r5,#0x40
+      0000BC 8F 82            [24]  610 	mov	dpl,r7
+      0000BE 8E 83            [24]  611 	mov	dph,r6
+      0000C0 8D F0            [24]  612 	mov	b,r5
+      0000C2 22               [24]  613 	ret
+                                    614 ;------------------------------------------------------------
+                                    615 ;Allocation info for local variables in function 'tcb_init'
+                                    616 ;------------------------------------------------------------
+                                    617 ;sloc0                     Allocated with name '_tcb_init_sloc0_1_0'
+                                    618 ;p                         Allocated with name '_tcb_init_PARM_2'
+                                    619 ;stack                     Allocated with name '_tcb_init_stack_1_19'
+                                    620 ;------------------------------------------------------------
+                                    621 ;	core.c:103: void tcb_init(uchar *stack,uint p){
+                                    622 ;	-----------------------------------------
+                                    623 ;	 function tcb_init
+                                    624 ;	-----------------------------------------
+      0000C3                        625 _tcb_init:
+      0000C3 AF F0            [24]  626 	mov	r7,b
+      0000C5 AE 83            [24]  627 	mov	r6,dph
+      0000C7 E5 82            [12]  628 	mov	a,dpl
+      0000C9 90r00r3D         [24]  629 	mov	dptr,#_tcb_init_stack_1_19
+      0000CC F0               [24]  630 	movx	@dptr,a
+      0000CD EE               [12]  631 	mov	a,r6
+      0000CE A3               [24]  632 	inc	dptr
+      0000CF F0               [24]  633 	movx	@dptr,a
+      0000D0 EF               [12]  634 	mov	a,r7
+      0000D1 A3               [24]  635 	inc	dptr
+      0000D2 F0               [24]  636 	movx	@dptr,a
+                                    637 ;	core.c:104: tcb_t[p]->sp=(__idata uchar*)stack;
+      0000D3 90r00r3B         [24]  638 	mov	dptr,#_tcb_init_PARM_2
+      0000D6 E0               [24]  639 	movx	a,@dptr
+      0000D7 FE               [12]  640 	mov	r6,a
+      0000D8 A3               [24]  641 	inc	dptr
+      0000D9 E0               [24]  642 	movx	a,@dptr
+      0000DA FF               [12]  643 	mov	r7,a
+      0000DB 90r00r00         [24]  644 	mov	dptr,#__mulint_PARM_2
+      0000DE EE               [12]  645 	mov	a,r6
+      0000DF F0               [24]  646 	movx	@dptr,a
+      0000E0 EF               [12]  647 	mov	a,r7
+      0000E1 A3               [24]  648 	inc	dptr
+      0000E2 F0               [24]  649 	movx	@dptr,a
+      0000E3 90 00 03         [24]  650 	mov	dptr,#0x0003
+      0000E6 C0 07            [24]  651 	push	ar7
+      0000E8 C0 06            [24]  652 	push	ar6
+      0000EA 12r00r00         [24]  653 	lcall	__mulint
+      0000ED AC 82            [24]  654 	mov	r4,dpl
+      0000EF AD 83            [24]  655 	mov	r5,dph
+      0000F1 D0 06            [24]  656 	pop	ar6
+      0000F3 D0 07            [24]  657 	pop	ar7
+      0000F5 EC               [12]  658 	mov	a,r4
+      0000F6 24r1D            [12]  659 	add	a,#_tcb_t
+      0000F8 FC               [12]  660 	mov	r4,a
+      0000F9 ED               [12]  661 	mov	a,r5
+      0000FA 34s00            [12]  662 	addc	a,#(_tcb_t >> 8)
+      0000FC FD               [12]  663 	mov	r5,a
+      0000FD 8C 82            [24]  664 	mov	dpl,r4
+      0000FF 8D 83            [24]  665 	mov	dph,r5
+      000101 E0               [24]  666 	movx	a,@dptr
+      000102 F5*00            [12]  667 	mov	_tcb_init_sloc0_1_0,a
+      000104 A3               [24]  668 	inc	dptr
+      000105 E0               [24]  669 	movx	a,@dptr
+      000106 F5*01            [12]  670 	mov	(_tcb_init_sloc0_1_0 + 1),a
+      000108 A3               [24]  671 	inc	dptr
+      000109 E0               [24]  672 	movx	a,@dptr
+      00010A F5*02            [12]  673 	mov	(_tcb_init_sloc0_1_0 + 2),a
+      00010C 90r00r3D         [24]  674 	mov	dptr,#_tcb_init_stack_1_19
+      00010F E0               [24]  675 	movx	a,@dptr
+      000110 F8               [12]  676 	mov	r0,a
+      000111 A3               [24]  677 	inc	dptr
+      000112 E0               [24]  678 	movx	a,@dptr
+      000113 FA               [12]  679 	mov	r2,a
+      000114 A3               [24]  680 	inc	dptr
+      000115 E0               [24]  681 	movx	a,@dptr
+      000116 85*00 82         [24]  682 	mov	dpl,_tcb_init_sloc0_1_0
+      000119 85*01 83         [24]  683 	mov	dph,(_tcb_init_sloc0_1_0 + 1)
+      00011C 85*02 F0         [24]  684 	mov	b,(_tcb_init_sloc0_1_0 + 2)
+      00011F E8               [12]  685 	mov	a,r0
+      000120 12r00r00         [24]  686 	lcall	__gptrput
+                                    687 ;	core.c:105: tcb_t[p]->priority=p;
+      000123 8C 82            [24]  688 	mov	dpl,r4
+      000125 8D 83            [24]  689 	mov	dph,r5
+      000127 E0               [24]  690 	movx	a,@dptr
+      000128 FC               [12]  691 	mov	r4,a
+      000129 A3               [24]  692 	inc	dptr
+      00012A E0               [24]  693 	movx	a,@dptr
+      00012B FD               [12]  694 	mov	r5,a
+      00012C A3               [24]  695 	inc	dptr
+      00012D E0               [24]  696 	movx	a,@dptr
+      00012E FB               [12]  697 	mov	r3,a
+      00012F 0C               [12]  698 	inc	r4
+      000130 BC 00 01         [24]  699 	cjne	r4,#0x00,00103$
+      000133 0D               [12]  700 	inc	r5
+      000134                        701 00103$:
+      000134 8C 82            [24]  702 	mov	dpl,r4
+      000136 8D 83            [24]  703 	mov	dph,r5
+      000138 8B F0            [24]  704 	mov	b,r3
+      00013A EE               [12]  705 	mov	a,r6
+      00013B 12r00r00         [24]  706 	lcall	__gptrput
+      00013E A3               [24]  707 	inc	dptr
+      00013F EF               [12]  708 	mov	a,r7
+                                    709 ;	core.c:106: return;
+      000140 02r00r00         [24]  710 	ljmp	__gptrput
+                                    711 ;------------------------------------------------------------
+                                    712 ;Allocation info for local variables in function 'task_create'
+                                    713 ;------------------------------------------------------------
+                                    714 ;p                         Allocated with name '_task_create_PARM_2'
+                                    715 ;thread                    Allocated with name '_task_create_thread_1_21'
+                                    716 ;stack                     Allocated with name '_task_create_stack_1_22'
+                                    717 ;------------------------------------------------------------
+                                    718 ;	core.c:114: void task_create(void *thread,uint p){
+                                    719 ;	-----------------------------------------
+                                    720 ;	 function task_create
+                                    721 ;	-----------------------------------------
+      000143                        722 _task_create:
+      000143 AF F0            [24]  723 	mov	r7,b
+      000145 AE 83            [24]  724 	mov	r6,dph
+      000147 E5 82            [12]  725 	mov	a,dpl
+      000149 90r00r42         [24]  726 	mov	dptr,#_task_create_thread_1_21
+      00014C F0               [24]  727 	movx	@dptr,a
+      00014D EE               [12]  728 	mov	a,r6
+      00014E A3               [24]  729 	inc	dptr
+      00014F F0               [24]  730 	movx	@dptr,a
+      000150 EF               [12]  731 	mov	a,r7
+      000151 A3               [24]  732 	inc	dptr
+      000152 F0               [24]  733 	movx	@dptr,a
+                                    734 ;	core.c:115: uchar *stack=stack_init(thread,p);
+      000153 90r00r42         [24]  735 	mov	dptr,#_task_create_thread_1_21
+      000156 E0               [24]  736 	movx	a,@dptr
+      000157 FD               [12]  737 	mov	r5,a
+      000158 A3               [24]  738 	inc	dptr
+      000159 E0               [24]  739 	movx	a,@dptr
+      00015A FE               [12]  740 	mov	r6,a
+      00015B A3               [24]  741 	inc	dptr
+      00015C E0               [24]  742 	movx	a,@dptr
+      00015D FF               [12]  743 	mov	r7,a
+      00015E 90r00r40         [24]  744 	mov	dptr,#_task_create_PARM_2
+      000161 E0               [24]  745 	movx	a,@dptr
+      000162 FB               [12]  746 	mov	r3,a
+      000163 A3               [24]  747 	inc	dptr
+      000164 E0               [24]  748 	movx	a,@dptr
+      000165 FC               [12]  749 	mov	r4,a
+      000166 90r00r36         [24]  750 	mov	dptr,#_stack_init_PARM_2
+      000169 EB               [12]  751 	mov	a,r3
+      00016A F0               [24]  752 	movx	@dptr,a
+      00016B EC               [12]  753 	mov	a,r4
+      00016C A3               [24]  754 	inc	dptr
+      00016D F0               [24]  755 	movx	@dptr,a
+      00016E 8D 82            [24]  756 	mov	dpl,r5
+      000170 8E 83            [24]  757 	mov	dph,r6
+      000172 8F F0            [24]  758 	mov	b,r7
+      000174 C0 04            [24]  759 	push	ar4
+      000176 C0 03            [24]  760 	push	ar3
+      000178 12r00r80         [24]  761 	lcall	_stack_init
+      00017B AD 82            [24]  762 	mov	r5,dpl
+      00017D AE 83            [24]  763 	mov	r6,dph
+      00017F AF F0            [24]  764 	mov	r7,b
+      000181 D0 03            [24]  765 	pop	ar3
+      000183 D0 04            [24]  766 	pop	ar4
+                                    767 ;	core.c:116: tcb_init(stack,p);
+      000185 90r00r3B         [24]  768 	mov	dptr,#_tcb_init_PARM_2
+      000188 EB               [12]  769 	mov	a,r3
+      000189 F0               [24]  770 	movx	@dptr,a
+      00018A EC               [12]  771 	mov	a,r4
+      00018B A3               [24]  772 	inc	dptr
+      00018C F0               [24]  773 	movx	@dptr,a
+      00018D 8D 82            [24]  774 	mov	dpl,r5
+      00018F 8E 83            [24]  775 	mov	dph,r6
+      000191 8F F0            [24]  776 	mov	b,r7
+      000193 C0 04            [24]  777 	push	ar4
+      000195 C0 03            [24]  778 	push	ar3
+      000197 12r00rC3         [24]  779 	lcall	_tcb_init
+      00019A D0 03            [24]  780 	pop	ar3
+      00019C D0 04            [24]  781 	pop	ar4
+                                    782 ;	core.c:117: READY=READY|MASK[p];
+      00019E EC               [12]  783 	mov	a,r4
+      00019F CB               [12]  784 	xch	a,r3
+      0001A0 25 E0            [12]  785 	add	a,acc
+      0001A2 CB               [12]  786 	xch	a,r3
+      0001A3 33               [12]  787 	rlc	a
+      0001A4 FC               [12]  788 	mov	r4,a
+      0001A5 EB               [12]  789 	mov	a,r3
+      0001A6 24r00            [12]  790 	add	a,#_MASK
+      0001A8 F5 82            [12]  791 	mov	dpl,a
+      0001AA EC               [12]  792 	mov	a,r4
+      0001AB 34s02            [12]  793 	addc	a,#(_MASK >> 8)
+      0001AD F5 83            [12]  794 	mov	dph,a
+      0001AF E4               [12]  795 	clr	a
+      0001B0 93               [24]  796 	movc	a,@a+dptr
+      0001B1 FE               [12]  797 	mov	r6,a
+      0001B2 A3               [24]  798 	inc	dptr
+      0001B3 E4               [12]  799 	clr	a
+      0001B4 93               [24]  800 	movc	a,@a+dptr
+      0001B5 FF               [12]  801 	mov	r7,a
+      0001B6 90r00r00         [24]  802 	mov	dptr,#_READY
+      0001B9 E0               [24]  803 	movx	a,@dptr
+      0001BA FC               [12]  804 	mov	r4,a
+      0001BB A3               [24]  805 	inc	dptr
+      0001BC E0               [24]  806 	movx	a,@dptr
+      0001BD FD               [12]  807 	mov	r5,a
+      0001BE 90r00r00         [24]  808 	mov	dptr,#_READY
+      0001C1 EE               [12]  809 	mov	a,r6
+      0001C2 4C               [12]  810 	orl	a,r4
+      0001C3 F0               [24]  811 	movx	@dptr,a
+      0001C4 EF               [12]  812 	mov	a,r7
+      0001C5 4D               [12]  813 	orl	a,r5
+      0001C6 A3               [24]  814 	inc	dptr
+      0001C7 F0               [24]  815 	movx	@dptr,a
+                                    816 ;	core.c:118: schedule();
+                                    817 ;	core.c:119: return;
+      0001C8 02r00r00         [24]  818 	ljmp	_schedule
+                                    819 ;------------------------------------------------------------
+                                    820 ;Allocation info for local variables in function 'task_del'
+                                    821 ;------------------------------------------------------------
+                                    822 ;p                         Allocated with name '_task_del_p_1_23'
+                                    823 ;------------------------------------------------------------
+                                    824 ;	core.c:124: void task_del(uint p)
+                                    825 ;	-----------------------------------------
+                                    826 ;	 function task_del
+                                    827 ;	-----------------------------------------
+      0001CB                        828 _task_del:
+      0001CB AF 83            [24]  829 	mov	r7,dph
+      0001CD E5 82            [12]  830 	mov	a,dpl
+      0001CF 90r00r45         [24]  831 	mov	dptr,#_task_del_p_1_23
+      0001D2 F0               [24]  832 	movx	@dptr,a
+      0001D3 EF               [12]  833 	mov	a,r7
+      0001D4 A3               [24]  834 	inc	dptr
+      0001D5 F0               [24]  835 	movx	@dptr,a
+                                    836 ;	core.c:126: EA=0;
+      0001D6 C2 AF            [12]  837 	clr	_EA
+                                    838 ;	core.c:127: READY=READY&(~MASK[p]);
+      0001D8 90r00r45         [24]  839 	mov	dptr,#_task_del_p_1_23
+      0001DB E0               [24]  840 	movx	a,@dptr
+      0001DC FE               [12]  841 	mov	r6,a
+      0001DD A3               [24]  842 	inc	dptr
+      0001DE E0               [24]  843 	movx	a,@dptr
+      0001DF CE               [12]  844 	xch	a,r6
+      0001E0 25 E0            [12]  845 	add	a,acc
+      0001E2 CE               [12]  846 	xch	a,r6
+      0001E3 33               [12]  847 	rlc	a
+      0001E4 FF               [12]  848 	mov	r7,a
+      0001E5 EE               [12]  849 	mov	a,r6
+      0001E6 24r00            [12]  850 	add	a,#_MASK
+      0001E8 F5 82            [12]  851 	mov	dpl,a
+      0001EA EF               [12]  852 	mov	a,r7
+      0001EB 34s02            [12]  853 	addc	a,#(_MASK >> 8)
+      0001ED F5 83            [12]  854 	mov	dph,a
+      0001EF E4               [12]  855 	clr	a
+      0001F0 93               [24]  856 	movc	a,@a+dptr
+      0001F1 FE               [12]  857 	mov	r6,a
+      0001F2 A3               [24]  858 	inc	dptr
+      0001F3 E4               [12]  859 	clr	a
+      0001F4 93               [24]  860 	movc	a,@a+dptr
+      0001F5 FF               [12]  861 	mov	r7,a
+      0001F6 EE               [12]  862 	mov	a,r6
+      0001F7 F4               [12]  863 	cpl	a
+      0001F8 FE               [12]  864 	mov	r6,a
+      0001F9 EF               [12]  865 	mov	a,r7
+      0001FA F4               [12]  866 	cpl	a
+      0001FB FF               [12]  867 	mov	r7,a
+      0001FC 90r00r00         [24]  868 	mov	dptr,#_READY
+      0001FF E0               [24]  869 	movx	a,@dptr
+      000200 FC               [12]  870 	mov	r4,a
+      000201 A3               [24]  871 	inc	dptr
+      000202 E0               [24]  872 	movx	a,@dptr
+      000203 FD               [12]  873 	mov	r5,a
+      000204 90r00r00         [24]  874 	mov	dptr,#_READY
+      000207 EE               [12]  875 	mov	a,r6
+      000208 5C               [12]  876 	anl	a,r4
+      000209 F0               [24]  877 	movx	@dptr,a
+      00020A EF               [12]  878 	mov	a,r7
+      00020B 5D               [12]  879 	anl	a,r5
+      00020C A3               [24]  880 	inc	dptr
+      00020D F0               [24]  881 	movx	@dptr,a
+                                    882 ;	core.c:128: EA=1;
+      00020E D2 AF            [12]  883 	setb	_EA
+                                    884 ;	core.c:129: return;
+      000210 22               [24]  885 	ret
+                                    886 ;------------------------------------------------------------
+                                    887 ;Allocation info for local variables in function 'os_init'
+                                    888 ;------------------------------------------------------------
+                                    889 ;i                         Allocated with name '_os_init_i_1_26'
+                                    890 ;------------------------------------------------------------
+                                    891 ;	core.c:134: void os_init(void){
+                                    892 ;	-----------------------------------------
+                                    893 ;	 function os_init
+                                    894 ;	-----------------------------------------
+      000211                        895 _os_init:
+                                    896 ;	core.c:136: READY=0;
+      000211 90r00r00         [24]  897 	mov	dptr,#_READY
+      000214 E4               [12]  898 	clr	a
+      000215 F0               [24]  899 	movx	@dptr,a
+      000216 A3               [24]  900 	inc	dptr
+      000217 F0               [24]  901 	movx	@dptr,a
+                                    902 ;	core.c:137: interrup=0;
+      000218 90r00r1C         [24]  903 	mov	dptr,#_interrup
+      00021B F0               [24]  904 	movx	@dptr,a
+                                    905 ;	core.c:138: for(i=0;i<8;i++)tcb_t[i]=&(tcb[i]);
+      00021C 90r00r47         [24]  906 	mov	dptr,#_os_init_i_1_26
+      00021F F0               [24]  907 	movx	@dptr,a
+      000220 A3               [24]  908 	inc	dptr
+      000221 F0               [24]  909 	movx	@dptr,a
+      000222 90r00r47         [24]  910 	mov	dptr,#_os_init_i_1_26
+      000225 E0               [24]  911 	movx	a,@dptr
+      000226 FE               [12]  912 	mov	r6,a
+      000227 A3               [24]  913 	inc	dptr
+      000228 E0               [24]  914 	movx	a,@dptr
+      000229 FF               [12]  915 	mov	r7,a
+      00022A                        916 00102$:
+      00022A 90r00r00         [24]  917 	mov	dptr,#__mulint_PARM_2
+      00022D EE               [12]  918 	mov	a,r6
+      00022E F0               [24]  919 	movx	@dptr,a
+      00022F EF               [12]  920 	mov	a,r7
+      000230 A3               [24]  921 	inc	dptr
+      000231 F0               [24]  922 	movx	@dptr,a
+      000232 90 00 03         [24]  923 	mov	dptr,#0x0003
+      000235 C0 07            [24]  924 	push	ar7
+      000237 C0 06            [24]  925 	push	ar6
+      000239 12r00r00         [24]  926 	lcall	__mulint
+      00023C AC 82            [24]  927 	mov	r4,dpl
+      00023E AD 83            [24]  928 	mov	r5,dph
+      000240 D0 06            [24]  929 	pop	ar6
+      000242 D0 07            [24]  930 	pop	ar7
+      000244 EC               [12]  931 	mov	a,r4
+      000245 24r1D            [12]  932 	add	a,#_tcb_t
+      000247 F5 82            [12]  933 	mov	dpl,a
+      000249 ED               [12]  934 	mov	a,r5
+      00024A 34s00            [12]  935 	addc	a,#(_tcb_t >> 8)
+      00024C F5 83            [12]  936 	mov	dph,a
+      00024E EC               [12]  937 	mov	a,r4
+      00024F 24r04            [12]  938 	add	a,#_tcb
+      000251 FC               [12]  939 	mov	r4,a
+      000252 ED               [12]  940 	mov	a,r5
+      000253 34s00            [12]  941 	addc	a,#(_tcb >> 8)
+      000255 FD               [12]  942 	mov	r5,a
+      000256 7B 00            [12]  943 	mov	r3,#0x00
+      000258 EC               [12]  944 	mov	a,r4
+      000259 F0               [24]  945 	movx	@dptr,a
+      00025A ED               [12]  946 	mov	a,r5
+      00025B A3               [24]  947 	inc	dptr
+      00025C F0               [24]  948 	movx	@dptr,a
+      00025D EB               [12]  949 	mov	a,r3
+      00025E A3               [24]  950 	inc	dptr
+      00025F F0               [24]  951 	movx	@dptr,a
+      000260 0E               [12]  952 	inc	r6
+      000261 BE 00 01         [24]  953 	cjne	r6,#0x00,00110$
+      000264 0F               [12]  954 	inc	r7
+      000265                        955 00110$:
+      000265 C3               [12]  956 	clr	c
+      000266 EE               [12]  957 	mov	a,r6
+      000267 94 08            [12]  958 	subb	a,#0x08
+      000269 EF               [12]  959 	mov	a,r7
+      00026A 94 00            [12]  960 	subb	a,#0x00
+      00026C 40 BC            [24]  961 	jc	00102$
+                                    962 ;	core.c:146: return;
+      00026E 22               [24]  963 	ret
+                                    964 ;------------------------------------------------------------
+                                    965 ;Allocation info for local variables in function 'os_start'
+                                    966 ;------------------------------------------------------------
+                                    967 ;hight                     Allocated with name '_os_start_hight_1_28'
+                                    968 ;------------------------------------------------------------
+                                    969 ;	core.c:148: void os_start(void)
+                                    970 ;	-----------------------------------------
+                                    971 ;	 function os_start
+                                    972 ;	-----------------------------------------
+      00026F                        973 _os_start:
+                                    974 ;	core.c:150: __xdata uchar hight=READYMAP[READY];
+      00026F 90r00r00         [24]  975 	mov	dptr,#_READY
+      000272 E0               [24]  976 	movx	a,@dptr
+      000273 FE               [12]  977 	mov	r6,a
+      000274 A3               [24]  978 	inc	dptr
+      000275 E0               [24]  979 	movx	a,@dptr
+      000276 CE               [12]  980 	xch	a,r6
+      000277 25 E0            [12]  981 	add	a,acc
+      000279 CE               [12]  982 	xch	a,r6
+      00027A 33               [12]  983 	rlc	a
+      00027B FF               [12]  984 	mov	r7,a
+      00027C EE               [12]  985 	mov	a,r6
+      00027D 24r00            [12]  986 	add	a,#_READYMAP
+      00027F F5 82            [12]  987 	mov	dpl,a
+      000281 EF               [12]  988 	mov	a,r7
+      000282 34s00            [12]  989 	addc	a,#(_READYMAP >> 8)
+      000284 F5 83            [12]  990 	mov	dph,a
+      000286 E4               [12]  991 	clr	a
+      000287 93               [24]  992 	movc	a,@a+dptr
+      000288 FE               [12]  993 	mov	r6,a
+      000289 A3               [24]  994 	inc	dptr
+      00028A E4               [12]  995 	clr	a
+      00028B 93               [24]  996 	movc	a,@a+dptr
+                                    997 ;	core.c:151: OS_START=1;
+      00028C 90r00r00         [24]  998 	mov	dptr,#_OS_START
+      00028F 74 01            [12]  999 	mov	a,#0x01
+      000291 F0               [24] 1000 	movx	@dptr,a
+      000292 E4               [12] 1001 	clr	a
+      000293 A3               [24] 1002 	inc	dptr
+      000294 F0               [24] 1003 	movx	@dptr,a
+                                   1004 ;	core.c:152: HIGHT_TCB_T=tcb_t[hight];
+      000295 EE               [12] 1005 	mov	a,r6
+      000296 75 F0 03         [24] 1006 	mov	b,#0x03
+      000299 A4               [48] 1007 	mul	ab
+      00029A 24r1D            [12] 1008 	add	a,#_tcb_t
+      00029C F5 82            [12] 1009 	mov	dpl,a
+      00029E 74s00            [12] 1010 	mov	a,#(_tcb_t >> 8)
+      0002A0 35 F0            [12] 1011 	addc	a,b
+      0002A2 F5 83            [12] 1012 	mov	dph,a
+      0002A4 E0               [24] 1013 	movx	a,@dptr
+      0002A5 FC               [12] 1014 	mov	r4,a
+      0002A6 A3               [24] 1015 	inc	dptr
+      0002A7 E0               [24] 1016 	movx	a,@dptr
+      0002A8 FD               [12] 1017 	mov	r5,a
+      0002A9 A3               [24] 1018 	inc	dptr
+      0002AA E0               [24] 1019 	movx	a,@dptr
+      0002AB FF               [12] 1020 	mov	r7,a
+      0002AC 78rCF            [12] 1021 	mov	r0,#_HIGHT_TCB_T
+      0002AE A6 04            [24] 1022 	mov	@r0,ar4
+      0002B0 08               [12] 1023 	inc	r0
+      0002B1 A6 05            [24] 1024 	mov	@r0,ar5
+      0002B3 08               [12] 1025 	inc	r0
+      0002B4 A6 07            [24] 1026 	mov	@r0,ar7
+                                   1027 ;	core.c:153: CUR=hight;
+      0002B6 90r00r02         [24] 1028 	mov	dptr,#_CUR
+      0002B9 EE               [12] 1029 	mov	a,r6
+      0002BA F0               [24] 1030 	movx	@dptr,a
+      0002BB E4               [12] 1031 	clr	a
+      0002BC A3               [24] 1032 	inc	dptr
+      0002BD F0               [24] 1033 	movx	@dptr,a
+                                   1034 ;	core.c:154: CUR_TCB_T=HIGHT_TCB_T;
+      0002BE 78rCC            [12] 1035 	mov	r0,#_CUR_TCB_T
+      0002C0 A6 04            [24] 1036 	mov	@r0,ar4
+      0002C2 08               [12] 1037 	inc	r0
+      0002C3 A6 05            [24] 1038 	mov	@r0,ar5
+      0002C5 08               [12] 1039 	inc	r0
+      0002C6 A6 07            [24] 1040 	mov	@r0,ar7
+                                   1041 ;	core.c:155: switch_task_int();
+                                   1042 ;	core.c:156: return;
+      0002C8 02r00r00         [24] 1043 	ljmp	_switch_task_int
+                                   1044 	.area CSEG    (CODE)
+                                   1045 	.area CONST   (CODE)
+      000000                       1046 _READYMAP:
+      000000 00 00                 1047 	.byte #0x00,#0x00	; 0
+      000002 00 00                 1048 	.byte #0x00,#0x00	; 0
+      000004 01 00                 1049 	.byte #0x01,#0x00	; 1
+      000006 00 00                 1050 	.byte #0x00,#0x00	; 0
+      000008 02 00                 1051 	.byte #0x02,#0x00	; 2
+      00000A 00 00                 1052 	.byte #0x00,#0x00	; 0
+      00000C 01 00                 1053 	.byte #0x01,#0x00	; 1
+      00000E 00 00                 1054 	.byte #0x00,#0x00	; 0
+      000010 03 00                 1055 	.byte #0x03,#0x00	; 3
+      000012 00 00                 1056 	.byte #0x00,#0x00	; 0
+      000014 01 00                 1057 	.byte #0x01,#0x00	; 1
+      000016 00 00                 1058 	.byte #0x00,#0x00	; 0
+      000018 02 00                 1059 	.byte #0x02,#0x00	; 2
+      00001A 00 00                 1060 	.byte #0x00,#0x00	; 0
+      00001C 01 00                 1061 	.byte #0x01,#0x00	; 1
+      00001E 00 00                 1062 	.byte #0x00,#0x00	; 0
+      000020 04 00                 1063 	.byte #0x04,#0x00	; 4
+      000022 00 00                 1064 	.byte #0x00,#0x00	; 0
+      000024 01 00                 1065 	.byte #0x01,#0x00	; 1
+      000026 00 00                 1066 	.byte #0x00,#0x00	; 0
+      000028 02 00                 1067 	.byte #0x02,#0x00	; 2
+      00002A 00 00                 1068 	.byte #0x00,#0x00	; 0
+      00002C 01 00                 1069 	.byte #0x01,#0x00	; 1
+      00002E 00 00                 1070 	.byte #0x00,#0x00	; 0
+      000030 03 00                 1071 	.byte #0x03,#0x00	; 3
+      000032 00 00                 1072 	.byte #0x00,#0x00	; 0
+      000034 01 00                 1073 	.byte #0x01,#0x00	; 1
+      000036 00 00                 1074 	.byte #0x00,#0x00	; 0
+      000038 02 00                 1075 	.byte #0x02,#0x00	; 2
+      00003A 00 00                 1076 	.byte #0x00,#0x00	; 0
+      00003C 01 00                 1077 	.byte #0x01,#0x00	; 1
+      00003E 00 00                 1078 	.byte #0x00,#0x00	; 0
+      000040 05 00                 1079 	.byte #0x05,#0x00	; 5
+      000042 00 00                 1080 	.byte #0x00,#0x00	; 0
+      000044 01 00                 1081 	.byte #0x01,#0x00	; 1
+      000046 00 00                 1082 	.byte #0x00,#0x00	; 0
+      000048 02 00                 1083 	.byte #0x02,#0x00	; 2
+      00004A 00 00                 1084 	.byte #0x00,#0x00	; 0
+      00004C 01 00                 1085 	.byte #0x01,#0x00	; 1
+      00004E 00 00                 1086 	.byte #0x00,#0x00	; 0
+      000050 03 00                 1087 	.byte #0x03,#0x00	; 3
+      000052 00 00                 1088 	.byte #0x00,#0x00	; 0
+      000054 01 00                 1089 	.byte #0x01,#0x00	; 1
+      000056 00 00                 1090 	.byte #0x00,#0x00	; 0
+      000058 02 00                 1091 	.byte #0x02,#0x00	; 2
+      00005A 00 00                 1092 	.byte #0x00,#0x00	; 0
+      00005C 01 00                 1093 	.byte #0x01,#0x00	; 1
+      00005E 00 00                 1094 	.byte #0x00,#0x00	; 0
+      000060 04 00                 1095 	.byte #0x04,#0x00	; 4
+      000062 00 00                 1096 	.byte #0x00,#0x00	; 0
+      000064 01 00                 1097 	.byte #0x01,#0x00	; 1
+      000066 00 00                 1098 	.byte #0x00,#0x00	; 0
+      000068 02 00                 1099 	.byte #0x02,#0x00	; 2
+      00006A 00 00                 1100 	.byte #0x00,#0x00	; 0
+      00006C 01 00                 1101 	.byte #0x01,#0x00	; 1
+      00006E 00 00                 1102 	.byte #0x00,#0x00	; 0
+      000070 03 00                 1103 	.byte #0x03,#0x00	; 3
+      000072 00 00                 1104 	.byte #0x00,#0x00	; 0
+      000074 01 00                 1105 	.byte #0x01,#0x00	; 1
+      000076 00 00                 1106 	.byte #0x00,#0x00	; 0
+      000078 02 00                 1107 	.byte #0x02,#0x00	; 2
+      00007A 00 00                 1108 	.byte #0x00,#0x00	; 0
+      00007C 01 00                 1109 	.byte #0x01,#0x00	; 1
+      00007E 00 00                 1110 	.byte #0x00,#0x00	; 0
+      000080 06 00                 1111 	.byte #0x06,#0x00	; 6
+      000082 00 00                 1112 	.byte #0x00,#0x00	; 0
+      000084 01 00                 1113 	.byte #0x01,#0x00	; 1
+      000086 00 00                 1114 	.byte #0x00,#0x00	; 0
+      000088 02 00                 1115 	.byte #0x02,#0x00	; 2
+      00008A 00 00                 1116 	.byte #0x00,#0x00	; 0
+      00008C 01 00                 1117 	.byte #0x01,#0x00	; 1
+      00008E 00 00                 1118 	.byte #0x00,#0x00	; 0
+      000090 03 00                 1119 	.byte #0x03,#0x00	; 3
+      000092 00 00                 1120 	.byte #0x00,#0x00	; 0
+      000094 01 00                 1121 	.byte #0x01,#0x00	; 1
+      000096 00 00                 1122 	.byte #0x00,#0x00	; 0
+      000098 02 00                 1123 	.byte #0x02,#0x00	; 2
+      00009A 00 00                 1124 	.byte #0x00,#0x00	; 0
+      00009C 01 00                 1125 	.byte #0x01,#0x00	; 1
+      00009E 00 00                 1126 	.byte #0x00,#0x00	; 0
+      0000A0 04 00                 1127 	.byte #0x04,#0x00	; 4
+      0000A2 00 00                 1128 	.byte #0x00,#0x00	; 0
+      0000A4 01 00                 1129 	.byte #0x01,#0x00	; 1
+      0000A6 00 00                 1130 	.byte #0x00,#0x00	; 0
+      0000A8 02 00                 1131 	.byte #0x02,#0x00	; 2
+      0000AA 00 00                 1132 	.byte #0x00,#0x00	; 0
+      0000AC 01 00                 1133 	.byte #0x01,#0x00	; 1
+      0000AE 00 00                 1134 	.byte #0x00,#0x00	; 0
+      0000B0 03 00                 1135 	.byte #0x03,#0x00	; 3
+      0000B2 00 00                 1136 	.byte #0x00,#0x00	; 0
+      0000B4 01 00                 1137 	.byte #0x01,#0x00	; 1
+      0000B6 00 00                 1138 	.byte #0x00,#0x00	; 0
+      0000B8 02 00                 1139 	.byte #0x02,#0x00	; 2
+      0000BA 00 00                 1140 	.byte #0x00,#0x00	; 0
+      0000BC 01 00                 1141 	.byte #0x01,#0x00	; 1
+      0000BE 00 00                 1142 	.byte #0x00,#0x00	; 0
+      0000C0 05 00                 1143 	.byte #0x05,#0x00	; 5
+      0000C2 00 00                 1144 	.byte #0x00,#0x00	; 0
+      0000C4 01 00                 1145 	.byte #0x01,#0x00	; 1
+      0000C6 00 00                 1146 	.byte #0x00,#0x00	; 0
+      0000C8 02 00                 1147 	.byte #0x02,#0x00	; 2
+      0000CA 00 00                 1148 	.byte #0x00,#0x00	; 0
+      0000CC 01 00                 1149 	.byte #0x01,#0x00	; 1
+      0000CE 00 00                 1150 	.byte #0x00,#0x00	; 0
+      0000D0 03 00                 1151 	.byte #0x03,#0x00	; 3
+      0000D2 00 00                 1152 	.byte #0x00,#0x00	; 0
+      0000D4 01 00                 1153 	.byte #0x01,#0x00	; 1
+      0000D6 00 00                 1154 	.byte #0x00,#0x00	; 0
+      0000D8 02 00                 1155 	.byte #0x02,#0x00	; 2
+      0000DA 00 00                 1156 	.byte #0x00,#0x00	; 0
+      0000DC 01 00                 1157 	.byte #0x01,#0x00	; 1
+      0000DE 00 00                 1158 	.byte #0x00,#0x00	; 0
+      0000E0 04 00                 1159 	.byte #0x04,#0x00	; 4
+      0000E2 00 00                 1160 	.byte #0x00,#0x00	; 0
+      0000E4 01 00                 1161 	.byte #0x01,#0x00	; 1
+      0000E6 00 00                 1162 	.byte #0x00,#0x00	; 0
+      0000E8 02 00                 1163 	.byte #0x02,#0x00	; 2
+      0000EA 00 00                 1164 	.byte #0x00,#0x00	; 0
+      0000EC 01 00                 1165 	.byte #0x01,#0x00	; 1
+      0000EE 00 00                 1166 	.byte #0x00,#0x00	; 0
+      0000F0 03 00                 1167 	.byte #0x03,#0x00	; 3
+      0000F2 00 00                 1168 	.byte #0x00,#0x00	; 0
+      0000F4 01 00                 1169 	.byte #0x01,#0x00	; 1
+      0000F6 00 00                 1170 	.byte #0x00,#0x00	; 0
+      0000F8 02 00                 1171 	.byte #0x02,#0x00	; 2
+      0000FA 00 00                 1172 	.byte #0x00,#0x00	; 0
+      0000FC 01 00                 1173 	.byte #0x01,#0x00	; 1
+      0000FE 00 00                 1174 	.byte #0x00,#0x00	; 0
+      000100 07 00                 1175 	.byte #0x07,#0x00	; 7
+      000102 00 00                 1176 	.byte #0x00,#0x00	; 0
+      000104 01 00                 1177 	.byte #0x01,#0x00	; 1
+      000106 00 00                 1178 	.byte #0x00,#0x00	; 0
+      000108 02 00                 1179 	.byte #0x02,#0x00	; 2
+      00010A 00 00                 1180 	.byte #0x00,#0x00	; 0
+      00010C 01 00                 1181 	.byte #0x01,#0x00	; 1
+      00010E 00 00                 1182 	.byte #0x00,#0x00	; 0
+      000110 03 00                 1183 	.byte #0x03,#0x00	; 3
+      000112 00 00                 1184 	.byte #0x00,#0x00	; 0
+      000114 01 00                 1185 	.byte #0x01,#0x00	; 1
+      000116 00 00                 1186 	.byte #0x00,#0x00	; 0
+      000118 02 00                 1187 	.byte #0x02,#0x00	; 2
+      00011A 00 00                 1188 	.byte #0x00,#0x00	; 0
+      00011C 01 00                 1189 	.byte #0x01,#0x00	; 1
+      00011E 00 00                 1190 	.byte #0x00,#0x00	; 0
+      000120 04 00                 1191 	.byte #0x04,#0x00	; 4
+      000122 00 00                 1192 	.byte #0x00,#0x00	; 0
+      000124 01 00                 1193 	.byte #0x01,#0x00	; 1
+      000126 00 00                 1194 	.byte #0x00,#0x00	; 0
+      000128 02 00                 1195 	.byte #0x02,#0x00	; 2
+      00012A 00 00                 1196 	.byte #0x00,#0x00	; 0
+      00012C 01 00                 1197 	.byte #0x01,#0x00	; 1
+      00012E 00 00                 1198 	.byte #0x00,#0x00	; 0
+      000130 03 00                 1199 	.byte #0x03,#0x00	; 3
+      000132 00 00                 1200 	.byte #0x00,#0x00	; 0
+      000134 01 00                 1201 	.byte #0x01,#0x00	; 1
+      000136 00 00                 1202 	.byte #0x00,#0x00	; 0
+      000138 02 00                 1203 	.byte #0x02,#0x00	; 2
+      00013A 00 00                 1204 	.byte #0x00,#0x00	; 0
+      00013C 01 00                 1205 	.byte #0x01,#0x00	; 1
+      00013E 00 00                 1206 	.byte #0x00,#0x00	; 0
+      000140 05 00                 1207 	.byte #0x05,#0x00	; 5
+      000142 00 00                 1208 	.byte #0x00,#0x00	; 0
+      000144 01 00                 1209 	.byte #0x01,#0x00	; 1
+      000146 00 00                 1210 	.byte #0x00,#0x00	; 0
+      000148 02 00                 1211 	.byte #0x02,#0x00	; 2
+      00014A 00 00                 1212 	.byte #0x00,#0x00	; 0
+      00014C 01 00                 1213 	.byte #0x01,#0x00	; 1
+      00014E 00 00                 1214 	.byte #0x00,#0x00	; 0
+      000150 03 00                 1215 	.byte #0x03,#0x00	; 3
+      000152 00 00                 1216 	.byte #0x00,#0x00	; 0
+      000154 01 00                 1217 	.byte #0x01,#0x00	; 1
+      000156 00 00                 1218 	.byte #0x00,#0x00	; 0
+      000158 02 00                 1219 	.byte #0x02,#0x00	; 2
+      00015A 00 00                 1220 	.byte #0x00,#0x00	; 0
+      00015C 01 00                 1221 	.byte #0x01,#0x00	; 1
+      00015E 00 00                 1222 	.byte #0x00,#0x00	; 0
+      000160 04 00                 1223 	.byte #0x04,#0x00	; 4
+      000162 00 00                 1224 	.byte #0x00,#0x00	; 0
+      000164 01 00                 1225 	.byte #0x01,#0x00	; 1
+      000166 00 00                 1226 	.byte #0x00,#0x00	; 0
+      000168 02 00                 1227 	.byte #0x02,#0x00	; 2
+      00016A 00 00                 1228 	.byte #0x00,#0x00	; 0
+      00016C 01 00                 1229 	.byte #0x01,#0x00	; 1
+      00016E 00 00                 1230 	.byte #0x00,#0x00	; 0
+      000170 03 00                 1231 	.byte #0x03,#0x00	; 3
+      000172 00 00                 1232 	.byte #0x00,#0x00	; 0
+      000174 01 00                 1233 	.byte #0x01,#0x00	; 1
+      000176 00 00                 1234 	.byte #0x00,#0x00	; 0
+      000178 02 00                 1235 	.byte #0x02,#0x00	; 2
+      00017A 00 00                 1236 	.byte #0x00,#0x00	; 0
+      00017C 01 00                 1237 	.byte #0x01,#0x00	; 1
+      00017E 00 00                 1238 	.byte #0x00,#0x00	; 0
+      000180 06 00                 1239 	.byte #0x06,#0x00	; 6
+      000182 00 00                 1240 	.byte #0x00,#0x00	; 0
+      000184 01 00                 1241 	.byte #0x01,#0x00	; 1
+      000186 00 00                 1242 	.byte #0x00,#0x00	; 0
+      000188 02 00                 1243 	.byte #0x02,#0x00	; 2
+      00018A 00 00                 1244 	.byte #0x00,#0x00	; 0
+      00018C 01 00                 1245 	.byte #0x01,#0x00	; 1
+      00018E 00 00                 1246 	.byte #0x00,#0x00	; 0
+      000190 03 00                 1247 	.byte #0x03,#0x00	; 3
+      000192 00 00                 1248 	.byte #0x00,#0x00	; 0
+      000194 01 00                 1249 	.byte #0x01,#0x00	; 1
+      000196 00 00                 1250 	.byte #0x00,#0x00	; 0
+      000198 02 00                 1251 	.byte #0x02,#0x00	; 2
+      00019A 00 00                 1252 	.byte #0x00,#0x00	; 0
+      00019C 01 00                 1253 	.byte #0x01,#0x00	; 1
+      00019E 00 00                 1254 	.byte #0x00,#0x00	; 0
+      0001A0 04 00                 1255 	.byte #0x04,#0x00	; 4
+      0001A2 00 00                 1256 	.byte #0x00,#0x00	; 0
+      0001A4 01 00                 1257 	.byte #0x01,#0x00	; 1
+      0001A6 00 00                 1258 	.byte #0x00,#0x00	; 0
+      0001A8 02 00                 1259 	.byte #0x02,#0x00	; 2
+      0001AA 00 00                 1260 	.byte #0x00,#0x00	; 0
+      0001AC 01 00                 1261 	.byte #0x01,#0x00	; 1
+      0001AE 00 00                 1262 	.byte #0x00,#0x00	; 0
+      0001B0 03 00                 1263 	.byte #0x03,#0x00	; 3
+      0001B2 00 00                 1264 	.byte #0x00,#0x00	; 0
+      0001B4 01 00                 1265 	.byte #0x01,#0x00	; 1
+      0001B6 00 00                 1266 	.byte #0x00,#0x00	; 0
+      0001B8 02 00                 1267 	.byte #0x02,#0x00	; 2
+      0001BA 00 00                 1268 	.byte #0x00,#0x00	; 0
+      0001BC 01 00                 1269 	.byte #0x01,#0x00	; 1
+      0001BE 00 00                 1270 	.byte #0x00,#0x00	; 0
+      0001C0 05 00                 1271 	.byte #0x05,#0x00	; 5
+      0001C2 00 00                 1272 	.byte #0x00,#0x00	; 0
+      0001C4 01 00                 1273 	.byte #0x01,#0x00	; 1
+      0001C6 00 00                 1274 	.byte #0x00,#0x00	; 0
+      0001C8 02 00                 1275 	.byte #0x02,#0x00	; 2
+      0001CA 00 00                 1276 	.byte #0x00,#0x00	; 0
+      0001CC 01 00                 1277 	.byte #0x01,#0x00	; 1
+      0001CE 00 00                 1278 	.byte #0x00,#0x00	; 0
+      0001D0 03 00                 1279 	.byte #0x03,#0x00	; 3
+      0001D2 00 00                 1280 	.byte #0x00,#0x00	; 0
+      0001D4 01 00                 1281 	.byte #0x01,#0x00	; 1
+      0001D6 00 00                 1282 	.byte #0x00,#0x00	; 0
+      0001D8 02 00                 1283 	.byte #0x02,#0x00	; 2
+      0001DA 00 00                 1284 	.byte #0x00,#0x00	; 0
+      0001DC 01 00                 1285 	.byte #0x01,#0x00	; 1
+      0001DE 00 00                 1286 	.byte #0x00,#0x00	; 0
+      0001E0 04 00                 1287 	.byte #0x04,#0x00	; 4
+      0001E2 00 00                 1288 	.byte #0x00,#0x00	; 0
+      0001E4 01 00                 1289 	.byte #0x01,#0x00	; 1
+      0001E6 00 00                 1290 	.byte #0x00,#0x00	; 0
+      0001E8 02 00                 1291 	.byte #0x02,#0x00	; 2
+      0001EA 00 00                 1292 	.byte #0x00,#0x00	; 0
+      0001EC 01 00                 1293 	.byte #0x01,#0x00	; 1
+      0001EE 00 00                 1294 	.byte #0x00,#0x00	; 0
+      0001F0 03 00                 1295 	.byte #0x03,#0x00	; 3
+      0001F2 00 00                 1296 	.byte #0x00,#0x00	; 0
+      0001F4 01 00                 1297 	.byte #0x01,#0x00	; 1
+      0001F6 00 00                 1298 	.byte #0x00,#0x00	; 0
+      0001F8 02 00                 1299 	.byte #0x02,#0x00	; 2
+      0001FA 00 00                 1300 	.byte #0x00,#0x00	; 0
+      0001FC 01 00                 1301 	.byte #0x01,#0x00	; 1
+      0001FE 00 00                 1302 	.byte #0x00,#0x00	; 0
+      000200                       1303 _MASK:
+      000200 01 00                 1304 	.byte #0x01,#0x00	; 1
+      000202 02 00                 1305 	.byte #0x02,#0x00	; 2
+      000204 04 00                 1306 	.byte #0x04,#0x00	; 4
+      000206 08 00                 1307 	.byte #0x08,#0x00	; 8
+      000208 10 00                 1308 	.byte #0x10,#0x00	; 16
+      00020A 20 00                 1309 	.byte #0x20,#0x00	; 32
+      00020C 40 00                 1310 	.byte #0x40,#0x00	; 64
+      00020E 80 00                 1311 	.byte #0x80,#0x00	; 128
+                                   1312 	.area XINIT   (CODE)
+      000000                       1313 __xinit__OS_START:
+      000000 00 00                 1314 	.byte #0x00,#0x00	; 0
+                                   1315 	.area CABS    (ABS,CODE)
