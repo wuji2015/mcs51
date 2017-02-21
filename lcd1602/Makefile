@@ -8,7 +8,7 @@ OBJ_FILE = ${target}.rel
 OBJ_FILE += ${filter-out ${target}.rel, ${patsubst %.c, %.rel, ${SRC_FILE}}}
 
 BUILD_DIR = build
-target=1602
+target=test
 
 # Attempt to create a output directory.
 $(shell [ -d "${BUILD_DIR}" ] || mkdir -p "${BUILD_DIR}")
@@ -23,7 +23,8 @@ $(if "$(BUILD_DIR)",,$(error output directory "$(saved-output)" does not exist))
 all: ${target}
 
 ${target}:${OBJ_FILE}
-	cd "${BUILD_DIR}"	&& ${CC} ${CFLAGS} ${OBJ_FILE} -o ${target}
+	cd "${BUILD_DIR}"	&& ${CC} ${CFLAGS} ${OBJ_FILE} -o ${target} \
+	      	&&  objcopy -I ihex -O binary ${target} ${target}.bin
 
 clean:
 	-cd "${BUILD_DIR}"&&rm *
