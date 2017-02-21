@@ -15,6 +15,7 @@ void write_command(uchar command)
 	CS = 1;
 	CS = 0;
 	delay_5ms();
+	DB = 0xff;
 }
 void write_date(uchar date)
 {
@@ -24,6 +25,7 @@ void write_date(uchar date)
 	CS = 1;
 	CS = 0;
 	delay_5ms();
+	DB = 0xff;
 }
 void read_status(void)
 {
