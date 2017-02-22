@@ -30,4 +30,14 @@ __sbit __at (0xd9) CCF1;
 __sbit __at (0xde) CR;
 __sbit __at (0xdf) CF;
 
+//adc
+__sfr __at (0x9d) P1ASF;
+__sfr __at (0xbc) ADC_CONTR;
+__sfr __at (0xbd) ADC_RES  ;
+__sfr __at (0xbe) ADC_RESL ;
+
+//spi
+__sfr __at (0xce) SPCTL;
+__sfr __at (0xcd) SPSTAT;
+__sfr __at (0xcf) SPDAT;
 #endif

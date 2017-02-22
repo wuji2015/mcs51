@@ -12,7 +12,7 @@ OBJ_FILE = ${target}.rel
 OBJ_FILE += ${filter-out ${target}.rel, ${patsubst %.c, %.rel, ${SRC_FILE}}}
 
 BUILD_DIR = build
-target=1602
+target=spi
 
 # Attempt to create a output directory.
 $(shell [ -d "${BUILD_DIR}" ] || mkdir -p "${BUILD_DIR}")

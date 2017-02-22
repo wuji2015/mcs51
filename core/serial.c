@@ -40,12 +40,12 @@ void display(uchar *str,uchar c)
 	putc('x');
 	tmp=c>>4;
 	for(i=0;i<2;i++){
-	if(tmp<0x0a){
-		putc(tmp+0x30);
-	}else{
-		putc(tmp+0x37);
-	}
-	tmp=c&0x0f;
+		if(tmp<0x0a){
+			putc(tmp+0x30);
+		}else{
+			putc(tmp+0x37);
+		}
+		tmp=c&0x0f;
 	}
 	sendstr("\n\r");
 }
