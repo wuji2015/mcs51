@@ -2,6 +2,8 @@
 #include <adc.h>
 void adc_init(enum ADC_PIN PIN, enum ADC_SPEED SPEED)	/*select pin1 0-7, and speed*/
 {
+	P1M1 &= ~(PIN);
+	P1M1 |= PIN;
 	P1ASF = PIN;
 	ADC_CONTR &= 0x9f;
 	ADC_CONTR |= SPEED;
@@ -16,10 +18,14 @@ void adc_select(enum ADC_CHANNEL CHANNEL)
 }
 uint adc_read(void)
 {
+	uint res;
 	ADC_CONTR |= ADC_START;
 	while(!(ADC_CONTR & ADC_FLAG));
 	ADC_CONTR &= ~ADC_FLAG;
-	return ADC_RES<<2 + ADC_RESL;
+	res = ADC_RES;
+	res = res<<2;
+	res = res + ADC_RESL;
+	return res;
 }
 void adc_stop(void)
 {

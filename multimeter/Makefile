@@ -2,7 +2,9 @@ CC = sdcc
 AR = sdar
 INCLUDE_DIR = /home/zj/mcs51/include/
 LIBS_DIR = /home/zj/mcs51/libs/
-CFLAGS = -I ${INCLUDE_DIR} -L ${LIBS_DIR}
+CFLAGS = -I ${INCLUDE_DIR} -L ${LIBS_DIR} \
+	 --iram-size 256 --xram-size 1024 --code-size 61440 \
+	 --model-large
 _LIBS = adc 1602
 LIBS = ${patsubst %, %.lib, ${_LIBS}}
 SRC_FILE = ${wildcard *.c}
@@ -12,7 +14,7 @@ OBJ_FILE = ${target}.rel
 OBJ_FILE += ${filter-out ${target}.rel, ${patsubst %.c, %.rel, ${SRC_FILE}}}
 
 BUILD_DIR = build
-target=test
+target=multimeter
 
 all: ${target}
 
