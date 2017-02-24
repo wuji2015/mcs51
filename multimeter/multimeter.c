@@ -169,36 +169,38 @@ int main(void)
 	uint res;
 	uint vol_in, vol_de, tmp;
 	uchar buffer[33] = "";
-	adc_init(PIN3, SPEED540);
+	adc_init(PIN3, SPEED90);
 	adc_select(CHANNEL3);
 	lcd_init();
 	interrupt_init();
 	while(1){
+		delay();
+		delay();
 		switch (status){
 		case 0:
-			delay();
 			res = adc_read();
 			//		to(buffer, res>>8);
 			//		to((uchar*)buffer+2, (uchar)res);
 			//		vol = __fsdiv(res, 1024);
 			//		vol = __fsmul(res, 5);
+			/*
 			vol_in = res/207;
 			tmp = res - vol_in*207;
 			vol_de = tmp*10/207;
-			tmp = tmp - vol_de*207/10;
-			tmp = tmp*100/207;
-			/*
-			vol_in = res*5/1023;
-			tmp = res - vol_in*1023/5;
-			vol_de = tmp*50/1023;
-			tmp = tmp - vol_de*1023/50;
-			tmp = tmp*500/1023;
+			tmp = tmp - vol_de*207;
+			tmp = tmp*10/207;
 			*/
+			res *= 5;
+			vol_in = res/1023;
+			tmp = res - vol_in*1023;
+			vol_de = tmp*10/1023;
+			tmp = tmp - vol_de*1023;
+			tmp = tmp*10/1023;
+
 			sprintf(buffer, "voltage:%d.%d%dV", vol_in, vol_de, tmp);
 			display_string(buffer);
 			break;
 		case 1:
-			delay();
 			res = adc_read();
 			//		to(buffer, res>>8);
 			//		to((uchar*)buffer+2, (uchar)res);
