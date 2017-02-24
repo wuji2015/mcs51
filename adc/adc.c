@@ -27,6 +27,24 @@ uint adc_read(void)
 	res = res + ADC_RESL;
 	return res;
 }
+uchar* adc_tovol(uint res)
+{
+	static uchar buffer[5] = "";
+	uint tmp;
+	buffer[1] = '.';
+	res *= 5;
+	buffer[0] = res/1023;
+	tmp = res - buffer[0]*1023;
+	buffer[2] = tmp*10/1023;
+	tmp = tmp*10 - buffer[2]*1023;
+	buffer[3] = tmp*10/1023;
+	buffer[0] += '0';
+	buffer[2] += '0';
+	buffer[3] += '0';
+	return buffer;
+}
+
+
 void adc_stop(void)
 {
 	ADC_CONTR &= 0xf7;

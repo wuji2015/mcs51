@@ -163,15 +163,20 @@ void interrupt_init(void)
 	EA = 1;
 	return;
 }
+void key_init(void)
+{
+	P3M1 = 1;
+	return;
+}
 uchar status = 0;
 int main(void)
 {
 	uint res;
-	uint vol_in, vol_de, tmp;
-	uchar buffer[33] = "";
+	uchar buffer[33] = "", *vol;
 	adc_init(PIN3, SPEED90);
 	adc_select(CHANNEL3);
 	lcd_init();
+	//key_init();
 	interrupt_init();
 	while(1){
 		delay();
@@ -179,46 +184,24 @@ int main(void)
 		switch (status){
 		case 0:
 			res = adc_read();
-			//		to(buffer, res>>8);
-			//		to((uchar*)buffer+2, (uchar)res);
-			//		vol = __fsdiv(res, 1024);
-			//		vol = __fsmul(res, 5);
-			/*
-			vol_in = res/207;
-			tmp = res - vol_in*207;
-			vol_de = tmp*10/207;
-			tmp = tmp - vol_de*207;
-			tmp = tmp*10/207;
-			*/
-			res *= 5;
-			vol_in = res/1023;
-			tmp = res - vol_in*1023;
-			vol_de = tmp*10/1023;
-			tmp = tmp - vol_de*1023;
-			tmp = tmp*10/1023;
+			vol = adc_tovol(res);
 
-			sprintf(buffer, "voltage:%d.%d%dV", vol_in, vol_de, tmp);
+			sprintf(buffer, "voltage:%sV", vol);
 			display_string(buffer);
 			break;
 		case 1:
 			res = adc_read();
-			//		to(buffer, res>>8);
-			//		to((uchar*)buffer+2, (uchar)res);
-			//		vol = __fsdiv(res, 1024);
-			//		vol = __fsmul(res, 5);
-			vol_in = res/207;
-			tmp = res - vol_in*207;
-			vol_de = tmp*10/207;
-			tmp = tmp - vol_de*207/10;
-			tmp = tmp*100/207;
-			/*
-			vol_in = res*5/1023;
-			tmp = res - vol_in*1023/5;
-			vol_de = tmp*50/1023;
-			tmp = tmp - vol_de*1023/50;
-			tmp = tmp*500/1023;
-			*/
-			sprintf(buffer, "current:%d.%d%dA", vol_in, vol_de, tmp);
+			vol = adc_tovol(res);
+
+			sprintf(buffer, "curent:%sA", vol);
+			display_string(buffer);
+			break;
+		case 2:
+			sprintf(buffer, "resistance:");
+			display_string(buffer);
+			break;
+		case 3:
+			sprintf(buffer, "capacitance:F");
 			display_string(buffer);
 			break;
 		default:
@@ -227,9 +210,11 @@ int main(void)
 	}		
 	return 0;
 }
-void ISR_KEY0(void) __interrupt (0) __using (1)
+void EX0_ISR(void) __interrupt (0) __using (1)
 {
-	delay();
+	int i, j;
+	for(i = 65535; i > 0; i--)
+		for(j = 2000; j > 0; j--);
 	if (P3_2 == 0)
 		status++;
 	if (status >= 4)status = 0;

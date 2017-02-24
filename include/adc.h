@@ -38,8 +38,9 @@ enum ADC_CHANNEL{
 	CHANNEL8 = 0x08,
 };
 
-void adc_init(enum ADC_PIN PIN, enum ADC_SPEED SPEED);	/*select pin1 0-7, and speed*/
-void adc_select(enum ADC_CHANNEL CHANNEL)       ;
-uint adc_read(void)                 ;
-void adc_stop(void)                 ;
+void adc_init(enum ADC_PIN PIN, enum ADC_SPEED SPEED)	;	/*select pin1 0-7, and speed*/
+void adc_select(enum ADC_CHANNEL CHANNEL)       	;
+uint adc_read(void)                 			;
+uchar* adc_tovol(uint res)				;
+void adc_stop(void)                 			;
 #endif
