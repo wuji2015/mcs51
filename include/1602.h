@@ -1,5 +1,6 @@
 #ifndef _1602_H
 #define _1602_H
+#include "std.h"
 #define RS P1_2
 #define RW P1_1
 #define CS P1_0

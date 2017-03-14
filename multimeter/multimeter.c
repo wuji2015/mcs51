@@ -1,8 +1,12 @@
 #include <std.h>
 #include <1602.h>
-#include <adc.h>
+#include <ad7705.h>
 #include <stdio.h>
 #include <float.h>
+#include "interrupt.h"
+#include "timer.h"
+#include "cap_measure.h"
+uchar catch_pos;
 static void delay(void)
 {
 	uint i, j;
@@ -159,7 +163,7 @@ float __fsdiv (float a1, float a2)
 }
 void interrupt_init(void)
 {
-	IT0 = EX0 = 1;
+	IT0 = EX0 = 1; // for key
 	EA = 1;
 	return;
 }
@@ -171,11 +175,17 @@ void key_init(void)
 uchar status = 0;
 int main(void)
 {
-	uint res;
-	uchar buffer[33] = "", *vol;
-	adc_init(PIN3, SPEED90);
-	adc_select(CHANNEL3);
+	uint adc1, adc2;
+	uchar buffer[33] = "";
+	uint vol = 0;
+	status = 3;
+
+//	adc_init(PIN3, SPEED90);
+//	adc_select(CHANNEL3);
+//	ad7705_init();
 	lcd_init();
+	cap_measure_init(CAP_MEASRUE_FLAG_ALWAY);
+			cap_measure_start();
 	//key_init();
 	interrupt_init();
 	while(1){
@@ -183,25 +193,30 @@ int main(void)
 		delay();
 		switch (status){
 		case 0:
-			res = adc_read();
-			vol = adc_tovol(res);
+//			res = adc_read();
+//			vol = adc_tovol(res);
+			adc1 = TM7705_ReadAdc(1);
+			vol = ((unsigned long)adc1 * 13000) / 65535;
 
-			sprintf(buffer, "voltage:%sV", vol);
+			sprintf(buffer, "voltage:%dmv", vol);
 			display_string(buffer);
 			break;
 		case 1:
-			res = adc_read();
-			vol = adc_tovol(res);
+//			res = adc_read();
+//			vol = adc_tovol(res);
+			adc1 = TM7705_ReadAdc(1);
+			vol = ((unsigned long)adc1 * 13000) / 65535;
 
-			sprintf(buffer, "curent:%sA", vol);
+			sprintf(buffer, "voltage:%dmv", vol);
 			display_string(buffer);
 			break;
 		case 2:
-			sprintf(buffer, "resistance:");
+			sprintf(buffer, "resistance:%d");
 			display_string(buffer);
 			break;
 		case 3:
-			sprintf(buffer, "capacitance:F");
+			sprintf(buffer, "capacitance:%UPF", cap_measure_calculate());
+		//	sprintf(buffer, "catched_pulse =\n%x", catched_pulse);
 			display_string(buffer);
 			break;
 		default:
@@ -210,7 +225,7 @@ int main(void)
 	}		
 	return 0;
 }
-void EX0_ISR(void) __interrupt (0) __using (1)
+INTERRUPT_EXT0
 {
 	int i, j;
 	for(i = 65535; i > 0; i--)
@@ -220,3 +235,17 @@ void EX0_ISR(void) __interrupt (0) __using (1)
 	if (status >= 4)status = 0;
 	return;
 }
+INTERRUPT_TIMER0
+{
+	static uint interrupt_count = 0;
+	interrupt_count++;
+	if (interrupt_count > CAP_MEASRUE_PERIOD){
+		interrupt_count = 0;
+		catched_pulse = timer_get(TIMER1);
+		timer_clear(TIMER1);
+		if (cap_measure_flag == CAP_MEASRUE_FLAG_ONLYONE)
+			cap_measure_stop();
+	}
+	return;
+}
+

@@ -1,0 +1,17 @@
+#ifndef _SERIAL_H
+#define _SERIAL_H
+
+enum BAUD{
+	BAUD_2400,
+	BAUD_9600,
+	BAUD_115200,
+};
+enum TIMER{
+	TIMER0 = 0x02,
+	TIMER1 = 0x20.
+};
+enum SERIAL_INTERRUPT{
+	DISABLE;
+	ENABLE;
+};
+#endif
