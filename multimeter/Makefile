@@ -43,4 +43,7 @@ ${target}.lib:${OBJ_FILE}
 clean:
 	-cd "${BUILD_DIR}"&&rm *
 
+run:
+	cd "${BUILD_DIR}" && stcflash -r12 ${target}.bin 
+
 .PHONY: all

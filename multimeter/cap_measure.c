@@ -33,7 +33,7 @@ uint cap_measure_calculate(void)
 	frequency = catched_pulse;
 	if (frequency != 0){
 		result = ((long)1430000000) / (R1 + 2*R2) / ((long)frequency);
-		return result;
+		return result+450;
 	}
 	return 0;
 }

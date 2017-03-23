@@ -246,7 +246,7 @@ static void TM7705_Delay(void)
 {
 	uint16_t i;
 
-	for (i = 0; i < 65535; i++);
+	for (i = 0; i < 5535; i++);
 }
 
 /*

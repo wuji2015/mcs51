@@ -13,6 +13,6 @@ extern uchar cap_measure_flag;
 #define CAP_MEASRUE_FLAG_ALWAY		1
 
 #define CAP_MEASRUE_PERIOD 3600 //the number of timer full
-#define R1 		470
-#define R2		470
+#define R1 		47000
+#define R2		47000
 #endif

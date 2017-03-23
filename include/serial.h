@@ -6,10 +6,6 @@ enum BAUD{
 	BAUD_9600,
 	BAUD_115200,
 };
-enum TIMER{
-	TIMER0 = 0x02,
-	TIMER1 = 0x20.
-};
 enum SERIAL_INTERRUPT{
 	DISABLE;
 	ENABLE;
