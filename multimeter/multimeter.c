@@ -76,6 +76,7 @@ int main(void)
 			sprintf(buffer, "voltage:%4dmv\n", vol);
 			/*move buffer1 toend of buffer*/
 			for (buffer1 = buffer; *buffer1 != 0; buffer1++);
+			*buffer1 = '\n';
 /*			buffer1 = buffer;*/
 /*			buffer1 += 14;*/
 			adc2 = TM7705_ReadAdc(2);

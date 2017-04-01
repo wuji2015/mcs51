@@ -65,11 +65,14 @@ void display_string(uchar* str)
 	write_command(CLEAR);
 	while(*str != 0){
 		if (count == 0x10){
-			if (*str == '\n')
-				str++;
 			set_address(0, 1);
 		}
 		if (count == 0x20)break;
+		if (*str == '\n'){
+			set_address(0, 1);
+			str++;
+			count = 0x10;
+		}
 		count++;
 		write_date(*str);
 		str++;
